@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7BEFD1B820C9483B00FDA05F"
-               BuildableName = "GitHubBridge_macOS.framework"
+               BuildableName = "GitHubBridge.framework"
                BlueprintName = "GitHubBridge macOS"
                ReferencedContainer = "container:GitHub Clients.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7BEFD1B820C9483B00FDA05F"
-            BuildableName = "GitHubBridge_macOS.framework"
+            BuildableName = "GitHubBridge.framework"
             BlueprintName = "GitHubBridge macOS"
             ReferencedContainer = "container:GitHub Clients.xcodeproj">
          </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7BEFD1B820C9483B00FDA05F"
-            BuildableName = "GitHubBridge_macOS.framework"
+            BuildableName = "GitHubBridge.framework"
             BlueprintName = "GitHubBridge macOS"
             ReferencedContainer = "container:GitHub Clients.xcodeproj">
          </BuildableReference>
@@ -83,7 +83,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7BEFD1B820C9483B00FDA05F"
-            BuildableName = "GitHubBridge_macOS.framework"
+            BuildableName = "GitHubBridge.framework"
             BlueprintName = "GitHubBridge macOS"
             ReferencedContainer = "container:GitHub Clients.xcodeproj">
          </BuildableReference>

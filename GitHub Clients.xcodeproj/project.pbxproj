@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7BA6F5CB20C94BE400C21A36 /* BMO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA6F57A20C94BCB00C21A36 /* BMO.framework */; };
+		7BA6F5CD20C94C0200C21A36 /* RESTUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA6F58820C94BCB00C21A36 /* RESTUtils.framework */; };
+		7BA6F5CE20C94C2500C21A36 /* BMO_CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA6F5A420C94BCB00C21A36 /* BMO_CoreData.framework */; };
+		7BA6F5CF20C94C3000C21A36 /* BMO_RESTCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA6F5B220C94BCB00C21A36 /* BMO_RESTCoreData.framework */; };
+		7BA6F5D020C94C6B00C21A36 /* BMO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA6F57620C94BCB00C21A36 /* BMO.framework */; };
+		7BA6F5D120C94C8400C21A36 /* BMO_CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA6F5A020C94BCB00C21A36 /* BMO_CoreData.framework */; };
+		7BA6F5D220C94C8700C21A36 /* BMO_RESTCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA6F5AE20C94BCB00C21A36 /* BMO_RESTCoreData.framework */; };
+		7BA6F5D320C94C8B00C21A36 /* RESTUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA6F58420C94BCB00C21A36 /* RESTUtils.framework */; };
 		7BA7C13420C9479E00C210B5 /* GitHubBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA7C12A20C9479E00C210B5 /* GitHubBridge.framework */; };
 		7BA7C13920C9479E00C210B5 /* GitHubBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7C13820C9479E00C210B5 /* GitHubBridgeTests.swift */; };
 		7BEFD1C220C9483B00FDA05F /* GitHubBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BEFD1B920C9483B00FDA05F /* GitHubBridge.framework */; };
@@ -15,6 +23,349 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		7BA6F57520C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B8BD01A20026E8C009BE667;
+			remoteInfo = "BMO-macOS";
+		};
+		7BA6F57720C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B7A34BF20027B4600348DF4;
+			remoteInfo = "BMO-tvOS";
+		};
+		7BA6F57920C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7BC696D52002775C007BC3E9;
+			remoteInfo = "BMO-iOS";
+		};
+		7BA6F57B20C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7BB52E43200279EA007CAD7B;
+			remoteInfo = "BMO-watchOS";
+		};
+		7BA6F57D20C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B8BD02220026E8C009BE667;
+			remoteInfo = "BMO-macOSTests";
+		};
+		7BA6F57F20C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B7A34C720027B4700348DF4;
+			remoteInfo = "BMO-tvOSTests";
+		};
+		7BA6F58120C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7BC696DD2002775C007BC3E9;
+			remoteInfo = "BMO-iOSTests";
+		};
+		7BA6F58320C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B8332712019296C005184FE;
+			remoteInfo = "RESTUtils-macOS";
+		};
+		7BA6F58520C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B5161D5201FBDAB00B94FB3;
+			remoteInfo = "RESTUtils-tvOS";
+		};
+		7BA6F58720C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B5161F1201FBDBE00B94FB3;
+			remoteInfo = "RESTUtils-iOS";
+		};
+		7BA6F58920C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B51620D201FBDD200B94FB3;
+			remoteInfo = "RESTUtils-watchOS";
+		};
+		7BA6F58B20C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B8332792019296C005184FE;
+			remoteInfo = "RESTUtils-macOSTests";
+		};
+		7BA6F58D20C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B5161DD201FBDAB00B94FB3;
+			remoteInfo = "RESTUtils-tvOSTests";
+		};
+		7BA6F58F20C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B5161F9201FBDBE00B94FB3;
+			remoteInfo = "RESTUtils-iOSTests";
+		};
+		7BA6F59120C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B817EF92019158200625427;
+			remoteInfo = "BMO+FastImportRepresentation-macOS";
+		};
+		7BA6F59320C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B516182201FBB1A00B94FB3;
+			remoteInfo = "BMO+FastImportRepresentation-tvOS";
+		};
+		7BA6F59520C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B5161A2201FBC2200B94FB3;
+			remoteInfo = "BMO+FastImportRepresentation-iOS";
+		};
+		7BA6F59720C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B5161C2201FBCEF00B94FB3;
+			remoteInfo = "BMO+FastImportRepresentation-watchOS";
+		};
+		7BA6F59920C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B817F012019158200625427;
+			remoteInfo = "BMO+FastImportRepresentation-macOSTests";
+		};
+		7BA6F59B20C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B51618A201FBB1A00B94FB3;
+			remoteInfo = "BMO+FastImportRepresentation-tvOSTests";
+		};
+		7BA6F59D20C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B5161AA201FBC2300B94FB3;
+			remoteInfo = "BMO+FastImportRepresentation-iOSTests";
+		};
+		7BA6F59F20C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B8332492019274B005184FE;
+			remoteInfo = "BMO+CoreData-macOS";
+		};
+		7BA6F5A120C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B51621A201FBDF000B94FB3;
+			remoteInfo = "BMO+CoreData-tvOS";
+		};
+		7BA6F5A320C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B516236201FBDFE00B94FB3;
+			remoteInfo = "BMO+CoreData-iOS";
+		};
+		7BA6F5A520C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B516252201FBE0C00B94FB3;
+			remoteInfo = "BMO+CoreData-watchOS";
+		};
+		7BA6F5A720C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B8332512019274B005184FE;
+			remoteInfo = "BMO+CoreData-macOSTests";
+		};
+		7BA6F5A920C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B516222201FBDF000B94FB3;
+			remoteInfo = "BMO+CoreData-tvOSTests";
+		};
+		7BA6F5AB20C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B51623E201FBDFE00B94FB3;
+			remoteInfo = "BMO+CoreData-iOSTests";
+		};
+		7BA6F5AD20C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B0AB0CD2021147300AC083A;
+			remoteInfo = "BMO+RESTCoreData-macOS";
+		};
+		7BA6F5AF20C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B0AB0E62021147D00AC083A;
+			remoteInfo = "BMO+RESTCoreData-tvOS";
+		};
+		7BA6F5B120C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B0AB0FF2021148000AC083A;
+			remoteInfo = "BMO+RESTCoreData-iOS";
+		};
+		7BA6F5B320C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B0AB1182021148300AC083A;
+			remoteInfo = "BMO+RESTCoreData-watchOS";
+		};
+		7BA6F5B520C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B0AB1252021148600AC083A;
+			remoteInfo = "BMO+RESTCoreData-macOSTests";
+		};
+		7BA6F5B720C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B0AB1322021148A00AC083A;
+			remoteInfo = "BMO+RESTCoreData-tvOSTests";
+		};
+		7BA6F5B920C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B0AB13F2021148E00AC083A;
+			remoteInfo = "BMO+RESTCoreData-iOSTests";
+		};
+		7BA6F5BB20C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7BB965612022299800024DE1;
+			remoteInfo = "CollectionLoader+RESTCoreData-macOS";
+		};
+		7BA6F5BD20C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7BB9657D202229A900024DE1;
+			remoteInfo = "CollectionLoader+RESTCoreData-tvOS";
+		};
+		7BA6F5BF20C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7BB96599202229BF00024DE1;
+			remoteInfo = "CollectionLoader+RESTCoreData-iOS";
+		};
+		7BA6F5C120C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7BB965B5202229D000024DE1;
+			remoteInfo = "CollectionLoader+RESTCoreData-watchOS";
+		};
+		7BA6F5C320C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7BB965692022299900024DE1;
+			remoteInfo = "CollectionLoader+RESTCoreData-macOSTests";
+		};
+		7BA6F5C520C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7BB96585202229A900024DE1;
+			remoteInfo = "CollectionLoader+RESTCoreData-tvOSTests";
+		};
+		7BA6F5C720C94BCB00C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7BB965A1202229BF00024DE1;
+			remoteInfo = "CollectionLoader+RESTCoreData-iOSTests";
+		};
+		7BA6F61120C94CC500C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F60620C94CC400C21A36 /* RetryingOperation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B8BD01A20026E8C009BE667;
+			remoteInfo = "RetryingOperation-macOS";
+		};
+		7BA6F61320C94CC500C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F60620C94CC400C21A36 /* RetryingOperation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B7A34BF20027B4600348DF4;
+			remoteInfo = "RetryingOperation-tvOS";
+		};
+		7BA6F61520C94CC500C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F60620C94CC400C21A36 /* RetryingOperation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7BC696D52002775C007BC3E9;
+			remoteInfo = "RetryingOperation-iOS";
+		};
+		7BA6F61720C94CC500C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F60620C94CC400C21A36 /* RetryingOperation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7BB52E43200279EA007CAD7B;
+			remoteInfo = "RetryingOperation-watchOS";
+		};
+		7BA6F61920C94CC500C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F60620C94CC400C21A36 /* RetryingOperation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B8BD02220026E8C009BE667;
+			remoteInfo = "RetryingOperation-macOSTests";
+		};
+		7BA6F61B20C94CC500C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F60620C94CC400C21A36 /* RetryingOperation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7BC696DD2002775C007BC3E9;
+			remoteInfo = "RetryingOperation-iOSTests";
+		};
+		7BA6F61D20C94CC500C21A36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA6F60620C94CC400C21A36 /* RetryingOperation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B7A34C720027B4700348DF4;
+			remoteInfo = "RetryingOperation-tvOSTests";
+		};
 		7BA7C13520C9479E00C210B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7BA7C12120C9479E00C210B5 /* Project object */;
@@ -32,6 +383,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BMO.xcodeproj; path = Carthage/Checkouts/BMO/BMO.xcodeproj; sourceTree = "<group>"; };
+		7BA6F60620C94CC400C21A36 /* RetryingOperation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RetryingOperation.xcodeproj; path = Carthage/Checkouts/RetryingOperation/RetryingOperation.xcodeproj; sourceTree = "<group>"; };
 		7BA7C12A20C9479E00C210B5 /* GitHubBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GitHubBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BA7C12E20C9479E00C210B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BA7C13320C9479E00C210B5 /* GitHubBridge iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GitHubBridge iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +400,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BA6F5CB20C94BE400C21A36 /* BMO.framework in Frameworks */,
+				7BA6F5CE20C94C2500C21A36 /* BMO_CoreData.framework in Frameworks */,
+				7BA6F5CF20C94C3000C21A36 /* BMO_RESTCoreData.framework in Frameworks */,
+				7BA6F5CD20C94C0200C21A36 /* RESTUtils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +419,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BA6F5D020C94C6B00C21A36 /* BMO.framework in Frameworks */,
+				7BA6F5D120C94C8400C21A36 /* BMO_CoreData.framework in Frameworks */,
+				7BA6F5D220C94C8700C21A36 /* BMO_RESTCoreData.framework in Frameworks */,
+				7BA6F5D320C94C8B00C21A36 /* RESTUtils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,12 +437,84 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7BA6F54420C94BCB00C21A36 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7BA6F57620C94BCB00C21A36 /* BMO.framework */,
+				7BA6F57820C94BCB00C21A36 /* BMO.framework */,
+				7BA6F57A20C94BCB00C21A36 /* BMO.framework */,
+				7BA6F57C20C94BCB00C21A36 /* BMO.framework */,
+				7BA6F57E20C94BCB00C21A36 /* BMO-macOSTests.xctest */,
+				7BA6F58020C94BCB00C21A36 /* BMO-tvOSTests.xctest */,
+				7BA6F58220C94BCB00C21A36 /* BMO-iOSTests.xctest */,
+				7BA6F58420C94BCB00C21A36 /* RESTUtils.framework */,
+				7BA6F58620C94BCB00C21A36 /* RESTUtils.framework */,
+				7BA6F58820C94BCB00C21A36 /* RESTUtils.framework */,
+				7BA6F58A20C94BCB00C21A36 /* RESTUtils.framework */,
+				7BA6F58C20C94BCB00C21A36 /* RESTUtils-macOSTests.xctest */,
+				7BA6F58E20C94BCB00C21A36 /* RESTUtils-tvOSTests.xctest */,
+				7BA6F59020C94BCB00C21A36 /* RESTUtils-iOSTests.xctest */,
+				7BA6F59220C94BCB00C21A36 /* BMO_FastImportRepresentation.framework */,
+				7BA6F59420C94BCB00C21A36 /* BMO_FastImportRepresentation.framework */,
+				7BA6F59620C94BCB00C21A36 /* BMO_FastImportRepresentation.framework */,
+				7BA6F59820C94BCB00C21A36 /* BMO_FastImportRepresentation.framework */,
+				7BA6F59A20C94BCB00C21A36 /* BMO+FastImportRepresentation-macOSTests.xctest */,
+				7BA6F59C20C94BCB00C21A36 /* BMO+FastImportRepresentation-tvOSTests.xctest */,
+				7BA6F59E20C94BCB00C21A36 /* BMO+FastImportRepresentation-iOSTests.xctest */,
+				7BA6F5A020C94BCB00C21A36 /* BMO_CoreData.framework */,
+				7BA6F5A220C94BCB00C21A36 /* BMO_CoreData.framework */,
+				7BA6F5A420C94BCB00C21A36 /* BMO_CoreData.framework */,
+				7BA6F5A620C94BCB00C21A36 /* BMO_CoreData.framework */,
+				7BA6F5A820C94BCB00C21A36 /* BMO+CoreData-macOSTests.xctest */,
+				7BA6F5AA20C94BCB00C21A36 /* BMO+CoreData-tvOSTests.xctest */,
+				7BA6F5AC20C94BCB00C21A36 /* BMO+CoreData-iOSTests.xctest */,
+				7BA6F5AE20C94BCB00C21A36 /* BMO_RESTCoreData.framework */,
+				7BA6F5B020C94BCB00C21A36 /* BMO_RESTCoreData.framework */,
+				7BA6F5B220C94BCB00C21A36 /* BMO_RESTCoreData.framework */,
+				7BA6F5B420C94BCB00C21A36 /* BMO_RESTCoreData.framework */,
+				7BA6F5B620C94BCB00C21A36 /* BMO+RESTCoreData-macOSTests.xctest */,
+				7BA6F5B820C94BCB00C21A36 /* BMO+RESTCoreData-tvOSTests.xctest */,
+				7BA6F5BA20C94BCB00C21A36 /* BMO+RESTCoreData-iOSTests.xctest */,
+				7BA6F5BC20C94BCB00C21A36 /* CollectionLoader_RESTCoreData.framework */,
+				7BA6F5BE20C94BCB00C21A36 /* CollectionLoader_RESTCoreData.framework */,
+				7BA6F5C020C94BCB00C21A36 /* CollectionLoader_RESTCoreData.framework */,
+				7BA6F5C220C94BCB00C21A36 /* CollectionLoader_RESTCoreData.framework */,
+				7BA6F5C420C94BCB00C21A36 /* CollectionLoader+RESTCoreData-macOSTests.xctest */,
+				7BA6F5C620C94BCB00C21A36 /* CollectionLoader+RESTCoreData-tvOSTests.xctest */,
+				7BA6F5C820C94BCB00C21A36 /* CollectionLoader+RESTCoreData-iOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7BA6F5C920C94BDC00C21A36 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7BA6F60720C94CC400C21A36 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7BA6F61220C94CC500C21A36 /* RetryingOperation.framework */,
+				7BA6F61420C94CC500C21A36 /* RetryingOperation.framework */,
+				7BA6F61620C94CC500C21A36 /* RetryingOperation.framework */,
+				7BA6F61820C94CC500C21A36 /* RetryingOperation.framework */,
+				7BA6F61A20C94CC500C21A36 /* RetryingOperation-macOSTests.xctest */,
+				7BA6F61C20C94CC500C21A36 /* RetryingOperation-iOSTests.xctest */,
+				7BA6F61E20C94CC500C21A36 /* RetryingOperation-tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		7BA7C12020C9479E00C210B5 = {
 			isa = PBXGroup;
 			children = (
 				7BA7C12C20C9479E00C210B5 /* GitHubBridge */,
 				7BA7C13720C9479E00C210B5 /* GitHubBridgeTests */,
+				7BBB24B920C94B6800BC673B /* Dependencies */,
 				7BA7C12B20C9479E00C210B5 /* Products */,
+				7BA6F5C920C94BDC00C21A36 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,6 +545,15 @@
 				7BA7C13A20C9479E00C210B5 /* Info.plist */,
 			);
 			path = GitHubBridgeTests;
+			sourceTree = "<group>";
+		};
+		7BBB24B920C94B6800BC673B /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */,
+				7BA6F60620C94CC400C21A36 /* RetryingOperation.xcodeproj */,
+			);
+			name = Dependencies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +684,16 @@
 			mainGroup = 7BA7C12020C9479E00C210B5;
 			productRefGroup = 7BA7C12B20C9479E00C210B5 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 7BA6F54420C94BCB00C21A36 /* Products */;
+					ProjectRef = 7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */;
+				},
+				{
+					ProductGroup = 7BA6F60720C94CC400C21A36 /* Products */;
+					ProjectRef = 7BA6F60620C94CC400C21A36 /* RetryingOperation.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				7BEFD1B820C9483B00FDA05F /* GitHubBridge macOS */,
@@ -251,6 +703,352 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		7BA6F57620C94BCB00C21A36 /* BMO.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMO.framework;
+			remoteRef = 7BA6F57520C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F57820C94BCB00C21A36 /* BMO.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMO.framework;
+			remoteRef = 7BA6F57720C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F57A20C94BCB00C21A36 /* BMO.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMO.framework;
+			remoteRef = 7BA6F57920C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F57C20C94BCB00C21A36 /* BMO.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMO.framework;
+			remoteRef = 7BA6F57B20C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F57E20C94BCB00C21A36 /* BMO-macOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "BMO-macOSTests.xctest";
+			remoteRef = 7BA6F57D20C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F58020C94BCB00C21A36 /* BMO-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "BMO-tvOSTests.xctest";
+			remoteRef = 7BA6F57F20C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F58220C94BCB00C21A36 /* BMO-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "BMO-iOSTests.xctest";
+			remoteRef = 7BA6F58120C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F58420C94BCB00C21A36 /* RESTUtils.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RESTUtils.framework;
+			remoteRef = 7BA6F58320C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F58620C94BCB00C21A36 /* RESTUtils.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RESTUtils.framework;
+			remoteRef = 7BA6F58520C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F58820C94BCB00C21A36 /* RESTUtils.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RESTUtils.framework;
+			remoteRef = 7BA6F58720C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F58A20C94BCB00C21A36 /* RESTUtils.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RESTUtils.framework;
+			remoteRef = 7BA6F58920C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F58C20C94BCB00C21A36 /* RESTUtils-macOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "RESTUtils-macOSTests.xctest";
+			remoteRef = 7BA6F58B20C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F58E20C94BCB00C21A36 /* RESTUtils-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "RESTUtils-tvOSTests.xctest";
+			remoteRef = 7BA6F58D20C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F59020C94BCB00C21A36 /* RESTUtils-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "RESTUtils-iOSTests.xctest";
+			remoteRef = 7BA6F58F20C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F59220C94BCB00C21A36 /* BMO_FastImportRepresentation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMO_FastImportRepresentation.framework;
+			remoteRef = 7BA6F59120C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F59420C94BCB00C21A36 /* BMO_FastImportRepresentation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMO_FastImportRepresentation.framework;
+			remoteRef = 7BA6F59320C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F59620C94BCB00C21A36 /* BMO_FastImportRepresentation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMO_FastImportRepresentation.framework;
+			remoteRef = 7BA6F59520C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F59820C94BCB00C21A36 /* BMO_FastImportRepresentation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMO_FastImportRepresentation.framework;
+			remoteRef = 7BA6F59720C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F59A20C94BCB00C21A36 /* BMO+FastImportRepresentation-macOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "BMO+FastImportRepresentation-macOSTests.xctest";
+			remoteRef = 7BA6F59920C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F59C20C94BCB00C21A36 /* BMO+FastImportRepresentation-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "BMO+FastImportRepresentation-tvOSTests.xctest";
+			remoteRef = 7BA6F59B20C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F59E20C94BCB00C21A36 /* BMO+FastImportRepresentation-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "BMO+FastImportRepresentation-iOSTests.xctest";
+			remoteRef = 7BA6F59D20C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5A020C94BCB00C21A36 /* BMO_CoreData.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMO_CoreData.framework;
+			remoteRef = 7BA6F59F20C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5A220C94BCB00C21A36 /* BMO_CoreData.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMO_CoreData.framework;
+			remoteRef = 7BA6F5A120C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5A420C94BCB00C21A36 /* BMO_CoreData.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMO_CoreData.framework;
+			remoteRef = 7BA6F5A320C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5A620C94BCB00C21A36 /* BMO_CoreData.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMO_CoreData.framework;
+			remoteRef = 7BA6F5A520C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5A820C94BCB00C21A36 /* BMO+CoreData-macOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "BMO+CoreData-macOSTests.xctest";
+			remoteRef = 7BA6F5A720C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5AA20C94BCB00C21A36 /* BMO+CoreData-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "BMO+CoreData-tvOSTests.xctest";
+			remoteRef = 7BA6F5A920C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5AC20C94BCB00C21A36 /* BMO+CoreData-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "BMO+CoreData-iOSTests.xctest";
+			remoteRef = 7BA6F5AB20C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5AE20C94BCB00C21A36 /* BMO_RESTCoreData.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMO_RESTCoreData.framework;
+			remoteRef = 7BA6F5AD20C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5B020C94BCB00C21A36 /* BMO_RESTCoreData.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMO_RESTCoreData.framework;
+			remoteRef = 7BA6F5AF20C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5B220C94BCB00C21A36 /* BMO_RESTCoreData.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMO_RESTCoreData.framework;
+			remoteRef = 7BA6F5B120C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5B420C94BCB00C21A36 /* BMO_RESTCoreData.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMO_RESTCoreData.framework;
+			remoteRef = 7BA6F5B320C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5B620C94BCB00C21A36 /* BMO+RESTCoreData-macOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "BMO+RESTCoreData-macOSTests.xctest";
+			remoteRef = 7BA6F5B520C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5B820C94BCB00C21A36 /* BMO+RESTCoreData-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "BMO+RESTCoreData-tvOSTests.xctest";
+			remoteRef = 7BA6F5B720C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5BA20C94BCB00C21A36 /* BMO+RESTCoreData-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "BMO+RESTCoreData-iOSTests.xctest";
+			remoteRef = 7BA6F5B920C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5BC20C94BCB00C21A36 /* CollectionLoader_RESTCoreData.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CollectionLoader_RESTCoreData.framework;
+			remoteRef = 7BA6F5BB20C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5BE20C94BCB00C21A36 /* CollectionLoader_RESTCoreData.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CollectionLoader_RESTCoreData.framework;
+			remoteRef = 7BA6F5BD20C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5C020C94BCB00C21A36 /* CollectionLoader_RESTCoreData.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CollectionLoader_RESTCoreData.framework;
+			remoteRef = 7BA6F5BF20C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5C220C94BCB00C21A36 /* CollectionLoader_RESTCoreData.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CollectionLoader_RESTCoreData.framework;
+			remoteRef = 7BA6F5C120C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5C420C94BCB00C21A36 /* CollectionLoader+RESTCoreData-macOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "CollectionLoader+RESTCoreData-macOSTests.xctest";
+			remoteRef = 7BA6F5C320C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5C620C94BCB00C21A36 /* CollectionLoader+RESTCoreData-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "CollectionLoader+RESTCoreData-tvOSTests.xctest";
+			remoteRef = 7BA6F5C520C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F5C820C94BCB00C21A36 /* CollectionLoader+RESTCoreData-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "CollectionLoader+RESTCoreData-iOSTests.xctest";
+			remoteRef = 7BA6F5C720C94BCB00C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F61220C94CC500C21A36 /* RetryingOperation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RetryingOperation.framework;
+			remoteRef = 7BA6F61120C94CC500C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F61420C94CC500C21A36 /* RetryingOperation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RetryingOperation.framework;
+			remoteRef = 7BA6F61320C94CC500C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F61620C94CC500C21A36 /* RetryingOperation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RetryingOperation.framework;
+			remoteRef = 7BA6F61520C94CC500C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F61820C94CC500C21A36 /* RetryingOperation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RetryingOperation.framework;
+			remoteRef = 7BA6F61720C94CC500C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F61A20C94CC500C21A36 /* RetryingOperation-macOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "RetryingOperation-macOSTests.xctest";
+			remoteRef = 7BA6F61920C94CC500C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F61C20C94CC500C21A36 /* RetryingOperation-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "RetryingOperation-iOSTests.xctest";
+			remoteRef = 7BA6F61B20C94CC500C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7BA6F61E20C94CC500C21A36 /* RetryingOperation-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "RetryingOperation-tvOSTests.xctest";
+			remoteRef = 7BA6F61D20C94CC500C21A36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7BA7C12820C9479E00C210B5 /* Resources */ = {

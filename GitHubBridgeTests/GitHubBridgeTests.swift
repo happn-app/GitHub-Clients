@@ -14,7 +14,6 @@ import XCTest
 class GitHubBridgeTests: XCTestCase {
    
    func testExample() {
-      XCTAssertEqual(GitHubBMOBridge().hello(), "hello")
    }
    
 }
