@@ -15,6 +15,10 @@
 		7BA6F5D120C94C8400C21A36 /* BMO_CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA6F5A020C94BCB00C21A36 /* BMO_CoreData.framework */; };
 		7BA6F5D220C94C8700C21A36 /* BMO_RESTCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA6F5AE20C94BCB00C21A36 /* BMO_RESTCoreData.framework */; };
 		7BA6F5D320C94C8B00C21A36 /* RESTUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA6F58420C94BCB00C21A36 /* RESTUtils.framework */; };
+		7BA6F62120C94F2000C21A36 /* GitHub.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BA6F61F20C94F2000C21A36 /* GitHub.xcdatamodeld */; };
+		7BA6F62220C94F2000C21A36 /* GitHub.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BA6F61F20C94F2000C21A36 /* GitHub.xcdatamodeld */; };
+		7BA6F62420C95CC700C21A36 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA6F62320C95CC700C21A36 /* Color.swift */; };
+		7BA6F62520C95CC700C21A36 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA6F62320C95CC700C21A36 /* Color.swift */; };
 		7BA7C13420C9479E00C210B5 /* GitHubBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA7C12A20C9479E00C210B5 /* GitHubBridge.framework */; };
 		7BA7C13920C9479E00C210B5 /* GitHubBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7C13820C9479E00C210B5 /* GitHubBridgeTests.swift */; };
 		7BEFD1C220C9483B00FDA05F /* GitHubBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BEFD1B920C9483B00FDA05F /* GitHubBridge.framework */; };
@@ -385,6 +389,8 @@
 /* Begin PBXFileReference section */
 		7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BMO.xcodeproj; path = Carthage/Checkouts/BMO/BMO.xcodeproj; sourceTree = "<group>"; };
 		7BA6F60620C94CC400C21A36 /* RetryingOperation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RetryingOperation.xcodeproj; path = Carthage/Checkouts/RetryingOperation/RetryingOperation.xcodeproj; sourceTree = "<group>"; };
+		7BA6F62020C94F2000C21A36 /* GitHub.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitHub.xcdatamodel; sourceTree = "<group>"; };
+		7BA6F62320C95CC700C21A36 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		7BA7C12A20C9479E00C210B5 /* GitHubBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GitHubBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BA7C12E20C9479E00C210B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BA7C13320C9479E00C210B5 /* GitHubBridge iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GitHubBridge iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -507,6 +513,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7BA6F63220C95D1700C21A36 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7BA6F62320C95CC700C21A36 /* Color.swift */,
+				7BA6F61F20C94F2000C21A36 /* GitHub.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		7BA7C12020C9479E00C210B5 = {
 			isa = PBXGroup;
 			children = (
@@ -533,6 +548,7 @@
 			isa = PBXGroup;
 			children = (
 				7BA7C12E20C9479E00C210B5 /* Info.plist */,
+				7BA6F63220C95D1700C21A36 /* Model */,
 				7BEFD1D020C948A500FDA05F /* GitHubBMOBridge.swift */,
 			);
 			path = GitHubBridge;
@@ -1086,7 +1102,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BA6F62220C94F2000C21A36 /* GitHub.xcdatamodeld in Sources */,
 				7BEFD1D220C948A500FDA05F /* GitHubBMOBridge.swift in Sources */,
+				7BA6F62520C95CC700C21A36 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1102,7 +1120,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BA6F62120C94F2000C21A36 /* GitHub.xcdatamodeld in Sources */,
 				7BEFD1D120C948A500FDA05F /* GitHubBMOBridge.swift in Sources */,
+				7BA6F62420C95CC700C21A36 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1480,6 +1500,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7BA6F61F20C94F2000C21A36 /* GitHub.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7BA6F62020C94F2000C21A36 /* GitHub.xcdatamodel */,
+			);
+			currentVersion = 7BA6F62020C94F2000C21A36 /* GitHub.xcdatamodel */;
+			path = GitHub.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7BA7C12120C9479E00C210B5 /* Project object */;
 }
