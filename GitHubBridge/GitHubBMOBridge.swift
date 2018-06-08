@@ -29,7 +29,15 @@ public class GitHubBMOBridge : Bridge {
 	
 	public typealias BackOperationType = Operation
 	
-	public init(dbModel m: NSManagedObjectModel) {
+	enum Err : Error {
+		case cannotGetRESTPathForRequest
+		case invalidAPIResponse
+	}
+	
+	public let apiRoot: URL
+	
+	public init(apiRoot r: URL, dbModel m: NSManagedObjectModel) {
+		apiRoot = r
 		dbModel = m
 	}
 	
@@ -38,7 +46,76 @@ public class GitHubBMOBridge : Bridge {
 	}
 	
 	public func backOperation(forFetchRequest fetchRequest: DbType.FetchRequestType, additionalInfo: AdditionalRequestInfoType?, userInfo: inout UserInfoType) throws -> Operation? {
-		return nil
+		let restPath: RESTPath?
+		
+		if let forcedRESTPath = additionalInfo?.forcedRESTPath {
+			restPath = forcedRESTPath
+		} else {
+			let entity = fetchRequest.entity!
+			switch entity.name! {
+			case Gist.entity().name!:
+				/* /gists                 <-- Lists gists of the connected user, or all public gists if nobody is connected */
+				/* /gists/:gist_id        <-- Get one gist */
+				/* /users/:username/gists <-- Lists gists of the specified user */
+				/* /gists/public          <-- Lists all public gists */
+				/* /gists/starred         <-- Lists authenticated user’s starred gists */
+//				.restPath("(/users/|owner.username|)/gists(/|remoteId|)"),
+				restPath = restMapper.restPath(forEntity: entity)
+				
+			case Issue.entity().name!:
+				/* /issues                            <-- Lists all issues assigned to authenticated user */
+				/* /repos/:owner/:repo/issues         <-- Lists issues in a given repository */
+				/* /repos/:owner/:repo/issues/:number <-- Get one issue */
+				/* /user/issues                       <-- Lists issues assigned to authenticated user in owned and member repositories */
+				/* /orgs/:org/issues                  <-- Lists issues assigned to authenticated user in the given org repositories */
+//				.restPath("(/repos/|repository.owner.username|/|repository.name|)/issues(/|issueNumber|)"),
+				restPath = restMapper.restPath(forEntity: entity)
+				
+			case Label.entity().name!:
+				/* /repos/:owner/:repo/labels                <-- Lists all labels in given repository */
+				/* /repos/:owner/:repo/labels/:name          <-- Get one label */
+				/* /repos/:owner/:repo/issues/:number/labels <-- Lists labels of a given issue */
+//				.restPath("/repos/|repository.owner.username|/|repository.name|(/issues/|issue.issueNumber|)/labels(/|name|)"),
+				restPath = restMapper.restPath(forEntity: entity)
+				
+			case Repository.entity().name!:
+				/* /repos/:owner/:repo    <-- Get one repository */
+				/* /user/repos            <-- Lists all repositories on which the authenticated user has explicit permission to access */
+				/* /users/:username/repos <-- Lists public repositories for the specified user */
+				/* /orgs/:org/repos       <-- Lists repositories for the specified org */
+				/* /repositories          <-- Lists all public repositories */
+//				.restPath("/repos/|owner.username|/|name|"),
+				restPath = restMapper.restPath(forEntity: entity)
+				
+			case User.entity().name!:
+				/* /users/:username <-- Get one user */
+				/* /users           <-- Lists all the users */
+				/* /user            <-- Get the authenticated user */
+//				.restPath("/users(/|id|)"),
+				restPath = restMapper.restPath(forEntity: entity)
+				
+			default:
+				restPath = restMapper.restPath(forEntity: entity)
+			}
+		}
+		
+		/* Computing REST path values from request's predicate: We're enumerating
+		 * all key/val pairs from comparison predicates in request predicate. Only
+		 * one value per key is allowed for the key to stay in the final
+		 * restPathValues dictionary. */
+		var blacklistedKeys = Set<String>()
+		var restPathResolvingInfo: [String: Any] = [:]
+		fetchRequest.predicate?.enumerateFirstLevelConstants(forKeyPath: nil){ (keyPath, constant) in
+			if restPathResolvingInfo[keyPath] == nil {restPathResolvingInfo[keyPath] = constant}
+			else                                     {blacklistedKeys.insert(keyPath)}
+		}
+		for p in blacklistedKeys {restPathResolvingInfo.removeValue(forKey: p)}
+		
+		guard let path = restPath?.resolvedPath(source: restPathResolvingInfo) else {
+			throw Err.cannotGetRESTPathForRequest
+		}
+		
+		return GitHubBMOOperation(request: URLRequest(url: URL(string: path, relativeTo: apiRoot)!))
 	}
 	
 	public func backOperation(forInsertedObject insertedObject: DbType.ObjectType, additionalInfo: AdditionalRequestInfoType?, userInfo: inout UserInfoType) throws -> Operation? {
@@ -103,159 +180,181 @@ public class GitHubBMOBridge : Bridge {
 		let FileMapping: [_RESTConvenienceMappingForEntity] = [
 			.uniquingPropertyName("bmoId"),
 			.propertiesMapping([
-				"bmoId":       [.restName("id")],
-				"filename":    [.restName("filename")],
-				"isTruncated": [.restName("truncated"), .restToLocalTransformer(boolTransformer)],
-				"language":    [.restName("language")],
-				"mimeType":    [.restName("type")],
-				"rawURL":      [.restName("raw_url"),   .restToLocalTransformer(urlTransformer)],
-				"size":        [.restName("size"),      .restToLocalTransformer(intTransformer)]
+				#keyPath(File.bmoId):       [.restName("id")],
+				#keyPath(File.filename):    [.restName("filename")],
+				#keyPath(File.isTruncated): [.restName("truncated"), .restToLocalTransformer(boolTransformer)],
+				#keyPath(File.language):    [.restName("language")],
+				#keyPath(File.mimeType):    [.restName("type")],
+				#keyPath(File.rawURL):      [.restName("raw_url"),   .restToLocalTransformer(urlTransformer)],
+				#keyPath(File.size):        [.restName("size"),      .restToLocalTransformer(intTransformer)]
 			])
 		]
 		
 		let FileLanguageMapping: [_RESTConvenienceMappingForEntity] = [
 			.uniquingPropertyName("bmoId"),
 			.propertiesMapping([
-				"bmoId": [.restName("name")],
-				"name":  [.restName("name")]
+				#keyPath(FileLanguage.bmoId): [.restName("name")],
+				#keyPath(FileLanguage.name):  [.restName("name")]
 			])
 		]
 		
 		let GistMapping: [_RESTConvenienceMappingForEntity] = [
-			.restPath("/gists"),
+			/* /gists                 <-- Lists gists of the connected user, or all public gists if nobody is connected */
+			/* /gists/:gist_id        <-- Get one gist */
+			/* /users/:username/gists <-- Lists gists of the specified user */
+			/* /gists/public          <-- Lists all public gists */
+			/* /gists/starred         <-- Lists authenticated user’s starred gists */
+			.restPath("(/users/|owner.username|)/gists(/|remoteId|)"),
 			.uniquingPropertyName("bmoId"),
 			.propertiesMapping([
-				"bmoId":        [.restName("id")],
-				"creationDate": [.restName("created_at"),   .restToLocalTransformer(dateTransformer)],
-				"descr":        [.restName("description")],
-				"files":        [                           .restToLocalTransformer(FilesTransformer())],
-				"gitPullURL":   [.restName("git_pull_url"), .restToLocalTransformer(urlTransformer)],
-				"gitPushURL":   [.restName("git_push_url"), .restToLocalTransformer(urlTransformer)],
-				"isPublic":     [.restName("public"),       .restToLocalTransformer(boolTransformer)],
-				"isTruncated":  [.restName("truncated"),    .restToLocalTransformer(boolTransformer)],
-				"nodeId":       [.restName("nodeId")],
-				"owner":        [.restName("owner")],
-				"remoteId":     [.restName("id")],
-				"updateDate":   [.restName("updated_at"),   .restToLocalTransformer(dateTransformer)]
+				#keyPath(Gist.bmoId):        [.restName("id")],
+				#keyPath(Gist.creationDate): [.restName("created_at"),   .restToLocalTransformer(dateTransformer)],
+				#keyPath(Gist.descr):        [.restName("description")],
+				#keyPath(Gist.files):        [                           .restToLocalTransformer(FilesTransformer())],
+				#keyPath(Gist.gitPullURL):   [.restName("git_pull_url"), .restToLocalTransformer(urlTransformer)],
+				#keyPath(Gist.gitPushURL):   [.restName("git_push_url"), .restToLocalTransformer(urlTransformer)],
+				#keyPath(Gist.isPublic):     [.restName("public"),       .restToLocalTransformer(boolTransformer)],
+				#keyPath(Gist.isTruncated):  [.restName("truncated"),    .restToLocalTransformer(boolTransformer)],
+				#keyPath(Gist.nodeId):       [.restName("nodeId")],
+				#keyPath(Gist.owner):        [.restName("owner")],
+				#keyPath(Gist.remoteId):     [.restName("id")],
+				#keyPath(Gist.updateDate):   [.restName("updated_at"),   .restToLocalTransformer(dateTransformer)]
 			])
 		]
 		
 		let IssueMapping: [_RESTConvenienceMappingForEntity] = [
-			.restPath("/issues"),
+			/* /issues                            <-- Lists all issues assigned to authenticated user */
+			/* /repos/:owner/:repo/issues         <-- Lists issues in a given repository */
+			/* /repos/:owner/:repo/issues/:number <-- Get one issue */
+			/* /user/issues                       <-- Lists issues assigned to authenticated user in owned and member repositories */
+			/* /orgs/:org/issues                  <-- Lists issues assigned to authenticated user in the given org repositories */
+			.restPath("(/repos/|repository.owner.username|/|repository.name|)/issues(/|issueNumber|)"),
 			.uniquingPropertyName("bmoId"),
 			.propertiesMapping([
-				"activeLockReason": [.restName("active_lock_reason")],
-				"assignees":        [.restName("assignees")],
-				"bmoId":            [.restName("id"),                 .restToLocalTransformer(intToStrTransformer)],
-				"closeDate":        [.restName("closed_at"),          .restToLocalTransformer(dateTransformer)],
-				"commentsCount":    [.restName("comments"),           .restToLocalTransformer(intTransformer)],
-				"creationDate":     [.restName("created_at"),         .restToLocalTransformer(dateTransformer)],
-				"isLocked":         [.restName("locked"),             .restToLocalTransformer(boolTransformer)],
-				"labels":           [.restName("labels")],
-				"nodeId":           [.restName("node_id")],
-				"remoteId":         [.restName("id"),                 .restToLocalTransformer(intTransformer)],
-				"repository":       [.restName("repository")],
-				"updateDate":       [.restName("updated_at"),         .restToLocalTransformer(dateTransformer)]
+				#keyPath(Issue.activeLockReason): [.restName("active_lock_reason")],
+				#keyPath(Issue.assignees):        [.restName("assignees")],
+				#keyPath(Issue.bmoId):            [.restName("id"),                 .restToLocalTransformer(intToStrTransformer)],
+				#keyPath(Issue.closeDate):        [.restName("closed_at"),          .restToLocalTransformer(dateTransformer)],
+				#keyPath(Issue.commentsCount):    [.restName("comments"),           .restToLocalTransformer(intTransformer)],
+				#keyPath(Issue.creationDate):     [.restName("created_at"),         .restToLocalTransformer(dateTransformer)],
+				#keyPath(Issue.isLocked):         [.restName("locked"),             .restToLocalTransformer(boolTransformer)],
+				#keyPath(Issue.labels):           [.restName("labels")],
+				#keyPath(Issue.nodeId):           [.restName("node_id")],
+				#keyPath(Issue.issueNumber):      [.restName("number"),             .restToLocalTransformer(intTransformer)],
+				#keyPath(Issue.remoteId):         [.restName("id"),                 .restToLocalTransformer(intTransformer)],
+				#keyPath(Issue.repository):       [.restName("repository")],
+				#keyPath(Issue.updateDate):       [.restName("updated_at"),         .restToLocalTransformer(dateTransformer)]
 			])
 		]
 		
 		let LabelMapping: [_RESTConvenienceMappingForEntity] = [
-			.restPath("/repos/|repository.owner|/|repository|/labels"),
+			/* /repos/:owner/:repo/labels                <-- Lists all labels in given repository */
+			/* /repos/:owner/:repo/labels/:name          <-- Get one label */
+			/* /repos/:owner/:repo/issues/:number/labels <-- Lists labels of a given issue */
+			.restPath("/repos/|repository.owner.username|/|repository.name|(/issues/|issue.issueNumber|)/labels(/|name|)"),
 			.uniquingPropertyName("bmoId"),
 			.propertiesMapping([
-				"bmoId":     [.restName("id"),          .restToLocalTransformer(intToStrTransformer)],
-				"color":     [.restName("color"),       .restToLocalTransformer(colorTransformer)],
-				"descr":     [.restName("description")],
-				"isDefault": [.restName("default"),     .restToLocalTransformer(boolTransformer)],
-				"name":      [.restName("name")],
-				"nodeId":    [.restName("node_id")],
-				"remoteId":  [.restName("id"),          .restToLocalTransformer(intTransformer)]
+				#keyPath(Label.bmoId):     [.restName("id"),          .restToLocalTransformer(intToStrTransformer)],
+				#keyPath(Label.color):     [.restName("color"),       .restToLocalTransformer(colorTransformer)],
+				#keyPath(Label.descr):     [.restName("description")],
+				#keyPath(Label.isDefault): [.restName("default"),     .restToLocalTransformer(boolTransformer)],
+				#keyPath(Label.name):      [.restName("name")],
+				#keyPath(Label.nodeId):    [.restName("node_id")],
+				#keyPath(Label.remoteId):  [.restName("id"),          .restToLocalTransformer(intTransformer)]
 			])
 		]
 		
 		let LicenseMapping: [_RESTConvenienceMappingForEntity] = [
 			.uniquingPropertyName("bmoId"),
 			.propertiesMapping([
-				"bmoId":  [.restName("key")],
-				"key":    [.restName("key")],
-				"name":   [.restName("name")],
-				"nodeId": [.restName("node_id")]
+				#keyPath(License.bmoId):  [.restName("key")],
+				#keyPath(License.key):    [.restName("key")],
+				#keyPath(License.name):   [.restName("name")],
+				#keyPath(License.nodeId): [.restName("node_id")]
 			])
 		]
 		
 		let RepositoryMapping: [_RESTConvenienceMappingForEntity] = [
-			.restPath("/user(s/|owner.name|/)repos"),
+			/* /repos/:owner/:repo    <-- Get one repository */
+			/* /user/repos            <-- Lists all repositories on which the authenticated user has explicit permission to access */
+			/* /users/:username/repos <-- Lists public repositories for the specified user */
+			/* /orgs/:org/repos       <-- Lists repositories for the specified org */
+			/* /repositories          <-- Lists all public repositories */
+			.restPath("/repos/|owner.username|/|name|"),
 			.uniquingPropertyName("bmoId"),
 			.propertiesMapping([
-				"bmoId":            [.restName("id"),                .restToLocalTransformer(intToStrTransformer)],
-				"creationDate":     [.restName("created_at"),        .restToLocalTransformer(dateTransformer)],
-				"defaultBranch":    [.restName("default_branch")],
-				"descr":            [.restName("description")],
-				"forksCount":       [.restName("forks_count"),       .restToLocalTransformer(intTransformer)],
-				"fullName":         [.restName("full_name")],
-				"hasDownloads":     [.restName("has_downloads"),     .restToLocalTransformer(boolTransformer)],
-				"hasIssues":        [.restName("has_issues"),        .restToLocalTransformer(boolTransformer)],
-				"hasPages":         [.restName("has_pages"),         .restToLocalTransformer(boolTransformer)],
-				"hasWiki":          [.restName("has_wiki"),          .restToLocalTransformer(boolTransformer)],
-				"isArchived":       [.restName("archived"),          .restToLocalTransformer(boolTransformer)],
-				"isFork":           [.restName("fork"),              .restToLocalTransformer(boolTransformer)],
-				"isPrivate":        [.restName("private"),           .restToLocalTransformer(boolTransformer)],
-				"latestPushDate":   [.restName("pushed_at"),         .restToLocalTransformer(dateTransformer)],
-				"license":          [.restName("license")],
-				"name":             [.restName("name")],
-				"nodeId":           [.restName("node_id")],
-				"openIssuesCount":  [.restName("open_issues_count"), .restToLocalTransformer(intTransformer)],
-				"owner":            [.restName("owner")],
-				"remoteId":         [.restName("id"),                .restToLocalTransformer(intTransformer)],
-				"stargazersCount":  [.restName("stargazers_count"),  .restToLocalTransformer(intTransformer)],
-				"subscribersCount": [.restName("subscribers_count"), .restToLocalTransformer(intTransformer)],
-				"topics":           [.restName("topics"),            .restToLocalTransformer(TopicsTransformer())],
-				"updateDate":       [.restName("updated_at"),        .restToLocalTransformer(dateTransformer)],
-				"watchersCount":    [.restName("watchers_count"),    .restToLocalTransformer(intTransformer)]
+				#keyPath(Repository.bmoId):            [.restName("id"),                .restToLocalTransformer(intToStrTransformer)],
+				#keyPath(Repository.creationDate):     [.restName("created_at"),        .restToLocalTransformer(dateTransformer)],
+				#keyPath(Repository.defaultBranch):    [.restName("default_branch")],
+				#keyPath(Repository.descr):            [.restName("description")],
+				#keyPath(Repository.forksCount):       [.restName("forks_count"),       .restToLocalTransformer(intTransformer)],
+				#keyPath(Repository.fullName):         [.restName("full_name")],
+				#keyPath(Repository.hasDownloads):     [.restName("has_downloads"),     .restToLocalTransformer(boolTransformer)],
+				#keyPath(Repository.hasIssues):        [.restName("has_issues"),        .restToLocalTransformer(boolTransformer)],
+				#keyPath(Repository.hasPages):         [.restName("has_pages"),         .restToLocalTransformer(boolTransformer)],
+				#keyPath(Repository.hasWiki):          [.restName("has_wiki"),          .restToLocalTransformer(boolTransformer)],
+				#keyPath(Repository.isArchived):       [.restName("archived"),          .restToLocalTransformer(boolTransformer)],
+				#keyPath(Repository.isFork):           [.restName("fork"),              .restToLocalTransformer(boolTransformer)],
+				#keyPath(Repository.isPrivate):        [.restName("private"),           .restToLocalTransformer(boolTransformer)],
+				#keyPath(Repository.latestPushDate):   [.restName("pushed_at"),         .restToLocalTransformer(dateTransformer)],
+				#keyPath(Repository.license):          [.restName("license")],
+				#keyPath(Repository.name):             [.restName("name")],
+				#keyPath(Repository.nodeId):           [.restName("node_id")],
+				#keyPath(Repository.openIssuesCount):  [.restName("open_issues_count"), .restToLocalTransformer(intTransformer)],
+				#keyPath(Repository.owner):            [.restName("owner")],
+				#keyPath(Repository.remoteId):         [.restName("id"),                .restToLocalTransformer(intTransformer)],
+				#keyPath(Repository.stargazersCount):  [.restName("stargazers_count"),  .restToLocalTransformer(intTransformer)],
+				#keyPath(Repository.subscribersCount): [.restName("subscribers_count"), .restToLocalTransformer(intTransformer)],
+				#keyPath(Repository.topics):           [.restName("topics"),            .restToLocalTransformer(TopicsTransformer())],
+				#keyPath(Repository.updateDate):       [.restName("updated_at"),        .restToLocalTransformer(dateTransformer)],
+				#keyPath(Repository.watchersCount):    [.restName("watchers_count"),    .restToLocalTransformer(intTransformer)]
 			])
 		]
 		
 		let TopicMapping: [_RESTConvenienceMappingForEntity] = [
 			.uniquingPropertyName("bmoId"),
 			.propertiesMapping([
-				"bmoId": [.restName("name")],
-				"name":  [.restName("name")]
+				#keyPath(Topic.bmoId): [.restName("name")],
+				#keyPath(Topic.name):  [.restName("name")]
 			])
 		]
 		
 		let UserMapping: [_RESTConvenienceMappingForEntity] = [
+			/* /users/:username <-- Get one user */
+			/* /users           <-- Lists all the users */
+			/* /user            <-- Get the authenticated user */
 			.restPath("/users(/|id|)"),
 			.uniquingPropertyName("bmoId"),
 			.propertiesMapping([
-				"avatarURL":        [.restName("avatar_url"),   .restToLocalTransformer(urlTransformer)],
-				"bmoId":            [.restName("id"),           .restToLocalTransformer(intToStrTransformer)],
-				"company":          [.restName("company")],
-				"creationDate":     [.restName("created_at"),   .restToLocalTransformer(dateTransformer)],
-				"followersCount":   [.restName("followers"),    .restToLocalTransformer(intTransformer)],
-				"followingCount":   [.restName("following"),    .restToLocalTransformer(intTransformer)],
-				"name":             [.restName("name")],
-				"nodeId":           [.restName("node_id")],
-				"publicGistsCount": [.restName("public_gists"), .restToLocalTransformer(intTransformer)],
-				"publicReposCount": [.restName("public_repos"), .restToLocalTransformer(intTransformer)],
-				"remoteId":         [.restName("id"),           .restToLocalTransformer(intTransformer)],
-				"updateDate":       [.restName("updated_at"),   .restToLocalTransformer(dateTransformer)],
-				"usename":          [.restName("login")]
+				#keyPath(User.avatarURL):        [.restName("avatar_url"),   .restToLocalTransformer(urlTransformer)],
+				#keyPath(User.bmoId):            [.restName("id"),           .restToLocalTransformer(intToStrTransformer)],
+				#keyPath(User.company):          [.restName("company")],
+				#keyPath(User.creationDate):     [.restName("created_at"),   .restToLocalTransformer(dateTransformer)],
+				#keyPath(User.followersCount):   [.restName("followers"),    .restToLocalTransformer(intTransformer)],
+				#keyPath(User.followingCount):   [.restName("following"),    .restToLocalTransformer(intTransformer)],
+				#keyPath(User.name):             [.restName("name")],
+				#keyPath(User.nodeId):           [.restName("node_id")],
+				#keyPath(User.publicGistsCount): [.restName("public_gists"), .restToLocalTransformer(intTransformer)],
+				#keyPath(User.publicReposCount): [.restName("public_repos"), .restToLocalTransformer(intTransformer)],
+				#keyPath(User.remoteId):         [.restName("id"),           .restToLocalTransformer(intTransformer)],
+				#keyPath(User.updateDate):       [.restName("updated_at"),   .restToLocalTransformer(dateTransformer)],
+				#keyPath(User.username):         [.restName("login")]
 			])
 		]
 		
 		return RESTMapper(
-			model: dbModel,
+			model: dbModel, defaultFieldsKeyName: nil,
 			defaultPaginator: RESTOffsetLimitPaginator(),
 			convenienceMapping: [
-				"File": FileMapping,
-				"FileLanguage": FileLanguageMapping,
-				"Gist": GistMapping,
-				"Issue": IssueMapping,
-				"Label": LabelMapping,
-				"License": LicenseMapping,
-				"Repository": RepositoryMapping,
-				"Topic": TopicMapping,
-				"User": UserMapping
+				File.entity().name!: FileMapping,
+				FileLanguage.entity().name!: FileLanguageMapping,
+				Gist.entity().name!: GistMapping,
+				Issue.entity().name!: IssueMapping,
+				Label.entity().name!: LabelMapping,
+				License.entity().name!: LicenseMapping,
+				Repository.entity().name!: RepositoryMapping,
+				Topic.entity().name!: TopicMapping,
+				User.entity().name!: UserMapping
 			]
 		)
 	}()
