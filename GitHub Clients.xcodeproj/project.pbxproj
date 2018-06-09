@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B59183520CB179800D4D9F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59183420CB179800D4D9F5 /* AppDelegate.swift */; };
+		7B59183720CB179800D4D9F5 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59183620CB179800D4D9F5 /* FirstViewController.swift */; };
+		7B59183920CB179800D4D9F5 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59183820CB179800D4D9F5 /* SecondViewController.swift */; };
+		7B59183C20CB179800D4D9F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B59183A20CB179800D4D9F5 /* Main.storyboard */; };
+		7B59183E20CB179A00D4D9F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B59183D20CB179A00D4D9F5 /* Assets.xcassets */; };
+		7B59184120CB179A00D4D9F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B59183F20CB179A00D4D9F5 /* LaunchScreen.storyboard */; };
 		7B97399C20C9FFBE00ACF883 /* GitHubBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7C13820C9479E00C210B5 /* GitHubBridgeTests.swift */; };
 		7BA6F5CB20C94BE400C21A36 /* BMO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA6F57A20C94BCB00C21A36 /* BMO.framework */; };
 		7BA6F5CD20C94C0200C21A36 /* RESTUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA6F58820C94BCB00C21A36 /* RESTUtils.framework */; };
@@ -445,6 +451,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B59183220CB179800D4D9F5 /* GitHub iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GitHub iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B59183420CB179800D4D9F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7B59183620CB179800D4D9F5 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		7B59183820CB179800D4D9F5 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		7B59183B20CB179800D4D9F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7B59183D20CB179A00D4D9F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7B59184020CB179A00D4D9F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7B59184220CB179A00D4D9F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BA6F54320C94BCB00C21A36 /* BMO.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BMO.xcodeproj; path = Carthage/Checkouts/BMO/BMO.xcodeproj; sourceTree = "<group>"; };
 		7BA6F60620C94CC400C21A36 /* RetryingOperation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RetryingOperation.xcodeproj; path = Carthage/Checkouts/RetryingOperation/RetryingOperation.xcodeproj; sourceTree = "<group>"; };
 		7BA6F62020C94F2000C21A36 /* GitHub.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitHub.xcdatamodel; sourceTree = "<group>"; };
@@ -463,6 +477,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7B59182F20CB179800D4D9F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7BA7C12620C9479E00C210B5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -508,6 +529,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B59183320CB179800D4D9F5 /* GitHub iOS */ = {
+			isa = PBXGroup;
+			children = (
+				7B59183420CB179800D4D9F5 /* AppDelegate.swift */,
+				7B59183620CB179800D4D9F5 /* FirstViewController.swift */,
+				7B59183820CB179800D4D9F5 /* SecondViewController.swift */,
+				7B59183A20CB179800D4D9F5 /* Main.storyboard */,
+				7B59183D20CB179A00D4D9F5 /* Assets.xcassets */,
+				7B59183F20CB179A00D4D9F5 /* LaunchScreen.storyboard */,
+				7B59184220CB179A00D4D9F5 /* Info.plist */,
+			);
+			path = "GitHub iOS";
+			sourceTree = "<group>";
+		};
 		7BA6F54420C94BCB00C21A36 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -590,6 +625,7 @@
 		7BA7C12020C9479E00C210B5 = {
 			isa = PBXGroup;
 			children = (
+				7B59183320CB179800D4D9F5 /* GitHub iOS */,
 				7BA7C12C20C9479E00C210B5 /* GitHubBridge */,
 				7BA7C13720C9479E00C210B5 /* GitHubBridgeTests */,
 				7BBB24B920C94B6800BC673B /* Dependencies */,
@@ -608,6 +644,7 @@
 				7BA7C13320C9479E00C210B5 /* GitHubBridge iOSTests.xctest */,
 				7BEFD1B920C9483B00FDA05F /* GitHubBridge.framework */,
 				7BEFD1C120C9483B00FDA05F /* GitHubBridge macOSTests.xctest */,
+				7B59183220CB179800D4D9F5 /* GitHub iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -677,6 +714,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		7B59183120CB179800D4D9F5 /* GitHub iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B59188020CB179A00D4D9F5 /* Build configuration list for PBXNativeTarget "GitHub iOS" */;
+			buildPhases = (
+				7B59182E20CB179800D4D9F5 /* Sources */,
+				7B59182F20CB179800D4D9F5 /* Frameworks */,
+				7B59183020CB179800D4D9F5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "GitHub iOS";
+			productName = "GitHub iOS";
+			productReference = 7B59183220CB179800D4D9F5 /* GitHub iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 		7BA7C12920C9479E00C210B5 /* GitHubBridge iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7BA7C13E20C9479E00C210B5 /* Build configuration list for PBXNativeTarget "GitHubBridge iOS" */;
@@ -755,10 +809,13 @@
 		7BA7C12120C9479E00C210B5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1000;
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = happn;
 				TargetAttributes = {
+					7B59183120CB179800D4D9F5 = {
+						CreatedOnToolsVersion = 9.4;
+					};
 					7BA7C12920C9479E00C210B5 = {
 						CreatedOnToolsVersion = 9.4;
 						LastSwiftMigration = 1000;
@@ -781,6 +838,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 7BA7C12020C9479E00C210B5;
 			productRefGroup = 7BA7C12B20C9479E00C210B5 /* Products */;
@@ -805,6 +863,7 @@
 				7BA7C12920C9479E00C210B5 /* GitHubBridge iOS */,
 				7BEFD1C020C9483B00FDA05F /* GitHubBridge macOSTests */,
 				7BA7C13220C9479E00C210B5 /* GitHubBridge iOSTests */,
+				7B59183120CB179800D4D9F5 /* GitHub iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -1205,6 +1264,16 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7B59183020CB179800D4D9F5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B59184120CB179A00D4D9F5 /* LaunchScreen.storyboard in Resources */,
+				7B59183E20CB179A00D4D9F5 /* Assets.xcassets in Resources */,
+				7B59183C20CB179800D4D9F5 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7BA7C12820C9479E00C210B5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1236,6 +1305,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7B59182E20CB179800D4D9F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B59183920CB179800D4D9F5 /* SecondViewController.swift in Sources */,
+				7B59183520CB179800D4D9F5 /* AppDelegate.swift in Sources */,
+				7B59183720CB179800D4D9F5 /* FirstViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7BA7C12520C9479E00C210B5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1291,7 +1370,64 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		7B59183A20CB179800D4D9F5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B59183B20CB179800D4D9F5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7B59183F20CB179A00D4D9F5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B59184020CB179A00D4D9F5 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		7B59184320CB179A00D4D9F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "GitHub iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.happn.GitHub-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7B59184420CB179A00D4D9F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "GitHub iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.happn.GitHub-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		7BA7C13C20C9479E00C210B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1597,6 +1733,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7B59188020CB179A00D4D9F5 /* Build configuration list for PBXNativeTarget "GitHub iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B59184320CB179A00D4D9F5 /* Debug */,
+				7B59184420CB179A00D4D9F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7BA7C12420C9479E00C210B5 /* Build configuration list for PBXProject "GitHub Clients" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
