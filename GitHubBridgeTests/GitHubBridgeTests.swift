@@ -18,8 +18,7 @@ class GitHubBridgeTests: XCTestCase {
 		 * test to pass. For the test to pass on iOS device (non-simulator), you
 		 * must create the "github_clients_token.txt" in the “Desktop” folder of
 		 * sandbox of the app on the device. */
-		let op = GitHubBMOOperation(request: URLRequest(url: URL(string: "https://www.apple.com/")!))
-		XCTAssertNotNil(op.token)
+		XCTAssertNotNil(GitHubBMOOperation.gitHubToken)
    }
    
 }

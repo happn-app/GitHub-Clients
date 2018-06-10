@@ -6,41 +6,78 @@
  * Copyright © 2018 happn. All rights reserved.
  */
 
+import CoreData
 import UIKit
+
+import BMO
+import BMO_CoreData
+import GitHubBridge
 
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	
+	static private(set) var shared: AppDelegate!
+	
+	private(set) var context: NSManagedObjectContext!
+	private(set) var requestManager: RequestManager!
+	
+	private(set) var tabBarController: UITabBarController!
+	
 	var window: UIWindow?
 	
+	override init() {
+		super.init()
+		
+		assert(AppDelegate.shared == nil)
+		AppDelegate.shared = self
+	}
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		// Override point for customization after application launch.
+		let container = NSPersistentContainer(name: "GitHub", managedObjectModel: NSManagedObjectModel(contentsOf: Bundle(for: GitHubBMOBridge.self).url(forResource: "GitHub", withExtension: "momd")!)!)
+		container.loadPersistentStores(completionHandler: { _, _ in })
+		context = container.viewContext
+		
+		requestManager = RequestManager(bridges: [GitHubBMOBridge(dbModel: container.managedObjectModel)], resultsImporterFactory: BMOBackResultsImporterForCoreDataWithFastImportRepresentationFactory())
+		
+		tabBarController = window!.rootViewController! as! UITabBarController
+		
+		/* Let's fetch the connected username (if any) and add the “you” tab if we
+		 * get a result. */
+		GitHubBMOOperation.retrieveUsernameFromToken{ username in
+			DispatchQueue.main.async{
+				let youNavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "YouNavigationController")
+				self.tabBarController.viewControllers = [youNavigationController] + (self.tabBarController.viewControllers ?? [])
+				self.tabBarController.selectedIndex = 0
+			}
+		}
+		
 		return true
 	}
 	
 	func applicationWillResignActive(_ application: UIApplication) {
-		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-		// Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
 	}
 	
 	func applicationDidEnterBackground(_ application: UIApplication) {
-		// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-		// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 	}
 	
 	func applicationWillEnterForeground(_ application: UIApplication) {
-		// Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
 	}
 	
 	func applicationDidBecomeActive(_ application: UIApplication) {
-		// Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 	}
 	
 	func applicationWillTerminate(_ application: UIApplication) {
-		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+	}
+	
+	private struct BMOBackResultsImporterForCoreDataWithFastImportRepresentationFactory : AnyBackResultsImporterFactory {
+		
+		func createResultsImporter<BridgeType : Bridge>() -> AnyBackResultsImporter<BridgeType>? {
+			assert(BridgeType.self == GitHubBMOBridge.self)
+			return (AnyBackResultsImporter(importer: BackResultsImporterForCoreDataWithFastImportRepresentation<GitHubBMOBridge>(uniquingPropertyName: "bmoId")) as! AnyBackResultsImporter<BridgeType>)
+		}
+		
 	}
 	
 }

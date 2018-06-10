@@ -34,10 +34,7 @@ public class GitHubBMOBridge : Bridge {
 		case invalidAPIResponse
 	}
 	
-	public let apiRoot: URL
-	
-	public init(apiRoot r: URL, dbModel m: NSManagedObjectModel) {
-		apiRoot = r
+	public init(dbModel m: NSManagedObjectModel) {
 		dbModel = m
 	}
 	
@@ -115,7 +112,7 @@ public class GitHubBMOBridge : Bridge {
 			throw Err.cannotGetRESTPathForRequest
 		}
 		
-		return GitHubBMOOperation(request: URLRequest(url: URL(string: path, relativeTo: apiRoot)!))
+		return GitHubBMOOperation(request: URLRequest(url: URL(string: path, relativeTo: di.apiRoot)!))
 	}
 	
 	public func backOperation(forInsertedObject insertedObject: DbType.ObjectType, additionalInfo: AdditionalRequestInfoType?, userInfo: inout UserInfoType) throws -> Operation? {
@@ -323,7 +320,7 @@ public class GitHubBMOBridge : Bridge {
 			/* /users/:username <-- Get one user */
 			/* /users           <-- Lists all the users */
 			/* /user            <-- Get the authenticated user */
-			.restPath("/users(/|id|)"),
+			.restPath("/users(/|username|)"),
 			.uniquingPropertyName("bmoId"),
 			.propertiesMapping([
 				#keyPath(User.avatarURL):        [.restName("avatar_url"),   .restToLocalTransformer(urlTransformer)],
