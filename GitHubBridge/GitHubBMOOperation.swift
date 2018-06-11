@@ -33,7 +33,7 @@ public class GitHubBMOOperation : RetryingOperation {
 		
 		let retrieveUsernameOperation = GitHubBMOOperation(request: URLRequest(url: URL(string: "user", relativeTo: di.apiRoot)!))
 		retrieveUsernameOperation.completionBlock = {
-			cachedUsernameFromToken = retrieveUsernameOperation.results.successValue?["login"] as? String
+			cachedUsernameFromToken = (retrieveUsernameOperation.results.successValue as? [String: Any?])?["login"] as? String
 			handler(cachedUsernameFromToken)
 		}
 		retrieveUsernameOperation.start()
@@ -46,7 +46,7 @@ public class GitHubBMOOperation : RetryingOperation {
 	}
 	
 	let request: URLRequest
-	var results: AsyncOperationResult<[String: Any?]> = .error(Err.operationNotFinished)
+	var results: AsyncOperationResult<Any> = .error(Err.operationNotFinished)
 	
 	init(request r: URLRequest) {
 		request = r
@@ -62,9 +62,9 @@ public class GitHubBMOOperation : RetryingOperation {
 		}
 		
 		Alamofire.request(authenticatedRequest).validate().responseJSON{ response in
-			print(response.result.value)
-			if let json = response.result.value as? [String: Any?] {
-				self.results = .success(json)
+//			print(response.result.value)
+			if let parsedJSON = response.result.value {
+				self.results = .success(parsedJSON)
 			} else {
 				self.results = .error(response.error ?? Err.unknownError)
 			}

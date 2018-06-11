@@ -6,38 +6,10 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--You-->
-        <scene sceneID="zqA-UA-8uz">
-            <objects>
-                <tableViewController title="You" id="Alj-bU-kLS" customClass="YouViewController" customModule="GitHub_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="tIT-ev-mnU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="imY-F8-HrL">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="imY-F8-HrL" id="0ve-IQ-fI2">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Alj-bU-kLS" id="jAD-4N-Vx3"/>
-                            <outlet property="delegate" destination="Alj-bU-kLS" id="E2X-N9-4st"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="BXw-UP-DiG"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DCB-3A-zHB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1538" y="-286"/>
-        </scene>
         <!--Users-->
         <scene sceneID="aSf-QL-o6F">
             <objects>
@@ -159,6 +131,37 @@
             </objects>
             <point key="canvasLocation" x="750" y="1108"/>
         </scene>
+        <!--You View Controller-->
+        <scene sceneID="bcO-sr-O7A">
+            <objects>
+                <viewController storyboardIdentifier="YouViewController" id="yuO-rZ-jW1" customClass="YouViewController" customModule="GitHub_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RSW-yo-ZGw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading…" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tal-ZN-SWh">
+                                <rect key="frame" x="20" y="45" width="280" height="32"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Tal-ZN-SWh" firstAttribute="top" secondItem="h8G-Pu-GyQ" secondAttribute="top" constant="25" id="A3T-yT-ObN"/>
+                            <constraint firstItem="Tal-ZN-SWh" firstAttribute="leading" secondItem="h8G-Pu-GyQ" secondAttribute="leading" constant="20" id="JAE-gV-a8m"/>
+                            <constraint firstItem="h8G-Pu-GyQ" firstAttribute="trailing" secondItem="Tal-ZN-SWh" secondAttribute="trailing" constant="20" id="RvW-Ev-n3X"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="h8G-Pu-GyQ"/>
+                    </view>
+                    <connections>
+                        <outlet property="labelUsername" destination="Tal-ZN-SWh" id="ZV3-u6-VGM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wWf-TC-RS7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750" y="-288"/>
+        </scene>
         <!--Users-->
         <scene sceneID="UcR-hB-LGM">
             <objects>
@@ -175,23 +178,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZFG-vA-TGN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="750" y="399"/>
-        </scene>
-        <!--You-->
-        <scene sceneID="fRR-5K-88L">
-            <objects>
-                <navigationController storyboardIdentifier="YouNavigationController" id="JbZ-aH-Fd9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="You" image="first" id="gNh-l2-Tmk"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="n15-kn-KzX">
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Alj-bU-kLS" kind="relationship" relationship="rootViewController" id="Wnx-Ih-9Zt"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Wr9-BO-Xzx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="750" y="-285"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -213,7 +199,4 @@
             <point key="canvasLocation" x="-289" y="1293"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="first" width="30" height="30"/>
-    </resources>
 </document>

@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		 * get a result. */
 		GitHubBMOOperation.retrieveUsernameFromToken{ username in
 			DispatchQueue.main.async{
-				let youNavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "YouNavigationController")
+				let youNavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "YouViewController")
 				self.tabBarController.viewControllers = [youNavigationController] + (self.tabBarController.viewControllers ?? [])
 				self.tabBarController.selectedIndex = 0
 			}

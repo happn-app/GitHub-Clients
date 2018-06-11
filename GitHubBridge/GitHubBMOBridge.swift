@@ -27,10 +27,11 @@ public class GitHubBMOBridge : Bridge {
 	public typealias RemoteObjectRepresentationType = [String: Any?]
 	public typealias RemoteRelationshipAndMetadataRepresentationType = [[String: Any?]]
 	
-	public typealias BackOperationType = Operation
+	public typealias BackOperationType = GitHubBMOOperation
 	
 	enum Err : Error {
 		case cannotGetRESTPathForRequest
+		case operationError(Error)
 		case invalidAPIResponse
 	}
 	
@@ -42,7 +43,7 @@ public class GitHubBMOBridge : Bridge {
 		return ()
 	}
 	
-	public func backOperation(forFetchRequest fetchRequest: DbType.FetchRequestType, additionalInfo: AdditionalRequestInfoType?, userInfo: inout UserInfoType) throws -> Operation? {
+	public func backOperation(forFetchRequest fetchRequest: DbType.FetchRequestType, additionalInfo: AdditionalRequestInfoType?, userInfo: inout UserInfoType) throws -> BackOperationType? {
 		let restPath: RESTPath?
 		
 		if let forcedRESTPath = additionalInfo?.forcedRESTPath {
@@ -115,20 +116,20 @@ public class GitHubBMOBridge : Bridge {
 		return GitHubBMOOperation(request: URLRequest(url: URL(string: path, relativeTo: di.apiRoot)!))
 	}
 	
-	public func backOperation(forInsertedObject insertedObject: DbType.ObjectType, additionalInfo: AdditionalRequestInfoType?, userInfo: inout UserInfoType) throws -> Operation? {
+	public func backOperation(forInsertedObject insertedObject: DbType.ObjectType, additionalInfo: AdditionalRequestInfoType?, userInfo: inout UserInfoType) throws -> BackOperationType? {
 		return nil
 	}
 	
-	public func backOperation(forUpdatedObject updatedObject: DbType.ObjectType, additionalInfo: AdditionalRequestInfoType?, userInfo: inout UserInfoType) throws -> Operation? {
+	public func backOperation(forUpdatedObject updatedObject: DbType.ObjectType, additionalInfo: AdditionalRequestInfoType?, userInfo: inout UserInfoType) throws -> BackOperationType? {
 		return nil
 	}
 	
-	public func backOperation(forDeletedObject deletedObject: DbType.ObjectType, additionalInfo: AdditionalRequestInfoType?, userInfo: inout UserInfoType) throws -> Operation? {
+	public func backOperation(forDeletedObject deletedObject: DbType.ObjectType, additionalInfo: AdditionalRequestInfoType?, userInfo: inout UserInfoType) throws -> BackOperationType? {
 		return nil
 	}
 	
 	public func error(fromFinishedOperation operation: BackOperationType) -> Error? {
-		return nil
+		return operation.results.error
 	}
 	
 	public func userInfo(fromFinishedOperation operation: BackOperationType, currentUserInfo: UserInfoType) -> UserInfoType {
@@ -140,11 +141,19 @@ public class GitHubBMOBridge : Bridge {
 	}
 	
 	public func remoteObjectRepresentations(fromFinishedOperation operation: BackOperationType, userInfo: UserInfoType) throws -> [RemoteObjectRepresentationType]? {
-		return nil
+		switch operation.results {
+		case .success(let success as [[String: Any?]]): return  success
+		case .success(let success as  [String: Any?]):  return [success]
+		case .error(let e): throw Err.operationError(e)
+		default:            throw Err.invalidAPIResponse
+		}
 	}
 	
 	public func mixedRepresentation(fromRemoteObjectRepresentation remoteRepresentation: RemoteObjectRepresentationType, expectedEntity: DbType.EntityDescriptionType, userInfo: UserInfoType) -> MixedRepresentation<DbType.EntityDescriptionType, RemoteRelationshipAndMetadataRepresentationType, UserInfoType>? {
-		return nil
+		guard let entity = restMapper.actualLocalEntity(forRESTRepresentation: remoteRepresentation, expectedEntity: expectedEntity) else {return nil}
+		let mixedRepresentationDictionary = restMapper.mixedRepresentation(ofEntity: entity, fromRESTRepresentation: remoteRepresentation, userInfo: userInfo)
+		let uniquingId = restMapper.uniquingId(forLocalRepresentation: mixedRepresentationDictionary, ofEntity: entity)
+		return MixedRepresentation(entity: entity, uniquingId: uniquingId, mixedRepresentationDictionary: mixedRepresentationDictionary, userInfo: userInfo)
 	}
 	
 	public func subUserInfo(forRelationshipNamed relationshipName: String, inEntity entity: DbType.EntityDescriptionType, currentMixedRepresentation: MixedRepresentation<DbType.EntityDescriptionType, RemoteRelationshipAndMetadataRepresentationType, UserInfoType>) -> UserInfoType {
@@ -156,7 +165,7 @@ public class GitHubBMOBridge : Bridge {
 	}
 	
 	public func remoteObjectRepresentations(fromRemoteRelationshipAndMetadataRepresentation remoteRelationshipAndMetadataRepresentation: RemoteRelationshipAndMetadataRepresentationType, userInfo: UserInfoType) -> [RemoteObjectRepresentationType]? {
-		return nil
+		return remoteRelationshipAndMetadataRepresentation
 	}
 	
 	public func relationshipMergeType(forRelationshipNamed relationshipName: String, inEntity entity: DbType.EntityDescriptionType, currentMixedRepresentation: MixedRepresentation<DbType.EntityDescriptionType, RemoteRelationshipAndMetadataRepresentationType, UserInfoType>) -> DbRepresentationRelationshipMergeType<DbType.EntityDescriptionType, DbType.ObjectType> {
