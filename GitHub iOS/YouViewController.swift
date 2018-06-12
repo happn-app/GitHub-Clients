@@ -84,7 +84,7 @@ class YouViewController : UIViewController, NSFetchedResultsControllerDelegate {
 	
 	private func updateUI() {
 		guard let user = fetchedResultsController?.fetchedObjects?.first else {
-			labelUsername.text = loadingMe ? "Loading..." : "Error"
+			labelUsername.text = loadingMe ? "Loading…" : "Error"
 			return
 		}
 		
