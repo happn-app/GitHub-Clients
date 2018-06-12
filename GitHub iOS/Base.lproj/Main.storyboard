@@ -145,12 +145,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q7s-Mg-c3A">
+                                <rect key="frame" x="20" y="97" width="161" height="30"/>
+                                <state key="normal" title="See Public Repositories"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uc0-Er-jJf">
+                                <rect key="frame" x="20" y="135" width="111" height="30"/>
+                                <state key="normal" title="See Public Gists"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Tal-ZN-SWh" firstAttribute="top" secondItem="h8G-Pu-GyQ" secondAttribute="top" constant="25" id="A3T-yT-ObN"/>
+                            <constraint firstItem="Q7s-Mg-c3A" firstAttribute="leading" secondItem="h8G-Pu-GyQ" secondAttribute="leading" constant="20" id="BgH-zb-UXq"/>
                             <constraint firstItem="Tal-ZN-SWh" firstAttribute="leading" secondItem="h8G-Pu-GyQ" secondAttribute="leading" constant="20" id="JAE-gV-a8m"/>
                             <constraint firstItem="h8G-Pu-GyQ" firstAttribute="trailing" secondItem="Tal-ZN-SWh" secondAttribute="trailing" constant="20" id="RvW-Ev-n3X"/>
+                            <constraint firstItem="uc0-Er-jJf" firstAttribute="leading" secondItem="h8G-Pu-GyQ" secondAttribute="leading" constant="20" id="c5d-hJ-Cc0"/>
+                            <constraint firstItem="Q7s-Mg-c3A" firstAttribute="top" secondItem="Tal-ZN-SWh" secondAttribute="bottom" constant="20" id="geZ-PE-qGD"/>
+                            <constraint firstItem="h8G-Pu-GyQ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="uc0-Er-jJf" secondAttribute="trailing" constant="20" id="hhH-ai-nMg"/>
+                            <constraint firstItem="uc0-Er-jJf" firstAttribute="top" secondItem="Q7s-Mg-c3A" secondAttribute="bottom" constant="8" id="jiA-Ia-HNW"/>
+                            <constraint firstItem="h8G-Pu-GyQ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Q7s-Mg-c3A" secondAttribute="trailing" constant="20" id="nCe-hV-CwP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="h8G-Pu-GyQ"/>
                     </view>
