@@ -10,6 +10,7 @@ import CoreData
 import Foundation
 import UIKit
 
+import AsyncOperationResult
 import BMO
 import BMO_RESTCoreData
 import GitHubBridge
@@ -43,12 +44,23 @@ class YouViewController : UIViewController, NSFetchedResultsControllerDelegate {
 				
 				self.fetchedResultsController?.delegate = self
 				try! self.fetchedResultsController?.performFetch()
-				self.updateUI()
 				
-				let _: BackRequestOperation<RESTCoreDataFetchRequest, GitHubBMOBridge> = requestManager.fetchObject(
+				self.loadingMe = true
+				requestManager.fetchObject(
 					fromFetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>, additionalRequestInfo: nil,
-					fetchType: .onlyIfNoLocalResults, onContext: context
+					fetchType: .onlyIfNoLocalResults, onContext: context, handler: { (_: User?, _: AsyncOperationResult<BridgeBackRequestResult<GitHubBMOBridge>>) in
+						self.loadingMe = false
+						/* We do monitor the fetched user, but not loadingMe… so we
+						 * need to manually update the UI.
+						 * Also, if there‘s a error fetching the user, it will not
+						 * exist when the operation is done, so the fetched results
+						 * controller will not have a notification that something has
+						 * changed, and the update UI will never be called. */
+						self.updateUI()
+					}
 				)
+				
+				self.updateUI()
 			}
 		}
 	}
@@ -67,11 +79,12 @@ class YouViewController : UIViewController, NSFetchedResultsControllerDelegate {
 	
 	private var myUsername: String?
 	
+	private var loadingMe = false
 	private var fetchedResultsController: NSFetchedResultsController<User>?
 	
 	private func updateUI() {
 		guard let user = fetchedResultsController?.fetchedObjects?.first else {
-			self.labelUsername.text = "Error"
+			labelUsername.text = loadingMe ? "Loading..." : "Error"
 			return
 		}
 		
