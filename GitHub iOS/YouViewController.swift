@@ -27,27 +27,29 @@ class YouViewController : UIViewController, NSFetchedResultsControllerDelegate {
 		title = "You"
 		
 		GitHubBMOOperation.retrieveUsernameFromToken{ username in
-			self.myUsername = username
-			guard let username = self.myUsername else {
+			DispatchQueue.main.async{
+				self.myUsername = username
+				guard let username = self.myUsername else {
+					self.updateUI()
+					return
+				}
+				
+				let context = AppDelegate.shared.context!
+				let requestManager = AppDelegate.shared.requestManager!
+				let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+				fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(User.username), username)
+				fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(User.username), ascending: true)]
+				self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+				
+				self.fetchedResultsController?.delegate = self
+				try! self.fetchedResultsController?.performFetch()
 				self.updateUI()
-				return
+				
+				let _: BackRequestOperation<RESTCoreDataFetchRequest, GitHubBMOBridge> = requestManager.fetchObject(
+					fromFetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>, additionalRequestInfo: nil,
+					fetchType: .onlyIfNoLocalResults, onContext: context
+				)
 			}
-			
-			let context = AppDelegate.shared.context!
-			let requestManager = AppDelegate.shared.requestManager!
-			let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-			fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(User.username), username)
-			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(User.username), ascending: true)]
-			self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-			
-			self.fetchedResultsController?.delegate = self
-			try! self.fetchedResultsController?.performFetch()
-			self.updateUI()
-			
-			let _: BackRequestOperation<RESTCoreDataFetchRequest, GitHubBMOBridge> = requestManager.fetchObject(
-				fromFetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>, additionalRequestInfo: nil,
-				fetchType: .onlyIfNoLocalResults, onContext: context
-			)
 		}
 	}
 	
