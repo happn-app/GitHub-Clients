@@ -22,6 +22,10 @@ class YouViewController : UIViewController, NSFetchedResultsControllerDelegate {
 	
 	@IBOutlet var labelUsername: UILabel!
 	
+	@IBOutlet var buttonPublicRepos: UIButton!
+	@IBOutlet var buttonPublicGists: UIButton!
+	@IBOutlet var buttonAssignedIssues: UIButton!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -65,6 +69,22 @@ class YouViewController : UIViewController, NSFetchedResultsControllerDelegate {
 		}
 	}
 	
+	/* ***************
+      MARK: - Actions
+	   *************** */
+	
+	@IBAction func seePublicRepos(_ sender: AnyObject) {
+		print("1")
+	}
+	
+	@IBAction func seePublicGists(_ sender: AnyObject) {
+		print("2")
+	}
+	
+	@IBAction func seeAssignedIssues(_ sender: AnyObject) {
+		print("3")
+	}
+	
 	/* *******************************************
       MARK: - Fetched Results Controller Delegate
 	   ******************************************* */
@@ -90,6 +110,9 @@ class YouViewController : UIViewController, NSFetchedResultsControllerDelegate {
 		
 		title = user.username
 		labelUsername.text = user.username
+		
+		buttonPublicRepos.setTitle("See Public Repositories (\(user.publicReposCount))", for: .normal)
+		buttonPublicGists.setTitle("See Public Gists (\(user.publicGistsCount))", for: .normal)
 	}
 	
 }

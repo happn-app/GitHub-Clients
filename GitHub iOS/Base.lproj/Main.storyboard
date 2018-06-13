@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -140,35 +141,54 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading…" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tal-ZN-SWh">
-                                <rect key="frame" x="20" y="45" width="280" height="32"/>
+                                <rect key="frame" x="16" y="45" width="288" height="32"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q7s-Mg-c3A">
-                                <rect key="frame" x="20" y="97" width="161" height="30"/>
+                                <rect key="frame" x="16" y="97" width="161" height="30"/>
                                 <state key="normal" title="See Public Repositories"/>
+                                <connections>
+                                    <action selector="seePublicRepos:" destination="yuO-rZ-jW1" eventType="touchUpInside" id="E2J-gc-2gb"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uc0-Er-jJf">
-                                <rect key="frame" x="20" y="135" width="111" height="30"/>
+                                <rect key="frame" x="16" y="135" width="111" height="30"/>
                                 <state key="normal" title="See Public Gists"/>
+                                <connections>
+                                    <action selector="seePublicGists:" destination="yuO-rZ-jW1" eventType="touchUpInside" id="nTe-s6-4zF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFC-QC-I9J">
+                                <rect key="frame" x="16" y="173" width="141" height="30"/>
+                                <state key="normal" title="See Assigned Issues"/>
+                                <connections>
+                                    <action selector="seeAssignedIssues:" destination="yuO-rZ-jW1" eventType="touchUpInside" id="Ufr-sX-IJN"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Tal-ZN-SWh" firstAttribute="top" secondItem="h8G-Pu-GyQ" secondAttribute="top" constant="25" id="A3T-yT-ObN"/>
-                            <constraint firstItem="Q7s-Mg-c3A" firstAttribute="leading" secondItem="h8G-Pu-GyQ" secondAttribute="leading" constant="20" id="BgH-zb-UXq"/>
-                            <constraint firstItem="Tal-ZN-SWh" firstAttribute="leading" secondItem="h8G-Pu-GyQ" secondAttribute="leading" constant="20" id="JAE-gV-a8m"/>
-                            <constraint firstItem="h8G-Pu-GyQ" firstAttribute="trailing" secondItem="Tal-ZN-SWh" secondAttribute="trailing" constant="20" id="RvW-Ev-n3X"/>
-                            <constraint firstItem="uc0-Er-jJf" firstAttribute="leading" secondItem="h8G-Pu-GyQ" secondAttribute="leading" constant="20" id="c5d-hJ-Cc0"/>
+                            <constraint firstItem="dFC-QC-I9J" firstAttribute="leading" secondItem="RSW-yo-ZGw" secondAttribute="leadingMargin" id="8gA-n7-3gF"/>
+                            <constraint firstItem="dFC-QC-I9J" firstAttribute="top" secondItem="uc0-Er-jJf" secondAttribute="bottom" constant="8" id="8iA-EH-eyo"/>
+                            <constraint firstItem="Tal-ZN-SWh" firstAttribute="leading" secondItem="RSW-yo-ZGw" secondAttribute="leadingMargin" id="BGe-be-FDy"/>
+                            <constraint firstItem="Q7s-Mg-c3A" firstAttribute="leading" secondItem="RSW-yo-ZGw" secondAttribute="leadingMargin" id="LMk-cO-U31"/>
+                            <constraint firstItem="uc0-Er-jJf" firstAttribute="leading" secondItem="RSW-yo-ZGw" secondAttribute="leadingMargin" id="QPs-k1-TXz"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="uc0-Er-jJf" secondAttribute="trailing" id="XCs-1u-Fs0"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Q7s-Mg-c3A" secondAttribute="trailing" id="cyn-Yd-sI9"/>
+                            <constraint firstItem="Tal-ZN-SWh" firstAttribute="top" secondItem="RSW-yo-ZGw" secondAttribute="topMargin" constant="25" id="dTL-LA-Mv8"/>
                             <constraint firstItem="Q7s-Mg-c3A" firstAttribute="top" secondItem="Tal-ZN-SWh" secondAttribute="bottom" constant="20" id="geZ-PE-qGD"/>
-                            <constraint firstItem="h8G-Pu-GyQ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="uc0-Er-jJf" secondAttribute="trailing" constant="20" id="hhH-ai-nMg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Tal-ZN-SWh" secondAttribute="trailing" id="hrY-3z-mqJ"/>
                             <constraint firstItem="uc0-Er-jJf" firstAttribute="top" secondItem="Q7s-Mg-c3A" secondAttribute="bottom" constant="8" id="jiA-Ia-HNW"/>
-                            <constraint firstItem="h8G-Pu-GyQ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Q7s-Mg-c3A" secondAttribute="trailing" constant="20" id="nCe-hV-CwP"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="dFC-QC-I9J" secondAttribute="trailing" id="tAO-BL-JRN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="h8G-Pu-GyQ"/>
                     </view>
                     <connections>
+                        <outlet property="buttonAssignedIssues" destination="dFC-QC-I9J" id="9WY-Ij-61j"/>
+                        <outlet property="buttonPublicGists" destination="uc0-Er-jJf" id="B2R-eb-7xK"/>
+                        <outlet property="buttonPublicRepos" destination="Q7s-Mg-c3A" id="Nwu-vu-iE4"/>
                         <outlet property="labelUsername" destination="Tal-ZN-SWh" id="ZV3-u6-VGM"/>
                     </connections>
                 </viewController>
