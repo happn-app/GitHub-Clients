@@ -17,10 +17,21 @@ import RESTUtils
 
 
 
-class UsersListViewController : UITableViewController {
+class UsersListViewController : UITableViewController, UISearchControllerDelegate, UISearchResultsUpdating {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		title = "Users"
+		
+		/* ***** Configuring the Search Controller ***** */
+		searchController = UISearchController(searchResultsController: nil)
+		searchController.delegate = self
+		searchController.searchResultsUpdater = self
+		searchController.hidesNavigationBarDuringPresentation = true
+		searchController.obscuresBackgroundDuringPresentation = false
+		
+		navigationItem.searchController = searchController
 	}
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
@@ -35,5 +46,19 @@ class UsersListViewController : UITableViewController {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath)
 		return cell
 	}
+	
+	/* *******************************
+      MARK: - Search Results Updating
+	   ******************************* */
+	
+	func updateSearchResults(for searchController: UISearchController) {
+		print(searchController.searchBar.text!)
+	}
+	
+	/* ***************
+      MARK: - Private
+	   *************** */
+	
+	private var searchController: UISearchController!
 	
 }
