@@ -69,22 +69,6 @@ class YouViewController : UIViewController, NSFetchedResultsControllerDelegate {
 		}
 	}
 	
-	/* ***************
-      MARK: - Actions
-	   *************** */
-	
-	@IBAction func seePublicRepos(_ sender: AnyObject) {
-		print("1")
-	}
-	
-	@IBAction func seePublicGists(_ sender: AnyObject) {
-		print("2")
-	}
-	
-	@IBAction func seeAssignedIssues(_ sender: AnyObject) {
-		print("3")
-	}
-	
 	/* *******************************************
       MARK: - Fetched Results Controller Delegate
 	   ******************************************* */
