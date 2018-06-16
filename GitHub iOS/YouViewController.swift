@@ -92,7 +92,6 @@ class YouViewController : UIViewController, NSFetchedResultsControllerDelegate {
 			return
 		}
 		
-		title = user.username
 		labelUsername.text = user.username
 		
 		buttonPublicRepos.setTitle("See Public Repositories (\(user.publicReposCount))", for: .normal)
