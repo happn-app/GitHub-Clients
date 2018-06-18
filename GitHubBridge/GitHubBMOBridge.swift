@@ -113,7 +113,11 @@ public class GitHubBMOBridge : Bridge {
 			throw Err.cannotGetRESTPathForRequest
 		}
 		
-		return GitHubBMOOperation(request: URLRequest(url: URL(string: path, relativeTo: di.apiRoot)!))
+		var baseURLComponents = URLComponents(url: URL(string: path, relativeTo: di.apiRoot)!, resolvingAgainstBaseURL: true)!
+		baseURLComponents.queryItems = (baseURLComponents.queryItems ?? []) + restMapper.parameters(fromAdditionalRESTInfo: additionalInfo, forEntity: fetchRequest.entity!).map{
+			URLQueryItem(name: $0.key, value: String(describing: $0.value))
+		}
+		return GitHubBMOOperation(request: URLRequest(url: baseURLComponents.url!))
 	}
 	
 	public func backOperation(forInsertedObject insertedObject: DbType.ObjectType, additionalInfo: AdditionalRequestInfoType?, userInfo: inout UserInfoType) throws -> BackOperationType? {

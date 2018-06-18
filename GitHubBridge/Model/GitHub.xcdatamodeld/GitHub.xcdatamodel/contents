@@ -132,6 +132,7 @@
         <attribute name="remoteId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="zDeletionDateInUsersList" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="assignedIssues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Issue" inverseName="assignees" inverseEntity="Issue" syncable="YES"/>
         <relationship name="gists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Gist" inverseName="owner" inverseEntity="Gist" syncable="YES"/>
         <relationship name="repositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Repository" inverseName="owner" inverseEntity="Repository" syncable="YES"/>
@@ -140,6 +141,9 @@
         </fetchIndex>
         <fetchIndex name="bmoIndex">
             <fetchIndexElement property="bmoId" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byZDeletionDateInUsersList">
+            <fetchIndexElement property="zDeletionDateInUsersList" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
     <elements>
@@ -151,6 +155,6 @@
         <element name="License" positionX="853" positionY="684" width="128" height="120"/>
         <element name="Repository" positionX="558" positionY="441" width="128" height="435"/>
         <element name="Topic" positionX="817" positionY="846" width="128" height="90"/>
-        <element name="User" positionX="369" positionY="81" width="128" height="285"/>
+        <element name="User" positionX="369" positionY="81" width="128" height="300"/>
     </elements>
 </model>
