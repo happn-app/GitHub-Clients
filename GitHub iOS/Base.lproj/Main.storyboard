@@ -318,10 +318,10 @@
             </objects>
             <point key="canvasLocation" x="4626" y="1107"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--You-->
         <scene sceneID="jWm-8X-Alg">
             <objects>
-                <navigationController storyboardIdentifier="YouNavigationViewController" id="slK-Gn-qdC" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="YouNavigationViewController" title="You" id="slK-Gn-qdC" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="B4a-wD-0hi">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -372,7 +372,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="A7I-xT-UGv"/>
+        <segue reference="a0C-cx-dUs"/>
         <segue reference="rPM-c9-FAf"/>
         <segue reference="PAU-bi-nBp"/>
     </inferredMetricsTieBreakers>

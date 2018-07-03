@@ -7,6 +7,7 @@
  */
 
 import CoreData
+import os.log
 import UIKit
 
 import BMO
@@ -34,22 +35,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		AppDelegate.shared = self
 	}
 	
-	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		let container = NSPersistentContainer(name: "GitHub", managedObjectModel: NSManagedObjectModel(contentsOf: Bundle(for: GitHubBMOBridge.self).url(forResource: "GitHub", withExtension: "momd")!)!)
 		container.loadPersistentStores(completionHandler: { _, _ in })
 		context = container.viewContext
 		
 		requestManager = RequestManager(bridges: [GitHubBMOBridge(dbModel: container.managedObjectModel)], resultsImporterFactory: BMOBackResultsImporterForCoreDataWithFastImportRepresentationFactory())
 		
-		tabBarController = window!.rootViewController! as! UITabBarController
+		tabBarController = (window!.rootViewController! as! UITabBarController)
 		
 		/* Let's fetch the connected username (if any) and add the “you” tab if we
 		 * get a result. */
 		GitHubBMOOperation.retrieveUsernameFromToken{ username in
 			DispatchQueue.main.async{
 				let youNavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "YouNavigationViewController")
-				self.tabBarController.viewControllers = [youNavigationController] + (self.tabBarController.viewControllers ?? [])
-				self.tabBarController.selectedIndex = 0
+				self.tabBarController.viewControllers?.append(youNavigationController)
 			}
 		}
 		

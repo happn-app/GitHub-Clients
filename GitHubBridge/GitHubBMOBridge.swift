@@ -12,11 +12,12 @@ import Foundation
 import BMO
 import BMO_CoreData
 import BMO_RESTCoreData
+import CollectionLoader_RESTCoreData
 import RESTUtils
 
 
 
-public class GitHubBMOBridge : Bridge {
+public class GitHubBMOBridge : Bridge, PageInfoRetriever {
 	
 	public typealias DbType = NSManagedObjectContext
 	public typealias AdditionalRequestInfoType = AdditionalRESTRequestInfo<NSPropertyDescription>
@@ -28,6 +29,8 @@ public class GitHubBMOBridge : Bridge {
 	public typealias RemoteRelationshipAndMetadataRepresentationType = [[String: Any?]]
 	
 	public typealias BackOperationType = GitHubBMOOperation
+	
+	public typealias BridgeType = GitHubBMOBridge
 	
 	enum Err : Error {
 		case cannotGetRESTPathForRequest
@@ -174,6 +177,18 @@ public class GitHubBMOBridge : Bridge {
 	
 	public func relationshipMergeType(forRelationshipNamed relationshipName: String, inEntity entity: DbType.EntityDescriptionType, currentMixedRepresentation: MixedRepresentation<DbType.EntityDescriptionType, RemoteRelationshipAndMetadataRepresentationType, UserInfoType>) -> DbRepresentationRelationshipMergeType<DbType.EntityDescriptionType, DbType.ObjectType> {
 		return .replace
+	}
+	
+	public func pageInfoFor(startOffset: Int, endOffset: Int) -> Any {
+		return RESTOffsetLimitPaginatorInfo(startOffset: startOffset, endOffset: endOffset)
+	}
+	
+	public func nextPageInfo(for completionResults: BridgeBackRequestResult<GitHubBMOBridge>, from pageInfo: Any, nElementsPerPage: Int) -> Any?? {
+		return nil
+	}
+	
+	public func previousPageInfo(for completionResults: BridgeBackRequestResult<GitHubBMOBridge>, from pageInfo: Any, nElementsPerPage: Int) -> Any? {
+		return nil
 	}
 	
 	let dbModel: NSManagedObjectModel

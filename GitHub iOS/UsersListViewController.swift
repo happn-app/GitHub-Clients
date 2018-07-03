@@ -43,7 +43,7 @@ class UsersListViewController : UITableViewController, NSFetchedResultsControlle
 		/* ***** Setup the Collection Loader ***** */
 		let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
 		fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(User.remoteId), ascending: true)]
-		let collectionLoaderHelper: CoreDataSearchCLH<User, GitHubBMOBridge> = CoreDataSearchCLH(fetchRequest: fetchRequest, additionalFetchInfo: nil, deletionDateProperty: User.entity().attributesByName[#keyPath(User.zDeletionDateInUsersList)]!, context: AppDelegate.shared.context, requestManager: AppDelegate.shared.requestManager)
+		let collectionLoaderHelper: CoreDataSearchCLH<User, GitHubBMOBridge, GitHubBMOBridge> = CoreDataSearchCLH(fetchRequest: fetchRequest, additionalFetchInfo: nil, deletionDateProperty: User.entity().attributesByName[#keyPath(User.zDeletionDateInUsersList)]!, context: AppDelegate.shared.context, pageInfoRetriever: AppDelegate.shared.requestManager.getBridge(from: nil) as GitHubBMOBridge, requestManager: AppDelegate.shared.requestManager)
 		collectionLoader = CollectionLoader(collectionLoaderHelper: collectionLoaderHelper, numberOfElementsPerPage: 21)
 		collectionLoader.helper.resultsController.delegate = self
 		collectionLoader.loadFirstPage()
@@ -101,7 +101,7 @@ class UsersListViewController : UITableViewController, NSFetchedResultsControlle
       MARK: - Private
 	   *************** */
 	
-	private var collectionLoader: CollectionLoader<CoreDataSearchCLH<User, GitHubBMOBridge>>!
+	private var collectionLoader: CollectionLoader<CoreDataSearchCLH<User, GitHubBMOBridge, GitHubBMOBridge>>!
 	private var searchController: UISearchController!
 	
 	private var resultsController: NSFetchedResultsController<User> {

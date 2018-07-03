@@ -29,8 +29,6 @@ class YouViewController : UIViewController, NSFetchedResultsControllerDelegate {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		title = "You"
-		
 		GitHubBMOOperation.retrieveUsernameFromToken{ username in
 			DispatchQueue.main.async{
 				self.myUsername = username
@@ -94,8 +92,14 @@ class YouViewController : UIViewController, NSFetchedResultsControllerDelegate {
 		
 		labelUsername.text = user.username
 		
-		buttonPublicRepos.setTitle("See Public Repositories (\(user.publicReposCount))", for: .normal)
-		buttonPublicGists.setTitle("See Public Gists (\(user.publicGistsCount))", for: .normal)
+		/* Both performWithoutAnimation and layoutIfNeeded are needed to avoid the
+		 * animations on the buttons when changing the title... */
+		UIView.performWithoutAnimation{
+			buttonPublicRepos.setTitle("See Public Repositories (\(user.publicReposCount))", for: .normal)
+			buttonPublicGists.setTitle("See Public Gists (\(user.publicGistsCount))", for: .normal)
+			buttonPublicRepos.layoutIfNeeded()
+			buttonPublicGists.layoutIfNeeded()
+		}
 	}
 	
 }
