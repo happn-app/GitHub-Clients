@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B10024420F1625800603105 /* GitHubPageInfoRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10024320F1625800603105 /* GitHubPageInfoRetriever.swift */; };
+		7B10024520F1625800603105 /* GitHubPageInfoRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10024320F1625800603105 /* GitHubPageInfoRetriever.swift */; };
 		7B10172720EB528E00D5816C /* CollectionLoader_RESTCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696E720EAE3BB00E26990 /* CollectionLoader_RESTCoreData.framework */; };
 		7B10172820EB528E00D5816C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696EC20EAE3BB00E26990 /* Alamofire.framework */; };
 		7B10172920EB528E00D5816C /* CollectionLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696ED20EAE3BB00E26990 /* CollectionLoader.framework */; };
@@ -84,6 +86,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B10024320F1625800603105 /* GitHubPageInfoRetriever.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubPageInfoRetriever.swift; sourceTree = "<group>"; };
 		7B4696B720EAE3BB00E26990 /* CollectionLoader_RESTCoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CollectionLoader_RESTCoreData.framework; sourceTree = "<group>"; };
 		7B4696C420EAE3BB00E26990 /* CollectionAndTableViewUpdateConveniences.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CollectionAndTableViewUpdateConveniences.framework; sourceTree = "<group>"; };
 		7B4696C620EAE3BB00E26990 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Alamofire.framework; sourceTree = "<group>"; };
@@ -366,6 +369,7 @@
 				7B59189020CDCA8300D4D9F5 /* DependencyInjection.swift */,
 				7BA6F63220C95D1700C21A36 /* Model */,
 				7BEFD1D020C948A500FDA05F /* GitHubBMOBridge.swift */,
+				7B10024320F1625800603105 /* GitHubPageInfoRetriever.swift */,
 				7BA6F63320C96B7500C21A36 /* GitHubTransformers.swift */,
 				7BE7F1E420C9A7C8006DED14 /* GitHubBMOOperation.swift */,
 			);
@@ -611,6 +615,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BE7F21920C9A7C8006DED14 /* GitHubBMOOperation.swift in Sources */,
+				7B10024520F1625800603105 /* GitHubPageInfoRetriever.swift in Sources */,
 				7BA6F63520C96B7500C21A36 /* GitHubTransformers.swift in Sources */,
 				7B59189220CDCA8400D4D9F5 /* DependencyInjection.swift in Sources */,
 				7BA6F62220C94F2000C21A36 /* GitHub.xcdatamodeld in Sources */,
@@ -632,6 +637,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BE7F21820C9A7C8006DED14 /* GitHubBMOOperation.swift in Sources */,
+				7B10024420F1625800603105 /* GitHubPageInfoRetriever.swift in Sources */,
 				7BA6F63420C96B7500C21A36 /* GitHubTransformers.swift in Sources */,
 				7B59189120CDCA8400D4D9F5 /* DependencyInjection.swift in Sources */,
 				7BA6F62120C94F2000C21A36 /* GitHub.xcdatamodeld in Sources */,

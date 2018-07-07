@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	private(set) var context: NSManagedObjectContext!
 	private(set) var requestManager: RequestManager!
+	private(set) var pageInfoRetriever: GitHubPageInfoRetriever!
 	
 	private(set) var tabBarController: UITabBarController!
 	
@@ -42,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		context = container.viewContext
 		
 		requestManager = RequestManager(bridges: [GitHubBMOBridge(dbModel: container.managedObjectModel)], resultsImporterFactory: BMOBackResultsImporterForCoreDataWithFastImportRepresentationFactory())
+		pageInfoRetriever = GitHubPageInfoRetriever(context: context)
 		
 		tabBarController = (window!.rootViewController! as! UITabBarController)
 		

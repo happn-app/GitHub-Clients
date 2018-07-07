@@ -12,12 +12,11 @@ import Foundation
 import BMO
 import BMO_CoreData
 import BMO_RESTCoreData
-import CollectionLoader_RESTCoreData
 import RESTUtils
 
 
 
-public class GitHubBMOBridge : Bridge, PageInfoRetriever {
+public class GitHubBMOBridge : Bridge {
 	
 	public typealias DbType = NSManagedObjectContext
 	public typealias AdditionalRequestInfoType = AdditionalRESTRequestInfo<NSPropertyDescription>
@@ -29,8 +28,6 @@ public class GitHubBMOBridge : Bridge, PageInfoRetriever {
 	public typealias RemoteRelationshipAndMetadataRepresentationType = [[String: Any?]]
 	
 	public typealias BackOperationType = GitHubBMOOperation
-	
-	public typealias BridgeType = GitHubBMOBridge
 	
 	enum Err : Error {
 		case cannotGetRESTPathForRequest
@@ -177,18 +174,6 @@ public class GitHubBMOBridge : Bridge, PageInfoRetriever {
 	
 	public func relationshipMergeType(forRelationshipNamed relationshipName: String, inEntity entity: DbType.EntityDescriptionType, currentMixedRepresentation: MixedRepresentation<DbType.EntityDescriptionType, RemoteRelationshipAndMetadataRepresentationType, UserInfoType>) -> DbRepresentationRelationshipMergeType<DbType.EntityDescriptionType, DbType.ObjectType> {
 		return .replace
-	}
-	
-	public func pageInfoFor(startOffset: Int, endOffset: Int) -> Any {
-		return RESTOffsetLimitPaginatorInfo(startOffset: startOffset, endOffset: endOffset)
-	}
-	
-	public func nextPageInfo(for completionResults: BridgeBackRequestResult<GitHubBMOBridge>, from pageInfo: Any, nElementsPerPage: Int) -> Any?? {
-		return nil
-	}
-	
-	public func previousPageInfo(for completionResults: BridgeBackRequestResult<GitHubBMOBridge>, from pageInfo: Any, nElementsPerPage: Int) -> Any? {
-		return nil
 	}
 	
 	let dbModel: NSManagedObjectModel
@@ -350,6 +335,7 @@ public class GitHubBMOBridge : Bridge, PageInfoRetriever {
 			/* /user            <-- Get the authenticated user */
 			.restPath("/users(/|username|)"),
 			.uniquingPropertyName("bmoId"),
+			.paginator(RESTMaxIdPaginator(maxReachedIdKey: "since", countKey: "per_page")),
 			.propertiesMapping([
 				#keyPath(User.avatarURL):        [.restName("avatar_url"),   .restToLocalTransformer(urlTransformer)],
 				#keyPath(User.bmoId):            [.restName("id"),           .restToLocalTransformer(intToStrTransformer)],
@@ -363,7 +349,8 @@ public class GitHubBMOBridge : Bridge, PageInfoRetriever {
 				#keyPath(User.publicReposCount): [.restName("public_repos"), .restToLocalTransformer(intTransformer)],
 				#keyPath(User.remoteId):         [.restName("id"),           .restToLocalTransformer(intTransformer)],
 				#keyPath(User.updateDate):       [.restName("updated_at"),   .restToLocalTransformer(dateTransformer)],
-				#keyPath(User.username):         [.restName("login")]
+				#keyPath(User.username):         [.restName("login")],
+				#keyPath(User.zDeletionDateInUsersList): [.localConstant(nil)]
 			])
 		]
 		
