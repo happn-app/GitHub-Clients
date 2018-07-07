@@ -22,8 +22,8 @@ public class GitHubBMOOperation : RetryingOperation {
 		let re = try! NSRegularExpression(pattern: "/Users/([^/]*)/.*", options: [])
 		let username = re.stringByReplacingMatches(in: desktopPath, options: [], range: NSRange(location: 0, length: (desktopPath as NSString).length), withTemplate: "$1")
 		return (
-			(try? String(contentsOf: URL(fileURLWithPath: "github_clients_token.txt", relativeTo: URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.desktopDirectory, .userDomainMask, true).first!)))) ??
-			(try? String(contentsOf: URL(fileURLWithPath: "/Users/\(username)/Desktop/github_clients_token.txt")))
+			(try? String(contentsOf: URL(fileURLWithPath: "github_clients_token.txt", isDirectory: false, relativeTo: URL(fileURLWithPath: desktopPath, isDirectory: true)))) ??
+			(try? String(contentsOf: URL(fileURLWithPath: "/Users/\(username)/Desktop/github_clients_token.txt", isDirectory: false)))
 		)
 	}
 	
