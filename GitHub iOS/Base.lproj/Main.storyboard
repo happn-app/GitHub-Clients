@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -46,7 +45,7 @@
                             <outlet property="delegate" destination="dPa-Qm-xM4" id="y7l-ua-TfX"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="3If-02-9Gg"/>
+                    <navigationItem key="navigationItem" id="3If-02-9Gg"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zwS-ar-XcD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -198,10 +197,10 @@
             </objects>
             <point key="canvasLocation" x="750" y="1108"/>
         </scene>
-        <!--You View Controller-->
+        <!--User-->
         <scene sceneID="bcO-sr-O7A">
             <objects>
-                <viewController id="yuO-rZ-jW1" customClass="YouViewController" customModule="GitHub_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="User" id="yuO-rZ-jW1" customClass="UserViewController" customModule="GitHub_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RSW-yo-ZGw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -372,7 +371,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="a0C-cx-dUs"/>
+        <segue reference="A7I-xT-UGv"/>
         <segue reference="rPM-c9-FAf"/>
         <segue reference="PAU-bi-nBp"/>
     </inferredMetricsTieBreakers>

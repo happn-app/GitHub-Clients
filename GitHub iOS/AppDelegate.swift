@@ -10,6 +10,7 @@ import CoreData
 import os.log
 import UIKit
 
+import AsyncOperationResult
 import BMO
 import BMO_CoreData
 import GitHubBridge
@@ -47,9 +48,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		/* Let's fetch the connected username (if any) and add the “you” tab if we
 		 * get a result. */
 		GitHubBMOOperation.retrieveUsernameFromToken{ username in
+			guard let username = username else {return}
 			DispatchQueue.main.async{
-				let youNavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "YouNavigationViewController")
-				self.tabBarController.viewControllers?.append(youNavigationController)
+				var hasAddedController = false
+				let addUserController = { (user: User?) -> Void in
+					guard !hasAddedController, let user = user else {return}
+					
+					let youNavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "YouNavigationViewController") as! UINavigationController
+					let userViewController = youNavigationController.viewControllers.first! as! UserViewController
+					userViewController.user = user
+					
+					self.tabBarController.viewControllers?.append(youNavigationController)
+					hasAddedController = true
+				}
+				let (u, _) = self.requestManager.unsafeFetchObject(withRemoteId: username, remoteIdAttributeName: "username", onContext: self.context, handler: { (u: User?, _: AsyncOperationResult<BridgeBackRequestResult<GitHubBMOBridge>>) in
+					addUserController(u)
+				})
+				addUserController(u)
 			}
 		}
 		

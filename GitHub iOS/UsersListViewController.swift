@@ -25,7 +25,8 @@ class UsersListViewController : UITableViewController, NSFetchedResultsControlle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		title = "Users"
+		let t = title
+		title = nil; title = t
 		
 		/* ***** Configuring the Table View ***** */
 		tableView.fetchedResultsControllerMoveMode = .move(reloadMode: .standard)
