@@ -42,12 +42,7 @@ class UsersListViewController : UITableViewController, NSFetchedResultsControlle
 		navigationItem.searchController = searchController
 		
 		/* ***** Setup the Collection Loader ***** */
-		let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-		fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(User.remoteId), ascending: true)]
-		let collectionLoaderHelper: CoreDataSearchCLH<User, GitHubBMOBridge, GitHubPageInfoRetriever> = CoreDataSearchCLH(fetchRequest: fetchRequest, additionalFetchInfo: nil, deletionDateProperty: User.entity().attributesByName[#keyPath(User.zDeletionDateInUsersList)]!, context: AppDelegate.shared.context, pageInfoRetriever: AppDelegate.shared.pageInfoRetriever, requestManager: AppDelegate.shared.requestManager)
-		collectionLoader = CollectionLoader(collectionLoaderHelper: collectionLoaderHelper, numberOfElementsPerPage: 21)
-		collectionLoader.helper.resultsController.delegate = self
-		collectionLoader.loadFirstPage()
+		setupCollectionLoader(searchText: nil)
 	}
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
@@ -75,7 +70,7 @@ class UsersListViewController : UITableViewController, NSFetchedResultsControlle
 	   ******************************* */
 	
 	func updateSearchResults(for searchController: UISearchController) {
-		print(searchController.searchBar.text!)
+		setupCollectionLoader(searchText: searchController.searchBar.text)
 	}
 	
 	/* ******************************************
@@ -107,6 +102,23 @@ class UsersListViewController : UITableViewController, NSFetchedResultsControlle
 	
 	private var resultsController: NSFetchedResultsController<User> {
 		return collectionLoader.helper.resultsController
+	}
+	
+	private func setupCollectionLoader(searchText: String?) {
+		collectionLoader?.helper.resultsController.delegate = nil
+		
+		let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+		fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(User.remoteId), ascending: true)]
+		if let t = searchText?.trimmingCharacters(in: .whitespaces), !t.isEmpty {
+			fetchRequest.predicate = NSPredicate(format: "%K LIKE[cd] %@", #keyPath(User.username), t + "*")
+		}
+		
+		let collectionLoaderHelper: CoreDataSearchCLH<User, GitHubBMOBridge, GitHubPageInfoRetriever> = CoreDataSearchCLH(fetchRequest: fetchRequest, additionalFetchInfo: nil, deletionDateProperty: User.entity().attributesByName[#keyPath(User.zDeletionDateInUsersList)]!, context: AppDelegate.shared.context, pageInfoRetriever: AppDelegate.shared.pageInfoRetriever, requestManager: AppDelegate.shared.requestManager)
+		collectionLoader = CollectionLoader(collectionLoaderHelper: collectionLoaderHelper, numberOfElementsPerPage: 21)
+		collectionLoader.helper.resultsController.delegate = self
+		collectionLoader.loadFirstPage()
+		
+		tableView.reloadData()
 	}
 	
 	private func configureCell(_ cell: UITableViewCell, user: User) {

@@ -45,8 +45,9 @@ public class GitHubBMOBridge : Bridge {
 	
 	public func backOperation(forFetchRequest fetchRequest: DbType.FetchRequestType, additionalInfo: AdditionalRequestInfoType?, userInfo: inout UserInfoType) throws -> BackOperationType? {
 		let restPath: RESTPath?
+		var additionalInfo = additionalInfo ?? AdditionalRequestInfoType()
 		
-		if let forcedRESTPath = additionalInfo?.forcedRESTPath {
+		if let forcedRESTPath = additionalInfo.forcedRESTPath {
 			restPath = forcedRESTPath
 		} else {
 			let entity = fetchRequest.entity!
@@ -90,7 +91,19 @@ public class GitHubBMOBridge : Bridge {
 				/* /users           <-- Lists all the users */
 				/* /user            <-- Get the authenticated user */
 //				.restPath("/users(/|id|)"),
-				restPath = restMapper.restPath(forEntity: entity)
+				if
+					let usernamePredicates = fetchRequest.predicate?.firstLevelComparisonSubpredicates
+						.filter({ $0.keyPathExpression?.keyPath == "username" && $0.predicateOperatorType == .like && $0.comparisonPredicateModifier == .direct }),
+					let usernamePredicate = usernamePredicates.first, usernamePredicates.count == 1,
+					let searchedUsernameWithStar = usernamePredicate.constantValueExpression?.constantValue as? String,
+					searchedUsernameWithStar.hasSuffix("*"), searchedUsernameWithStar != "*"
+				{
+					let searchedUsername = searchedUsernameWithStar.dropLast()
+					restPath = RESTPath("/search/users")
+					additionalInfo.additionalRequestParameters["q"] = searchedUsername
+				} else {
+					restPath = restMapper.restPath(forEntity: entity)
+				}
 				
 			default:
 				restPath = restMapper.restPath(forEntity: entity)
@@ -147,7 +160,7 @@ public class GitHubBMOBridge : Bridge {
 	public func remoteObjectRepresentations(fromFinishedOperation operation: BackOperationType, userInfo: UserInfoType) throws -> [RemoteObjectRepresentationType]? {
 		switch operation.results {
 		case .success(let success as [[String: Any?]]): return  success
-		case .success(let success as  [String: Any?]):  return [success]
+		case .success(let success as  [String: Any?]):  return  success["items"] as? [[String: Any?]] ?? [success]
 		case .error(let e): throw Err.operationError(e)
 		default:            throw Err.invalidAPIResponse
 		}
