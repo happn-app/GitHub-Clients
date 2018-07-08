@@ -36,7 +36,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="yuO-rZ-jW1" kind="show" id="A7I-xT-UGv"/>
+                                    <segue destination="yuO-rZ-jW1" kind="show" identifier="ShowUser" id="A7I-xT-UGv"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

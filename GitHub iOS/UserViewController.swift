@@ -21,6 +21,7 @@ import RESTUtils
 class UserViewController : UIViewController, NSFetchedResultsControllerDelegate {
 	
 	var user: User!
+	var shouldRefreshUserOnLoad = true
 	
 	@IBOutlet var labelUsername: UILabel!
 	
@@ -41,6 +42,10 @@ class UserViewController : UIViewController, NSFetchedResultsControllerDelegate 
 		
 		self.fetchedResultsController?.delegate = self
 		try! self.fetchedResultsController?.performFetch()
+		
+		if shouldRefreshUserOnLoad {
+			let _: BackRequestOperation<RESTCoreDataFetchRequest, GitHubBMOBridge> = AppDelegate.shared.requestManager.fetchObject(fromFetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>, additionalRequestInfo: nil, onContext: AppDelegate.shared.context)
+		}
 		
 		updateUI()
 	}

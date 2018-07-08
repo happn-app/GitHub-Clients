@@ -45,6 +45,12 @@ class UsersListViewController : UITableViewController, NSFetchedResultsControlle
 		setupCollectionLoader(searchText: nil)
 	}
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		assert(segue.identifier == "ShowUser")
+		let userViewController = segue.destination as! UserViewController
+		userViewController.user = resultsController.object(at: tableView.indexPathForSelectedRow!)
+	}
+	
 	override func numberOfSections(in tableView: UITableView) -> Int {
 		return resultsController.sections!.count
 	}

@@ -45,6 +45,7 @@ public class GitHubBMOBridge : Bridge {
 	
 	public func backOperation(forFetchRequest fetchRequest: DbType.FetchRequestType, additionalInfo: AdditionalRequestInfoType?, userInfo: inout UserInfoType) throws -> BackOperationType? {
 		let restPath: RESTPath?
+		var restPathResolvingInfo: [String: Any] = [:]
 		var additionalInfo = additionalInfo ?? AdditionalRequestInfoType()
 		
 		if let forcedRESTPath = additionalInfo.forcedRESTPath {
@@ -91,8 +92,7 @@ public class GitHubBMOBridge : Bridge {
 				/* /users           <-- Lists all the users */
 				/* /user            <-- Get the authenticated user */
 //				.restPath("/users(/|id|)"),
-				if
-					let usernamePredicates = fetchRequest.predicate?.firstLevelComparisonSubpredicates
+				if let usernamePredicates = fetchRequest.predicate?.firstLevelComparisonSubpredicates
 						.filter({ $0.keyPathExpression?.keyPath == "username" && $0.predicateOperatorType == .like && $0.comparisonPredicateModifier == .direct }),
 					let usernamePredicate = usernamePredicates.first, usernamePredicates.count == 1,
 					let searchedUsernameWithStar = usernamePredicate.constantValueExpression?.constantValue as? String,
@@ -103,6 +103,13 @@ public class GitHubBMOBridge : Bridge {
 					additionalInfo.additionalRequestParameters["q"] = searchedUsername + " in:login"
 				} else {
 					restPath = restMapper.restPath(forEntity: entity)
+					if let selfUsernames = fetchRequest.predicate?.firstLevelComparisonSubpredicates
+						.filter({ $0.leftExpression.expressionType == .evaluatedObject || $0.rightExpression.expressionType == .evaluatedObject })
+						.compactMap({ ($0.constantValueExpression?.constantValue as? User)?.username }),
+						let selfUsername = selfUsernames.first, selfUsernames.count == 1
+					{
+						restPathResolvingInfo["username"] = selfUsername
+					}
 				}
 				
 			default:
@@ -115,7 +122,6 @@ public class GitHubBMOBridge : Bridge {
 		 * one value per key is allowed for the key to stay in the final
 		 * restPathValues dictionary. */
 		var blacklistedKeys = Set<String>()
-		var restPathResolvingInfo: [String: Any] = [:]
 		fetchRequest.predicate?.enumerateFirstLevelConstants(forKeyPath: nil){ (keyPath, constant) in
 			if restPathResolvingInfo[keyPath] == nil {restPathResolvingInfo[keyPath] = constant}
 			else                                     {blacklistedKeys.insert(keyPath)}
@@ -130,6 +136,7 @@ public class GitHubBMOBridge : Bridge {
 		baseURLComponents.queryItems = (baseURLComponents.queryItems ?? []) + restMapper.parameters(fromAdditionalRESTInfo: additionalInfo, forEntity: fetchRequest.entity!).map{
 			URLQueryItem(name: $0.key, value: String(describing: $0.value))
 		}
+		if baseURLComponents.queryItems?.isEmpty ?? false {baseURLComponents.queryItems = nil}
 		return GitHubBMOOperation(request: URLRequest(url: baseURLComponents.url!))
 	}
 	

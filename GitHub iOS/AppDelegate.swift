@@ -58,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					
 					let youNavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "YouNavigationViewController") as! UINavigationController
 					let userViewController = youNavigationController.viewControllers.first! as! UserViewController
+					userViewController.shouldRefreshUserOnLoad = false
 					userViewController.user = user
 					
 					self.tabBarController.viewControllers?.append(youNavigationController)
