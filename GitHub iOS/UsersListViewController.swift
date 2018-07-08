@@ -70,7 +70,11 @@ class UsersListViewController : UITableViewController, NSFetchedResultsControlle
 	   ******************************* */
 	
 	func updateSearchResults(for searchController: UISearchController) {
-		setupCollectionLoader(searchText: searchController.searchBar.text)
+		timerRefreshCollectionLoader?.invalidate()
+		timerRefreshCollectionLoader = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
+			self.timerRefreshCollectionLoader = nil
+			self.setupCollectionLoader(searchText: searchController.searchBar.text)
+		})
 	}
 	
 	/* ******************************************
@@ -100,20 +104,36 @@ class UsersListViewController : UITableViewController, NSFetchedResultsControlle
 	private var collectionLoader: CollectionLoader<CoreDataSearchCLH<User, GitHubBMOBridge, GitHubPageInfoRetriever>>!
 	private var searchController: UISearchController!
 	
+	private var timerRefreshCollectionLoader: Timer?
+	
 	private var resultsController: NSFetchedResultsController<User> {
 		return collectionLoader.helper.resultsController
 	}
 	
 	private func setupCollectionLoader(searchText: String?) {
+		collectionLoader?.cancelAllLoadings()
 		collectionLoader?.helper.resultsController.delegate = nil
 		
 		let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-		fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(User.remoteId), ascending: true)]
+		
+		let deletionDateProperty: NSAttributeDescription
 		if let t = searchText?.trimmingCharacters(in: .whitespaces), !t.isEmpty {
+			let fr: NSFetchRequest<User> = User.fetchRequest()
+			fr.predicate = NSPredicate(format: "%K != NULL", #keyPath(User.zDeletionDateInUsersListSearch))
+			if let r = try? AppDelegate.shared.context.fetch(fr) {
+				for u in r {u.zDeletionDateInUsersListSearch = nil}
+				try? AppDelegate.shared.context.save()
+			}
+			
+			deletionDateProperty = User.entity().attributesByName[#keyPath(User.zDeletionDateInUsersListSearch)]!
 			fetchRequest.predicate = NSPredicate(format: "%K LIKE[cd] %@", #keyPath(User.username), t + "*")
+			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(User.username), ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
+		} else {
+			deletionDateProperty = User.entity().attributesByName[#keyPath(User.zDeletionDateInUsersList)]!
+			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(User.remoteId), ascending: true)]
 		}
 		
-		let collectionLoaderHelper: CoreDataSearchCLH<User, GitHubBMOBridge, GitHubPageInfoRetriever> = CoreDataSearchCLH(fetchRequest: fetchRequest, additionalFetchInfo: nil, deletionDateProperty: User.entity().attributesByName[#keyPath(User.zDeletionDateInUsersList)]!, context: AppDelegate.shared.context, pageInfoRetriever: AppDelegate.shared.pageInfoRetriever, requestManager: AppDelegate.shared.requestManager)
+		let collectionLoaderHelper: CoreDataSearchCLH<User, GitHubBMOBridge, GitHubPageInfoRetriever> = CoreDataSearchCLH(fetchRequest: fetchRequest, additionalFetchInfo: nil, deletionDateProperty: deletionDateProperty, context: AppDelegate.shared.context, pageInfoRetriever: AppDelegate.shared.pageInfoRetriever, requestManager: AppDelegate.shared.requestManager)
 		collectionLoader = CollectionLoader(collectionLoaderHelper: collectionLoaderHelper, numberOfElementsPerPage: 21)
 		collectionLoader.helper.resultsController.delegate = self
 		collectionLoader.loadFirstPage()

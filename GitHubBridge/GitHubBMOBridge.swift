@@ -100,7 +100,7 @@ public class GitHubBMOBridge : Bridge {
 				{
 					let searchedUsername = searchedUsernameWithStar.dropLast()
 					restPath = RESTPath("/search/users")
-					additionalInfo.additionalRequestParameters["q"] = searchedUsername
+					additionalInfo.additionalRequestParameters["q"] = searchedUsername + " in:login"
 				} else {
 					restPath = restMapper.restPath(forEntity: entity)
 				}
@@ -363,7 +363,8 @@ public class GitHubBMOBridge : Bridge {
 				#keyPath(User.remoteId):         [.restName("id"),           .restToLocalTransformer(intTransformer)],
 				#keyPath(User.updateDate):       [.restName("updated_at"),   .restToLocalTransformer(dateTransformer)],
 				#keyPath(User.username):         [.restName("login")],
-				#keyPath(User.zDeletionDateInUsersList): [.localConstant(nil)]
+				#keyPath(User.zDeletionDateInUsersList):       [.localConstant(nil)],
+				#keyPath(User.zDeletionDateInUsersListSearch): [.localConstant(nil)]
 			])
 		]
 		

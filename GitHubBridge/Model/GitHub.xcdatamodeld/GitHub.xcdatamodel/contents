@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17F77" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14296.2" systemVersion="17F77" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="File" representedClassName="File" syncable="YES" codeGenerationType="class">
         <attribute name="bmoId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="filename" optional="YES" attributeType="String" syncable="YES"/>
@@ -133,6 +133,7 @@
         <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zDeletionDateInUsersList" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="zDeletionDateInUsersListSearch" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="assignedIssues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Issue" inverseName="assignees" inverseEntity="Issue" syncable="YES"/>
         <relationship name="gists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Gist" inverseName="owner" inverseEntity="Gist" syncable="YES"/>
         <relationship name="repositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Repository" inverseName="owner" inverseEntity="Repository" syncable="YES"/>
@@ -145,6 +146,9 @@
         <fetchIndex name="byZDeletionDateInUsersList">
             <fetchIndexElement property="zDeletionDateInUsersList" type="Binary" order="ascending"/>
         </fetchIndex>
+        <fetchIndex name="byZDeletionDateInUsersListSearch">
+            <fetchIndexElement property="zDeletionDateInUsersListSearch" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <elements>
         <element name="File" positionX="-27" positionY="458" width="128" height="165"/>
@@ -155,6 +159,6 @@
         <element name="License" positionX="853" positionY="684" width="128" height="120"/>
         <element name="Repository" positionX="558" positionY="441" width="128" height="435"/>
         <element name="Topic" positionX="817" positionY="846" width="128" height="90"/>
-        <element name="User" positionX="369" positionY="81" width="128" height="300"/>
+        <element name="User" positionX="369" positionY="81" width="128" height="315"/>
     </elements>
 </model>
