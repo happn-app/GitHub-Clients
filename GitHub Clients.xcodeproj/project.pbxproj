@@ -549,11 +549,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				7B59183120CB179800D4D9F5 /* GitHub iOS */,
 				7BEFD1B820C9483B00FDA05F /* GitHubBridge macOS */,
 				7BA7C12920C9479E00C210B5 /* GitHubBridge iOS */,
 				7BEFD1C020C9483B00FDA05F /* GitHubBridge macOSTests */,
 				7BA7C13220C9479E00C210B5 /* GitHubBridge iOSTests */,
-				7B59183120CB179800D4D9F5 /* GitHub iOS */,
 			);
 		};
 /* End PBXProject section */
