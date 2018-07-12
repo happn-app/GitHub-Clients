@@ -40,6 +40,7 @@ class UsersListViewController : UITableViewController, NSFetchedResultsControlle
 		searchController.obscuresBackgroundDuringPresentation = false
 		
 		navigationItem.searchController = searchController
+		definesPresentationContext = true /* Needed so that navigation works when searching */
 		
 		/* ***** Setup the Collection Loader ***** */
 		setupCollectionLoader(searchText: nil)
