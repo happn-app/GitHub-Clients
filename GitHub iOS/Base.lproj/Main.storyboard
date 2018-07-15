@@ -54,7 +54,7 @@
         <!--Projects-->
         <scene sceneID="cpK-UE-C2Z">
             <objects>
-                <tableViewController title="Projects" id="tpG-qC-ZZO" sceneMemberID="viewController">
+                <tableViewController title="Projects" id="tpG-qC-ZZO" customClass="ProjectsListViewController" customModule="GitHub_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Yku-RO-Gwy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -86,7 +86,7 @@
                             <outlet property="delegate" destination="tpG-qC-ZZO" id="vWf-DL-2lb"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="uz7-tW-IhE"/>
+                    <navigationItem key="navigationItem" id="uz7-tW-IhE"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dc1-mu-xOf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -142,7 +142,7 @@
                             <outlet property="delegate" destination="K24-eK-oic" id="pbp-kI-jO3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="k4G-kT-iCI"/>
+                    <navigationItem key="navigationItem" id="k4G-kT-iCI"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cwi-Zf-ku9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

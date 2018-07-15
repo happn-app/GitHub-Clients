@@ -85,7 +85,11 @@ public class GitHubBMOBridge : Bridge {
 				/* /orgs/:org/repos       <-- Lists repositories for the specified org */
 				/* /repositories          <-- Lists all public repositories */
 //				.restPath("/repos/|owner.username|/|name|"),
-				restPath = restMapper.restPath(forEntity: entity)
+				if (fetchRequest.predicate?.firstLevelConstants(forKeyPath: "owner") ?? []).count == 0 {
+					restPath = RESTPath("/repositories")
+				} else {
+					restPath = restMapper.restPath(forEntity: entity)
+				}
 				
 			case User.entity().name!:
 				/* /users/:username <-- Get one user */
@@ -166,8 +170,8 @@ public class GitHubBMOBridge : Bridge {
 	
 	public func remoteObjectRepresentations(fromFinishedOperation operation: BackOperationType, userInfo: UserInfoType) throws -> [RemoteObjectRepresentationType]? {
 		switch operation.results {
-		case .success(let success as [[String: Any?]]): return  success
-		case .success(let success as  [String: Any?]):  return  success["items"] as? [[String: Any?]] ?? [success]
+		case .success(let success as [[String: Any?]]): return success
+		case .success(let success as  [String: Any?]):  return success["items"] as? [[String: Any?]] ?? [success]
 		case .error(let e): throw Err.operationError(e)
 		default:            throw Err.invalidAPIResponse
 		}

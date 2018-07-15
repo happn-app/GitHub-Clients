@@ -1,6 +1,6 @@
-github "Alamofire/Alamofire" "4.7.2"
+github "Alamofire/Alamofire" "4.7.3"
 github "happn-app/AsyncOperationResult" "1.0.3"
-github "happn-app/BMO" "965a6d6eba474538ca3173a61c07a9790fa7d4f6"
+github "happn-app/BMO" "778f449b66dc9ddb0d71b01038f9cc8fceb03467"
 github "happn-app/CollectionLoader" "e159d910033cf98867c580d640167945383e4ebe"
 github "happn-app/KVObserver" "0.9.3"
 github "happn-app/RetryingOperation" "1.1.0"
