@@ -16,13 +16,21 @@ import RESTUtils
 
 
 
+public struct GitHubBMOBridgeMetadata {
+	
+	public var responseHeaders: [AnyHashable: Any]?
+	
+}
+
+
+
 public class GitHubBMOBridge : Bridge {
 	
 	public typealias DbType = NSManagedObjectContext
 	public typealias AdditionalRequestInfoType = AdditionalRESTRequestInfo<NSPropertyDescription>
 	
 	public typealias UserInfoType = Void
-	public typealias MetadataType = Void
+	public typealias MetadataType = GitHubBMOBridgeMetadata
 	
 	public typealias RemoteObjectRepresentationType = [String: Any?]
 	public typealias RemoteRelationshipAndMetadataRepresentationType = [[String: Any?]]
@@ -48,7 +56,8 @@ public class GitHubBMOBridge : Bridge {
 		var restPathResolvingInfo: [String: Any] = [:]
 		var additionalInfo = additionalInfo ?? AdditionalRequestInfoType()
 		
-		if let forcedRESTPath = additionalInfo.forcedRESTPath {
+		let paginatorRESTPath = additionalInfo.paginatorInfo.flatMap{ paginator.forcedRestPath(withPaginatorInfo: $0) }
+		if let forcedRESTPath = (additionalInfo.forcedRESTPath ?? paginatorRESTPath) {
 			restPath = forcedRESTPath
 		} else {
 			let entity = fetchRequest.entity!
@@ -60,7 +69,7 @@ public class GitHubBMOBridge : Bridge {
 				/* /gists/public          <-- Lists all public gists */
 				/* /gists/starred         <-- Lists authenticated user’s starred gists */
 //				.restPath("(/users/|owner.username|)/gists(/|remoteId|)"),
-				restPath = restMapper.restPath(forEntity: entity)
+				restPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
 				
 			case Issue.entity().name!:
 				/* /issues                            <-- Lists all issues assigned to authenticated user */
@@ -69,14 +78,14 @@ public class GitHubBMOBridge : Bridge {
 				/* /user/issues                       <-- Lists issues assigned to authenticated user in owned and member repositories */
 				/* /orgs/:org/issues                  <-- Lists issues assigned to authenticated user in the given org repositories */
 //				.restPath("(/repos/|repository.owner.username|/|repository.name|)/issues(/|issueNumber|)"),
-				restPath = restMapper.restPath(forEntity: entity)
+				restPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
 				
 			case Label.entity().name!:
 				/* /repos/:owner/:repo/labels                <-- Lists all labels in given repository */
 				/* /repos/:owner/:repo/labels/:name          <-- Get one label */
 				/* /repos/:owner/:repo/issues/:number/labels <-- Lists labels of a given issue */
 //				.restPath("/repos/|repository.owner.username|/|repository.name|(/issues/|issue.issueNumber|)/labels(/|name|)"),
-				restPath = restMapper.restPath(forEntity: entity)
+				restPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
 				
 			case Repository.entity().name!:
 				/* /repos/:owner/:repo    <-- Get one repository */
@@ -86,9 +95,11 @@ public class GitHubBMOBridge : Bridge {
 				/* /repositories          <-- Lists all public repositories */
 //				.restPath("/repos/|owner.username|/|name|"),
 				if (fetchRequest.predicate?.firstLevelConstants(forKeyPath: "owner") ?? []).count == 0 {
+					/* We do not specify an owner for the searched repositories, we assume all repositories are searched */
 					restPath = RESTPath("/repositories")
 				} else {
-					restPath = restMapper.restPath(forEntity: entity)
+					/* Un-specific predicate, we use the generic REST path */
+					restPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
 				}
 				
 			case User.entity().name!:
@@ -102,22 +113,25 @@ public class GitHubBMOBridge : Bridge {
 					let searchedUsernameWithStar = usernamePredicate.constantValueExpression?.constantValue as? String,
 					searchedUsernameWithStar.hasSuffix("*"), searchedUsernameWithStar != "*"
 				{
+					/* Search for users */
 					let searchedUsername = searchedUsernameWithStar.dropLast()
 					restPath = RESTPath("/search/users")
 					additionalInfo.additionalRequestParameters["q"] = searchedUsername + " in:login"
 				} else {
-					restPath = restMapper.restPath(forEntity: entity)
+					/* Un-specific predicate, we use the generic REST path */
+					restPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
 					if let selfUsernames = fetchRequest.predicate?.firstLevelComparisonSubpredicates
-						.filter({ $0.leftExpression.expressionType == .evaluatedObject || $0.rightExpression.expressionType == .evaluatedObject })
-						.compactMap({ ($0.constantValueExpression?.constantValue as? User)?.username }),
+							.filter({ $0.leftExpression.expressionType == .evaluatedObject || $0.rightExpression.expressionType == .evaluatedObject })
+							.compactMap({ ($0.constantValueExpression?.constantValue as? User)?.username }),
 						let selfUsername = selfUsernames.first, selfUsernames.count == 1
 					{
+						/* But we have a “SELF == user” predicate, so we set that in the REST path resolving info (not supported by the REST mapper)  */
 						restPathResolvingInfo["username"] = selfUsername
 					}
 				}
 				
 			default:
-				restPath = restMapper.restPath(forEntity: entity)
+				restPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
 			}
 		}
 		
@@ -165,7 +179,7 @@ public class GitHubBMOBridge : Bridge {
 	}
 	
 	public func bridgeMetadata(fromFinishedOperation operation: BackOperationType, userInfo: UserInfoType) -> MetadataType? {
-		return ()
+		return GitHubBMOBridgeMetadata(responseHeaders: operation.responseHeaders)
 	}
 	
 	public func remoteObjectRepresentations(fromFinishedOperation operation: BackOperationType, userInfo: UserInfoType) throws -> [RemoteObjectRepresentationType]? {
@@ -189,7 +203,7 @@ public class GitHubBMOBridge : Bridge {
 	}
 	
 	public func metadata(fromRemoteRelationshipAndMetadataRepresentation remoteRelationshipAndMetadataRepresentation: RemoteRelationshipAndMetadataRepresentationType, userInfo: UserInfoType) -> MetadataType? {
-		return ()
+		return nil
 	}
 	
 	public func remoteObjectRepresentations(fromRemoteRelationshipAndMetadataRepresentation remoteRelationshipAndMetadataRepresentation: RemoteRelationshipAndMetadataRepresentationType, userInfo: UserInfoType) -> [RemoteObjectRepresentationType]? {
@@ -201,6 +215,8 @@ public class GitHubBMOBridge : Bridge {
 	}
 	
 	let dbModel: NSManagedObjectModel
+	
+	private var paginator = RESTURLAndCountPaginator(countKey: "per_page")
 	
 	private lazy var restMapper: RESTMapper<NSEntityDescription, NSPropertyDescription> = {
 		let urlTransformer = RESTURLTransformer()
@@ -359,7 +375,6 @@ public class GitHubBMOBridge : Bridge {
 			/* /user            <-- Get the authenticated user */
 			.restPath("/users(/|username|)"),
 			.uniquingPropertyName("bmoId"),
-			.paginator(RESTMaxIdPaginator(maxReachedIdKey: "since", countKey: "per_page")),
 			.propertiesMapping([
 				#keyPath(User.avatarURL):        [.restName("avatar_url"),   .restToLocalTransformer(urlTransformer)],
 				#keyPath(User.bmoId):            [.restName("id"),           .restToLocalTransformer(intToStrTransformer)],
@@ -381,7 +396,7 @@ public class GitHubBMOBridge : Bridge {
 		
 		return RESTMapper(
 			model: dbModel, defaultFieldsKeyName: nil,
-			defaultPaginator: RESTOffsetLimitPaginator(),
+			defaultPaginator: paginator,
 			convenienceMapping: [
 				File.entity().name!: FileMapping,
 				FileLanguage.entity().name!: FileLanguageMapping,

@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		context = container.viewContext
 		
 		requestManager = RequestManager(bridges: [GitHubBMOBridge(dbModel: container.managedObjectModel)], resultsImporterFactory: BMOBackResultsImporterForCoreDataWithFastImportRepresentationFactory())
-		pageInfoRetriever = GitHubPageInfoRetriever(context: context)
+		pageInfoRetriever = GitHubPageInfoRetriever()
 		
 		tabBarController = (window!.rootViewController! as! UITabBarController)
 		
@@ -59,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					let youNavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "YouNavigationViewController") as! UINavigationController
 					let userViewController = youNavigationController.viewControllers.first! as! UserViewController
 					userViewController.shouldRefreshUserOnLoad = false
+					userViewController.title = "You"
 					userViewController.user = user
 					
 					self.tabBarController.viewControllers?.append(youNavigationController)

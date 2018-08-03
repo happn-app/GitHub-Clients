@@ -9,7 +9,7 @@ cd "$(dirname "$0")"/../ || exit 42
 ##########################################
 
 rm -fr "Carthage/Build"
-XCODE_XCCONFIG_FILE="$(pwd)/StaticCarthageBuild.xcconfig" carthage update --use-ssh "$@"
+XCODE_XCCONFIG_FILE="$(pwd)/StaticCarthageBuild.xcconfig" carthage update --platform iOS --use-ssh "$@"
 
 # Apply Carthage workaround
 "$scpt_dir"/carthage_workaround_static_folder.sh "Static"

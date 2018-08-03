@@ -20,14 +20,11 @@ public class GitHubPageInfoRetriever : PageInfoRetriever {
 	
 	public typealias BridgeType = GitHubBMOBridge
 	
-	public let context: NSManagedObjectContext
-	
-	public init(context c: NSManagedObjectContext) {
-		context = c
+	public init() {
 	}
 	
 	public func pageInfoFor(startOffset: Int, endOffset: Int) -> Any {
-		return RESTMaxIdPaginatorInfo(maxReachedId: nil, count: endOffset-startOffset)
+		return RESTURLAndCountPaginatorInfo(url: nil, count: endOffset-startOffset)
 	}
 	
 	/* Note: Instead of fetching the latest object retrieved from the previous
@@ -36,16 +33,31 @@ public class GitHubPageInfoRetriever : PageInfoRetriever {
 	 *       Link header GitHub sends in its response. (Doc actually strongly
 	 *       advise us to do so...) */
 	public func nextPageInfo(for completionResults: BridgeBackRequestResult<GitHubBMOBridge>, from pageInfo: Any, nElementsPerPage: Int) -> Any?? {
-		guard let objectID = completionResults.returnedObjectIDsAndRelationships.last?.objectID else {return .some(nil)}
-		var ret: Any??
-		context.performAndWait{
-			ret = (try? self.context.existingObject(with: objectID) as? User)?.flatMap{ RESTMaxIdPaginatorInfo(maxReachedId: $0.bmoId, count: nElementsPerPage) }
-		}
-		return ret
+		guard let linkHeader = completionResults.metadata?.responseHeaders?["Link"] as? String else {return nil}
+		guard let linkValues = LinkHeaderParser.parseLinkHeader(linkHeader, defaultContext: nil, contentLanguageHeader: nil) else {return nil}
+		guard let linkNext = linkValues.first(where: { $0.rel.contains("next") })?.link else {return nil}
+		return RESTURLAndCountPaginatorInfo(url: linkNext, count: nElementsPerPage)
+		
+		/* Note: Using a RESTMaxIdPaginator we can also get the latest retrieved
+		 * id of the elements we retrieved and return a RESTMaxIdPaginatorInfo in
+		 * this function. GitHub strongly recommends against manually dealing with
+		 * pagination and instead use the Link header, so this is what we do.
+		 * Below is an implementation of the alternative for reference. It does
+		 * require the page info retriever to be allocated with a reference to the
+		 * CoreData context. */
+//		guard let objectID = completionResults.returnedObjectIDsAndRelationships.last?.objectID else {return .some(nil)}
+//		var ret: Any??
+//		context.performAndWait{
+//			ret = (try? self.context.existingObject(with: objectID) as? User)?.flatMap{ RESTMaxIdPaginatorInfo(maxReachedId: $0.bmoId, count: nElementsPerPage) }
+//		}
+//		return ret
 	}
 	
 	public func previousPageInfo(for completionResults: BridgeBackRequestResult<GitHubBMOBridge>, from pageInfo: Any, nElementsPerPage: Int) -> Any? {
-		return nil
+		guard let linkHeader = completionResults.metadata?.responseHeaders?["Link"] as? String else {return nil}
+		guard let linkValues = LinkHeaderParser.parseLinkHeader(linkHeader, defaultContext: nil, contentLanguageHeader: nil) else {return nil}
+		guard let linkPrev = linkValues.first(where: { $0.rel.contains("prev") })?.link else {return nil}
+		return RESTURLAndCountPaginatorInfo(url: linkPrev, count: nElementsPerPage)
 	}
 	
 }

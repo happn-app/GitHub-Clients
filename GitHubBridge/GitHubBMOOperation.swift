@@ -46,6 +46,7 @@ public class GitHubBMOOperation : RetryingOperation {
 	}
 	
 	let request: URLRequest
+	var responseHeaders: [AnyHashable: Any]?
 	var results: AsyncOperationResult<Any> = .error(Err.operationNotFinished)
 	
 	init(request r: URLRequest) {
@@ -63,6 +64,7 @@ public class GitHubBMOOperation : RetryingOperation {
 		
 		Alamofire.request(authenticatedRequest).validate().responseJSON{ response in
 //			print(response.result.value)
+			self.responseHeaders = response.response?.allHeaderFields
 			if let parsedJSON = response.result.value {
 				self.results = .success(parsedJSON)
 			} else {
