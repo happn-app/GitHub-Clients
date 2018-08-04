@@ -17,7 +17,7 @@ class IntToStringTransformer : ValueTransformer {
 	}
 	
 	override public class func transformedValueClass() -> AnyClass {
-		return NSDate.self
+		return NSString.self
 	}
 	
 	override func transformedValue(_ value: Any?) -> Any? {
