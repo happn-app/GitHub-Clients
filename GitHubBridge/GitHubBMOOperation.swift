@@ -58,7 +58,7 @@ public class GitHubBMOOperation : RetryingOperation {
 		
 		var authenticatedRequest = request
 		if let token = GitHubBMOOperation.gitHubToken {
-			print("   -> Authenticating request with token found in Desktop file")
+//			print("   -> Authenticating request with token found in Desktop file")
 			authenticatedRequest.addValue("token \(token)", forHTTPHeaderField: "Authorization")
 		}
 		

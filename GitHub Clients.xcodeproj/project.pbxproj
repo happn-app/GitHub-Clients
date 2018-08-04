@@ -11,46 +11,23 @@
 		7B01D6F420FA393300F0E967 /* GitHubListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B01D6F320FA393300F0E967 /* GitHubListViewController.swift */; };
 		7B10024420F1625800603105 /* GitHubPageInfoRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10024320F1625800603105 /* GitHubPageInfoRetriever.swift */; };
 		7B10024520F1625800603105 /* GitHubPageInfoRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10024320F1625800603105 /* GitHubPageInfoRetriever.swift */; };
-		7B10172720EB528E00D5816C /* CollectionLoader_RESTCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696E720EAE3BB00E26990 /* CollectionLoader_RESTCoreData.framework */; };
-		7B10172820EB528E00D5816C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696EC20EAE3BB00E26990 /* Alamofire.framework */; };
-		7B10172920EB528E00D5816C /* CollectionLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696ED20EAE3BB00E26990 /* CollectionLoader.framework */; };
-		7B10172A20EB528E00D5816C /* BMO_CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696EE20EAE3BB00E26990 /* BMO_CoreData.framework */; };
-		7B10172B20EB528E00D5816C /* AsyncOperationResult.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696EF20EAE3BB00E26990 /* AsyncOperationResult.framework */; };
-		7B10172C20EB528E00D5816C /* RetryingOperation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696F120EAE3BB00E26990 /* RetryingOperation.framework */; };
-		7B10172D20EB528E00D5816C /* BMO_FastImportRepresentation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696F420EAE3BB00E26990 /* BMO_FastImportRepresentation.framework */; };
-		7B10172E20EB528E00D5816C /* RESTUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696F520EAE3BB00E26990 /* RESTUtils.framework */; };
-		7B10172F20EB528E00D5816C /* BMO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696F720EAE3BB00E26990 /* BMO.framework */; };
-		7B10173020EB528E00D5816C /* BMO_RESTCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696F920EAE3BB00E26990 /* BMO_RESTCoreData.framework */; };
-		7B10173120EB528E00D5816C /* KVObserver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696FA20EAE3BB00E26990 /* KVObserver.framework */; };
-		7B10173220EB52AA00D5816C /* CollectionLoader_RESTCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696B720EAE3BB00E26990 /* CollectionLoader_RESTCoreData.framework */; };
-		7B10173320EB52AA00D5816C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696C620EAE3BB00E26990 /* Alamofire.framework */; };
-		7B10173420EB52AA00D5816C /* CollectionLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696C720EAE3BB00E26990 /* CollectionLoader.framework */; };
-		7B10173520EB52AA00D5816C /* BMO_CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696C820EAE3BB00E26990 /* BMO_CoreData.framework */; };
-		7B10173620EB52AA00D5816C /* AsyncOperationResult.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696CA20EAE3BB00E26990 /* AsyncOperationResult.framework */; };
-		7B10173720EB52AA00D5816C /* RetryingOperation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696CF20EAE3BB00E26990 /* RetryingOperation.framework */; };
-		7B10173820EB52AA00D5816C /* BMO_FastImportRepresentation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696D420EAE3BB00E26990 /* BMO_FastImportRepresentation.framework */; };
-		7B10173920EB52AA00D5816C /* RESTUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696D720EAE3BB00E26990 /* RESTUtils.framework */; };
-		7B10173A20EB52AA00D5816C /* BMO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696DA20EAE3BB00E26990 /* BMO.framework */; };
-		7B10173B20EB52AA00D5816C /* BMO_RESTCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696DE20EAE3BB00E26990 /* BMO_RESTCoreData.framework */; };
-		7B10173C20EB52AA00D5816C /* KVObserver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696DF20EAE3BB00E26990 /* KVObserver.framework */; };
-		7B10173D20EB52BB00D5816C /* CollectionLoader_RESTCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696B720EAE3BB00E26990 /* CollectionLoader_RESTCoreData.framework */; };
-		7B10173E20EB52BB00D5816C /* CollectionAndTableViewUpdateConveniences.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696C420EAE3BB00E26990 /* CollectionAndTableViewUpdateConveniences.framework */; };
-		7B10173F20EB52BB00D5816C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696C620EAE3BB00E26990 /* Alamofire.framework */; };
-		7B10174020EB52BB00D5816C /* CollectionLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696C720EAE3BB00E26990 /* CollectionLoader.framework */; };
-		7B10174120EB52BB00D5816C /* BMO_CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696C820EAE3BB00E26990 /* BMO_CoreData.framework */; };
-		7B10174220EB52BB00D5816C /* AsyncOperationResult.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696CA20EAE3BB00E26990 /* AsyncOperationResult.framework */; };
-		7B10174320EB52BB00D5816C /* RetryingOperation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696CF20EAE3BB00E26990 /* RetryingOperation.framework */; };
-		7B10174420EB52BB00D5816C /* BMO_FastImportRepresentation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696D420EAE3BB00E26990 /* BMO_FastImportRepresentation.framework */; };
-		7B10174520EB52BB00D5816C /* RESTUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696D720EAE3BB00E26990 /* RESTUtils.framework */; };
-		7B10174620EB52BB00D5816C /* BMO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696DA20EAE3BB00E26990 /* BMO.framework */; };
-		7B10174720EB52BB00D5816C /* BMO_RESTCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696DE20EAE3BB00E26990 /* BMO_RESTCoreData.framework */; };
-		7B10174820EB52BB00D5816C /* KVObserver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696DF20EAE3BB00E26990 /* KVObserver.framework */; };
+		7B559AA821166113002C5E30 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696C620EAE3BB00E26990 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B559AA921166113002C5E30 /* AsyncOperationResult.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696CA20EAE3BB00E26990 /* AsyncOperationResult.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B559AAA21166113002C5E30 /* BMO.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696DA20EAE3BB00E26990 /* BMO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B559AAB21166113002C5E30 /* BMO_CoreData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696C820EAE3BB00E26990 /* BMO_CoreData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B559AAC21166113002C5E30 /* BMO_FastImportRepresentation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696D420EAE3BB00E26990 /* BMO_FastImportRepresentation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B559AAD21166113002C5E30 /* BMO_RESTCoreData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696DE20EAE3BB00E26990 /* BMO_RESTCoreData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B559AAE21166113002C5E30 /* CollectionAndTableViewUpdateConveniences.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696C420EAE3BB00E26990 /* CollectionAndTableViewUpdateConveniences.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B559AAF21166113002C5E30 /* CollectionLoader.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696C720EAE3BB00E26990 /* CollectionLoader.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B559AB021166113002C5E30 /* CollectionLoader_RESTCoreData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696B720EAE3BB00E26990 /* CollectionLoader_RESTCoreData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B559AB121166113002C5E30 /* KVObserver.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696DF20EAE3BB00E26990 /* KVObserver.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B559AB221166113002C5E30 /* RESTUtils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696D720EAE3BB00E26990 /* RESTUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B559AB321166113002C5E30 /* RetryingOperation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696CF20EAE3BB00E26990 /* RetryingOperation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7B59183520CB179800D4D9F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59183420CB179800D4D9F5 /* AppDelegate.swift */; };
 		7B59183C20CB179800D4D9F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B59183A20CB179800D4D9F5 /* Main.storyboard */; };
 		7B59183E20CB179A00D4D9F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B59183D20CB179A00D4D9F5 /* Assets.xcassets */; };
 		7B59184120CB179A00D4D9F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B59183F20CB179A00D4D9F5 /* LaunchScreen.storyboard */; };
 		7B59188220CC6EEE00D4D9F5 /* UsersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59188120CC6EEE00D4D9F5 /* UsersListViewController.swift */; };
-		7B59188320CC6F5200D4D9F5 /* GitHubBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA7C12A20C9479E00C210B5 /* GitHubBridge.framework */; };
 		7B59189120CDCA8400D4D9F5 /* DependencyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59189020CDCA8300D4D9F5 /* DependencyInjection.swift */; };
 		7B59189220CDCA8400D4D9F5 /* DependencyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59189020CDCA8300D4D9F5 /* DependencyInjection.swift */; };
 		7B59189420CDCF3900D4D9F5 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59189320CDCF3900D4D9F5 /* UserViewController.swift */; };
@@ -78,6 +55,13 @@
 			remoteGlobalIDString = 7BA7C12920C9479E00C210B5;
 			remoteInfo = GitHubBridge;
 		};
+		7BB35CD42115B38B005E96EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA7C12120C9479E00C210B5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7BA7C12920C9479E00C210B5;
+			remoteInfo = "GitHubBridge iOS";
+		};
 		7BEFD1C320C9483B00FDA05F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7BA7C12120C9479E00C210B5 /* Project object */;
@@ -86,6 +70,31 @@
 			remoteInfo = "GitHubBridge macOS";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7BB35CCD2115B324005E96EF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7B559AA821166113002C5E30 /* Alamofire.framework in Embed Frameworks */,
+				7B559AA921166113002C5E30 /* AsyncOperationResult.framework in Embed Frameworks */,
+				7B559AAA21166113002C5E30 /* BMO.framework in Embed Frameworks */,
+				7B559AAB21166113002C5E30 /* BMO_CoreData.framework in Embed Frameworks */,
+				7B559AAC21166113002C5E30 /* BMO_FastImportRepresentation.framework in Embed Frameworks */,
+				7B559AAD21166113002C5E30 /* BMO_RESTCoreData.framework in Embed Frameworks */,
+				7B559AAE21166113002C5E30 /* CollectionAndTableViewUpdateConveniences.framework in Embed Frameworks */,
+				7B559AAF21166113002C5E30 /* CollectionLoader.framework in Embed Frameworks */,
+				7B559AB021166113002C5E30 /* CollectionLoader_RESTCoreData.framework in Embed Frameworks */,
+				7B559AB121166113002C5E30 /* KVObserver.framework in Embed Frameworks */,
+				7B559AB221166113002C5E30 /* RESTUtils.framework in Embed Frameworks */,
+				7B559AB321166113002C5E30 /* RetryingOperation.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7B01D6ED20F95D1500F0E967 /* ProjectsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListViewController.swift; sourceTree = "<group>"; };
@@ -164,19 +173,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B59188320CC6F5200D4D9F5 /* GitHubBridge.framework in Frameworks */,
-				7B10173F20EB52BB00D5816C /* Alamofire.framework in Frameworks */,
-				7B10174220EB52BB00D5816C /* AsyncOperationResult.framework in Frameworks */,
-				7B10174620EB52BB00D5816C /* BMO.framework in Frameworks */,
-				7B10174120EB52BB00D5816C /* BMO_CoreData.framework in Frameworks */,
-				7B10174420EB52BB00D5816C /* BMO_FastImportRepresentation.framework in Frameworks */,
-				7B10174720EB52BB00D5816C /* BMO_RESTCoreData.framework in Frameworks */,
-				7B10173E20EB52BB00D5816C /* CollectionAndTableViewUpdateConveniences.framework in Frameworks */,
-				7B10174020EB52BB00D5816C /* CollectionLoader.framework in Frameworks */,
-				7B10173D20EB52BB00D5816C /* CollectionLoader_RESTCoreData.framework in Frameworks */,
-				7B10174820EB52BB00D5816C /* KVObserver.framework in Frameworks */,
-				7B10174520EB52BB00D5816C /* RESTUtils.framework in Frameworks */,
-				7B10174320EB52BB00D5816C /* RetryingOperation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,17 +180,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B10173320EB52AA00D5816C /* Alamofire.framework in Frameworks */,
-				7B10173620EB52AA00D5816C /* AsyncOperationResult.framework in Frameworks */,
-				7B10173A20EB52AA00D5816C /* BMO.framework in Frameworks */,
-				7B10173520EB52AA00D5816C /* BMO_CoreData.framework in Frameworks */,
-				7B10173820EB52AA00D5816C /* BMO_FastImportRepresentation.framework in Frameworks */,
-				7B10173B20EB52AA00D5816C /* BMO_RESTCoreData.framework in Frameworks */,
-				7B10173420EB52AA00D5816C /* CollectionLoader.framework in Frameworks */,
-				7B10173220EB52AA00D5816C /* CollectionLoader_RESTCoreData.framework in Frameworks */,
-				7B10173C20EB52AA00D5816C /* KVObserver.framework in Frameworks */,
-				7B10173920EB52AA00D5816C /* RESTUtils.framework in Frameworks */,
-				7B10173720EB52AA00D5816C /* RetryingOperation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,17 +195,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B10172820EB528E00D5816C /* Alamofire.framework in Frameworks */,
-				7B10172B20EB528E00D5816C /* AsyncOperationResult.framework in Frameworks */,
-				7B10172F20EB528E00D5816C /* BMO.framework in Frameworks */,
-				7B10172A20EB528E00D5816C /* BMO_CoreData.framework in Frameworks */,
-				7B10172D20EB528E00D5816C /* BMO_FastImportRepresentation.framework in Frameworks */,
-				7B10173020EB528E00D5816C /* BMO_RESTCoreData.framework in Frameworks */,
-				7B10172920EB528E00D5816C /* CollectionLoader.framework in Frameworks */,
-				7B10172720EB528E00D5816C /* CollectionLoader_RESTCoreData.framework in Frameworks */,
-				7B10173120EB528E00D5816C /* KVObserver.framework in Frameworks */,
-				7B10172E20EB528E00D5816C /* RESTUtils.framework in Frameworks */,
-				7B10172C20EB528E00D5816C /* RetryingOperation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,18 +212,18 @@
 		7B4696B520EAE3BB00E26990 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				7B4696B720EAE3BB00E26990 /* CollectionLoader_RESTCoreData.framework */,
-				7B4696C420EAE3BB00E26990 /* CollectionAndTableViewUpdateConveniences.framework */,
 				7B4696C620EAE3BB00E26990 /* Alamofire.framework */,
-				7B4696C720EAE3BB00E26990 /* CollectionLoader.framework */,
-				7B4696C820EAE3BB00E26990 /* BMO_CoreData.framework */,
 				7B4696CA20EAE3BB00E26990 /* AsyncOperationResult.framework */,
-				7B4696CF20EAE3BB00E26990 /* RetryingOperation.framework */,
-				7B4696D420EAE3BB00E26990 /* BMO_FastImportRepresentation.framework */,
-				7B4696D720EAE3BB00E26990 /* RESTUtils.framework */,
 				7B4696DA20EAE3BB00E26990 /* BMO.framework */,
+				7B4696C820EAE3BB00E26990 /* BMO_CoreData.framework */,
+				7B4696D420EAE3BB00E26990 /* BMO_FastImportRepresentation.framework */,
 				7B4696DE20EAE3BB00E26990 /* BMO_RESTCoreData.framework */,
+				7B4696C420EAE3BB00E26990 /* CollectionAndTableViewUpdateConveniences.framework */,
+				7B4696C720EAE3BB00E26990 /* CollectionLoader.framework */,
+				7B4696B720EAE3BB00E26990 /* CollectionLoader_RESTCoreData.framework */,
 				7B4696DF20EAE3BB00E26990 /* KVObserver.framework */,
+				7B4696D720EAE3BB00E26990 /* RESTUtils.framework */,
+				7B4696CF20EAE3BB00E26990 /* RetryingOperation.framework */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -257,17 +231,17 @@
 		7B4696E620EAE3BB00E26990 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
-				7B4696E720EAE3BB00E26990 /* CollectionLoader_RESTCoreData.framework */,
 				7B4696EC20EAE3BB00E26990 /* Alamofire.framework */,
-				7B4696ED20EAE3BB00E26990 /* CollectionLoader.framework */,
-				7B4696EE20EAE3BB00E26990 /* BMO_CoreData.framework */,
 				7B4696EF20EAE3BB00E26990 /* AsyncOperationResult.framework */,
-				7B4696F120EAE3BB00E26990 /* RetryingOperation.framework */,
-				7B4696F420EAE3BB00E26990 /* BMO_FastImportRepresentation.framework */,
-				7B4696F520EAE3BB00E26990 /* RESTUtils.framework */,
 				7B4696F720EAE3BB00E26990 /* BMO.framework */,
+				7B4696EE20EAE3BB00E26990 /* BMO_CoreData.framework */,
+				7B4696F420EAE3BB00E26990 /* BMO_FastImportRepresentation.framework */,
 				7B4696F920EAE3BB00E26990 /* BMO_RESTCoreData.framework */,
+				7B4696ED20EAE3BB00E26990 /* CollectionLoader.framework */,
+				7B4696E720EAE3BB00E26990 /* CollectionLoader_RESTCoreData.framework */,
 				7B4696FA20EAE3BB00E26990 /* KVObserver.framework */,
+				7B4696F520EAE3BB00E26990 /* RESTUtils.framework */,
+				7B4696F120EAE3BB00E26990 /* RetryingOperation.framework */,
 			);
 			name = macOS;
 			path = Mac;
@@ -276,17 +250,17 @@
 		7B4696FD20EAE3BB00E26990 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
-				7B4696FE20EAE3BB00E26990 /* CollectionLoader_RESTCoreData.framework */,
 				7B46970720EAE3BB00E26990 /* Alamofire.framework */,
-				7B46970920EAE3BB00E26990 /* CollectionLoader.framework */,
-				7B46970A20EAE3BB00E26990 /* BMO_CoreData.framework */,
 				7B46970D20EAE3BB00E26990 /* AsyncOperationResult.framework */,
-				7B46971120EAE3BB00E26990 /* RetryingOperation.framework */,
-				7B46971420EAE3BB00E26990 /* BMO_FastImportRepresentation.framework */,
-				7B46971520EAE3BB00E26990 /* RESTUtils.framework */,
 				7B46971720EAE3BB00E26990 /* BMO.framework */,
+				7B46970A20EAE3BB00E26990 /* BMO_CoreData.framework */,
+				7B46971420EAE3BB00E26990 /* BMO_FastImportRepresentation.framework */,
 				7B46971A20EAE3BB00E26990 /* BMO_RESTCoreData.framework */,
+				7B46970920EAE3BB00E26990 /* CollectionLoader.framework */,
+				7B4696FE20EAE3BB00E26990 /* CollectionLoader_RESTCoreData.framework */,
 				7B46971B20EAE3BB00E26990 /* KVObserver.framework */,
+				7B46971520EAE3BB00E26990 /* RESTUtils.framework */,
+				7B46971120EAE3BB00E26990 /* RetryingOperation.framework */,
 			);
 			path = tvOS;
 			sourceTree = "<group>";
@@ -294,17 +268,17 @@
 		7B46971F20EAE3BB00E26990 /* watchOS */ = {
 			isa = PBXGroup;
 			children = (
-				7B46972120EAE3BB00E26990 /* CollectionLoader_RESTCoreData.framework */,
 				7B46972C20EAE3BB00E26990 /* Alamofire.framework */,
-				7B46972D20EAE3BB00E26990 /* CollectionLoader.framework */,
-				7B46972E20EAE3BB00E26990 /* BMO_CoreData.framework */,
 				7B46972F20EAE3BB00E26990 /* AsyncOperationResult.framework */,
-				7B46973220EAE3BB00E26990 /* RetryingOperation.framework */,
-				7B46973620EAE3BB00E26990 /* BMO_FastImportRepresentation.framework */,
-				7B46973720EAE3BB00E26990 /* RESTUtils.framework */,
 				7B46973920EAE3BB00E26990 /* BMO.framework */,
+				7B46972E20EAE3BB00E26990 /* BMO_CoreData.framework */,
+				7B46973620EAE3BB00E26990 /* BMO_FastImportRepresentation.framework */,
 				7B46973D20EAE3BB00E26990 /* BMO_RESTCoreData.framework */,
+				7B46972D20EAE3BB00E26990 /* CollectionLoader.framework */,
+				7B46972120EAE3BB00E26990 /* CollectionLoader_RESTCoreData.framework */,
 				7B46973E20EAE3BB00E26990 /* KVObserver.framework */,
+				7B46973720EAE3BB00E26990 /* RESTUtils.framework */,
+				7B46973220EAE3BB00E26990 /* RetryingOperation.framework */,
 			);
 			path = watchOS;
 			sourceTree = "<group>";
@@ -430,10 +404,12 @@
 				7B59182E20CB179800D4D9F5 /* Sources */,
 				7B59182F20CB179800D4D9F5 /* Frameworks */,
 				7B59183020CB179800D4D9F5 /* Resources */,
+				7BB35CCD2115B324005E96EF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7BB35CD52115B38B005E96EF /* PBXTargetDependency */,
 			);
 			name = "GitHub iOS";
 			productName = "GitHub iOS";
@@ -670,6 +646,11 @@
 			target = 7BA7C12920C9479E00C210B5 /* GitHubBridge iOS */;
 			targetProxy = 7BA7C13520C9479E00C210B5 /* PBXContainerItemProxy */;
 		};
+		7BB35CD52115B38B005E96EF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7BA7C12920C9479E00C210B5 /* GitHubBridge iOS */;
+			targetProxy = 7BB35CD42115B38B005E96EF /* PBXContainerItemProxy */;
+		};
 		7BEFD1C420C9483B00FDA05F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7BEFD1B820C9483B00FDA05F /* GitHubBridge macOS */;
@@ -700,6 +681,7 @@
 		7B59184320CB179A00D4D9F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -723,6 +705,7 @@
 		7B59184420CB179A00D4D9F5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -794,7 +777,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -849,7 +832,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -863,6 +846,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -893,6 +877,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
