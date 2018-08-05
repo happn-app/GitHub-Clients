@@ -51,7 +51,7 @@ class GistsListViewController: GitHubListViewController<Gist> {
 			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Gist.firstFileName), ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
 		} else {
 			deletionDateProperty = Gist.entity().attributesByName[#keyPath(Gist.zDeletionDateInGistList)]!
-			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Gist.remoteId), ascending: true)]
+			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Gist.creationDate), ascending: false)]
 		}
 		
 		return CoreDataSearchCLH(fetchRequest: fetchRequest, additionalFetchInfo: nil, deletionDateProperty: deletionDateProperty, context: AppDelegate.shared.context, pageInfoRetriever: AppDelegate.shared.pageInfoRetriever, requestManager: AppDelegate.shared.requestManager)
