@@ -161,7 +161,10 @@ public class GitHubBMOBridge : Bridge {
 			URLQueryItem(name: $0.key, value: String(describing: $0.value))
 		}
 		if baseURLComponents.queryItems?.isEmpty ?? false {baseURLComponents.queryItems = nil}
-		return GitHubBMOOperation(request: URLRequest(url: baseURLComponents.url!))
+		
+		var request = URLRequest(url: baseURLComponents.url!)
+		request.cachePolicy = .reloadIgnoringLocalCacheData
+		return GitHubBMOOperation(request: request)
 	}
 	
 	public func backOperation(forInsertedObject insertedObject: DbType.ObjectType, additionalInfo: AdditionalRequestInfoType?, userInfo: inout UserInfoType) throws -> BackOperationType? {
