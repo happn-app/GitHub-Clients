@@ -53,6 +53,10 @@ class GitHubListViewController<ListElement : NSManagedObject> : UITableViewContr
       MARK: - Override Points
 	   *********************** */
 	
+	var numberOfElementsPerPage: Int {
+		return 21
+	}
+	
 	func configureCell(_ cell: UITableViewCell, element: ListElement) {
 		fatalError("Abstract method called.")
 	}
@@ -128,7 +132,7 @@ class GitHubListViewController<ListElement : NSManagedObject> : UITableViewContr
 		collectionLoader?.helper.resultsController.delegate = nil
 		
 		let clh = collectionLoaderHelper(for: searchText, context: AppDelegate.shared.context)
-		collectionLoader = CollectionLoader(collectionLoaderHelper: clh, numberOfElementsPerPage: 21)
+		collectionLoader = CollectionLoader(collectionLoaderHelper: clh, numberOfElementsPerPage: numberOfElementsPerPage)
 		collectionLoader.helper.resultsController.delegate = self
 		collectionLoader.loadFirstPage()
 		

@@ -1,3 +1,4 @@
+github "happn-app/KVObserver" ~> 0.9.3
 github "happn-app/BMO" "dev.github_paginator"
 github "happn-app/CollectionLoader" "master"
 github "happn-app/RetryingOperation" ~> 1.0

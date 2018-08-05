@@ -69,7 +69,13 @@ public class GitHubBMOBridge : Bridge {
 				/* /gists/public          <-- Lists all public gists */
 				/* /gists/starred         <-- Lists authenticated user’s starred gists */
 //				.restPath("(/users/|owner.username|)/gists(/|remoteId|)"),
-				restPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
+				if (fetchRequest.predicate?.firstLevelConstants(forKeyPath: "owner") ?? []).count == 0 {
+					/* We do not specify an owner for the searched gists, we assume all gists are searched */
+					restPath = RESTPath("/gists/public")
+				} else {
+					/* Un-specific predicate, we use the generic REST path */
+					restPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
+				}
 				
 			case Issue.entity().name!:
 				/* /issues                            <-- Lists all issues assigned to authenticated user */
@@ -268,7 +274,9 @@ public class GitHubBMOBridge : Bridge {
 				#keyPath(Gist.nodeId):       [.restName("nodeId")],
 				#keyPath(Gist.owner):        [.restName("owner")],
 				#keyPath(Gist.remoteId):     [.restName("id")],
-				#keyPath(Gist.updateDate):   [.restName("updated_at"),   .restToLocalTransformer(dateTransformer)]
+				#keyPath(Gist.updateDate):   [.restName("updated_at"),   .restToLocalTransformer(dateTransformer)],
+				#keyPath(Gist.zDeletionDateInGistList):       [.localConstant(nil)],
+				#keyPath(Gist.zDeletionDateInGistListSearch): [.localConstant(nil)]
 			])
 		]
 		

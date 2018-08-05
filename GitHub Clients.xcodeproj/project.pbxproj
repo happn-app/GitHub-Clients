@@ -23,6 +23,7 @@
 		7B559AB121166113002C5E30 /* KVObserver.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696DF20EAE3BB00E26990 /* KVObserver.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7B559AB221166113002C5E30 /* RESTUtils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696D720EAE3BB00E26990 /* RESTUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7B559AB321166113002C5E30 /* RetryingOperation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696CF20EAE3BB00E26990 /* RetryingOperation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B559AB52116EF34002C5E30 /* GistsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B559AB42116EF34002C5E30 /* GistsListViewController.swift */; };
 		7B59183520CB179800D4D9F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59183420CB179800D4D9F5 /* AppDelegate.swift */; };
 		7B59183C20CB179800D4D9F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B59183A20CB179800D4D9F5 /* Main.storyboard */; };
 		7B59183E20CB179A00D4D9F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B59183D20CB179A00D4D9F5 /* Assets.xcassets */; };
@@ -31,6 +32,8 @@
 		7B59189120CDCA8400D4D9F5 /* DependencyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59189020CDCA8300D4D9F5 /* DependencyInjection.swift */; };
 		7B59189220CDCA8400D4D9F5 /* DependencyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59189020CDCA8300D4D9F5 /* DependencyInjection.swift */; };
 		7B59189420CDCF3900D4D9F5 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59189320CDCF3900D4D9F5 /* UserViewController.swift */; };
+		7B63397621175D0E005966F4 /* Gist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B63397521175D0E005966F4 /* Gist.swift */; };
+		7B63397721175D0E005966F4 /* Gist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B63397521175D0E005966F4 /* Gist.swift */; };
 		7B97399C20C9FFBE00ACF883 /* GitHubBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7C13820C9479E00C210B5 /* GitHubBridgeTests.swift */; };
 		7BA6F62120C94F2000C21A36 /* GitHub.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BA6F61F20C94F2000C21A36 /* GitHub.xcdatamodeld */; };
 		7BA6F62220C94F2000C21A36 /* GitHub.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BA6F61F20C94F2000C21A36 /* GitHub.xcdatamodeld */; };
@@ -145,6 +148,7 @@
 		7B46973920EAE3BB00E26990 /* BMO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BMO.framework; sourceTree = "<group>"; };
 		7B46973D20EAE3BB00E26990 /* BMO_RESTCoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BMO_RESTCoreData.framework; sourceTree = "<group>"; };
 		7B46973E20EAE3BB00E26990 /* KVObserver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KVObserver.framework; sourceTree = "<group>"; };
+		7B559AB42116EF34002C5E30 /* GistsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GistsListViewController.swift; sourceTree = "<group>"; };
 		7B59183220CB179800D4D9F5 /* GitHub iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GitHub iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B59183420CB179800D4D9F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B59183B20CB179800D4D9F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -154,6 +158,7 @@
 		7B59188120CC6EEE00D4D9F5 /* UsersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListViewController.swift; sourceTree = "<group>"; };
 		7B59189020CDCA8300D4D9F5 /* DependencyInjection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyInjection.swift; sourceTree = "<group>"; };
 		7B59189320CDCF3900D4D9F5 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		7B63397521175D0E005966F4 /* Gist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gist.swift; sourceTree = "<group>"; };
 		7BA6F62020C94F2000C21A36 /* GitHub.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitHub.xcdatamodel; sourceTree = "<group>"; };
 		7BA6F62320C95CC700C21A36 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		7BA6F63320C96B7500C21A36 /* GitHubTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubTransformers.swift; sourceTree = "<group>"; };
@@ -291,6 +296,7 @@
 				7B01D6F320FA393300F0E967 /* GitHubListViewController.swift */,
 				7B59188120CC6EEE00D4D9F5 /* UsersListViewController.swift */,
 				7B01D6ED20F95D1500F0E967 /* ProjectsListViewController.swift */,
+				7B559AB42116EF34002C5E30 /* GistsListViewController.swift */,
 				7B59183A20CB179800D4D9F5 /* Main.storyboard */,
 				7B59183D20CB179A00D4D9F5 /* Assets.xcassets */,
 				7B59183F20CB179A00D4D9F5 /* LaunchScreen.storyboard */,
@@ -310,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				7BA6F62320C95CC700C21A36 /* Color.swift */,
+				7B63397521175D0E005966F4 /* Gist.swift */,
 				7BA6F61F20C94F2000C21A36 /* GitHub.xcdatamodeld */,
 			);
 			path = Model;
@@ -587,6 +594,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B01D6EE20F95D1500F0E967 /* ProjectsListViewController.swift in Sources */,
+				7B559AB52116EF34002C5E30 /* GistsListViewController.swift in Sources */,
 				7B59183520CB179800D4D9F5 /* AppDelegate.swift in Sources */,
 				7B59189420CDCF3900D4D9F5 /* UserViewController.swift in Sources */,
 				7B01D6F420FA393300F0E967 /* GitHubListViewController.swift in Sources */,
@@ -602,6 +610,7 @@
 				7B10024520F1625800603105 /* GitHubPageInfoRetriever.swift in Sources */,
 				7BA6F63520C96B7500C21A36 /* GitHubTransformers.swift in Sources */,
 				7B59189220CDCA8400D4D9F5 /* DependencyInjection.swift in Sources */,
+				7B63397721175D0E005966F4 /* Gist.swift in Sources */,
 				7BA6F62220C94F2000C21A36 /* GitHub.xcdatamodeld in Sources */,
 				7BEFD1D220C948A500FDA05F /* GitHubBMOBridge.swift in Sources */,
 				7BA6F62520C95CC700C21A36 /* Color.swift in Sources */,
@@ -624,6 +633,7 @@
 				7B10024420F1625800603105 /* GitHubPageInfoRetriever.swift in Sources */,
 				7BA6F63420C96B7500C21A36 /* GitHubTransformers.swift in Sources */,
 				7B59189120CDCA8400D4D9F5 /* DependencyInjection.swift in Sources */,
+				7B63397621175D0E005966F4 /* Gist.swift in Sources */,
 				7BA6F62120C94F2000C21A36 /* GitHub.xcdatamodeld in Sources */,
 				7BEFD1D120C948A500FDA05F /* GitHubBMOBridge.swift in Sources */,
 				7BA6F62420C95CC700C21A36 /* Color.swift in Sources */,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14296.2" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.2.4" systemVersion="18A347e" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="File" representedClassName="File" syncable="YES" codeGenerationType="class">
         <attribute name="bmoId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="filename" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,10 +21,11 @@
             <fetchIndexElement property="bmoId" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
-    <entity name="Gist" representedClassName="Gist" syncable="YES" codeGenerationType="class">
+    <entity name="Gist" representedClassName="Gist" syncable="YES" codeGenerationType="category">
         <attribute name="bmoId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="descr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstFileName" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <attribute name="gitPullURL" optional="YES" attributeType="URI" syncable="YES"/>
         <attribute name="gitPushURL" optional="YES" attributeType="URI" syncable="YES"/>
         <attribute name="isPublic" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -32,7 +33,9 @@
         <attribute name="nodeId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="remoteId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="files" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="File" inverseName="gistOwner" inverseEntity="File" syncable="YES"/>
+        <attribute name="zDeletionDateInGistList" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="zDeletionDateInGistListSearch" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="files" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="File" inverseName="gistOwner" inverseEntity="File" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="gists" inverseEntity="User" syncable="YES"/>
         <fetchIndex name="bmoIndex">
             <fetchIndexElement property="bmoId" type="Binary" order="ascending"/>
@@ -161,7 +164,7 @@
     <elements>
         <element name="File" positionX="-27" positionY="458" width="128" height="165"/>
         <element name="FileLanguage" positionX="151" positionY="603" width="128" height="90"/>
-        <element name="Gist" positionX="151" positionY="306" width="128" height="225"/>
+        <element name="Gist" positionX="151" positionY="306" width="128" height="270"/>
         <element name="Issue" positionX="745" positionY="198" width="128" height="240"/>
         <element name="Label" positionX="963" positionY="423" width="128" height="165"/>
         <element name="License" positionX="853" positionY="684" width="128" height="120"/>
