@@ -35,6 +35,11 @@ class GitHubListViewController<ListElement : NSManagedObject> : UITableViewContr
 		tableView.fetchedResultsControllerMoveMode = .move(reloadMode: .standard)
 		tableView.fetchedResultsControllerReloadMode = .handler{ [weak self] cell, object, _, _ in self?.configureCell(cell, element: object as! ListElement) }
 		
+		/* ***** Add refresh control to the table view ***** */
+		let rc = UIRefreshControl()
+		rc.addTarget(self, action: #selector(refreshTableView(_:)), for: .valueChanged)
+		tableView.refreshControl = rc
+		
 		/* ***** Configuring the Search Controller ***** */
 		searchController = UISearchController(searchResultsController: nil)
 		searchController.delegate = self
@@ -47,6 +52,16 @@ class GitHubListViewController<ListElement : NSManagedObject> : UITableViewContr
 		
 		/* ***** Setup the Collection Loader ***** */
 		setupCollectionLoader(searchText: nil)
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		/* If the refresh control is updated too soon, the collection view inset
+		 * will not be updated and we won't be able to show the refresh control.
+		 * So we have to block the update until the view _will_ appear. */
+		blockSetRefreshControlIsRefreshing = false
+		collectionLoaderIsLoadingFirstPageChangedHandler()
 	}
 	
 	/* ***********************
@@ -84,7 +99,7 @@ class GitHubListViewController<ListElement : NSManagedObject> : UITableViewContr
 	}
 	
 	override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-		if indexPath.section == tableView.numberOfSections-1 && indexPath.row >= tableView.numberOfRows(inSection: indexPath.section)-13 {
+		if indexPath.section == tableView.numberOfSections-1 && indexPath.row >= tableView.numberOfRows(inSection: indexPath.section)-5 {
 			collectionLoader.loadNextPage()
 		}
 	}
@@ -125,6 +140,8 @@ class GitHubListViewController<ListElement : NSManagedObject> : UITableViewContr
       MARK: - Private
 	   *************** */
 	
+	private var blockSetRefreshControlIsRefreshing = true
+	
 	private var timerRefreshCollectionLoader: Timer?
 	
 	private func setupCollectionLoader(searchText: String?) {
@@ -133,10 +150,25 @@ class GitHubListViewController<ListElement : NSManagedObject> : UITableViewContr
 		
 		let clh = collectionLoaderHelper(for: searchText, context: AppDelegate.shared.context)
 		collectionLoader = CollectionLoader(collectionLoaderHelper: clh, numberOfElementsPerPage: numberOfElementsPerPage)
+		collectionLoader.isLoadingFirstPageChangedHandler = { [weak self] in self?.collectionLoaderIsLoadingFirstPageChangedHandler() }
 		collectionLoader.helper.resultsController.delegate = self
 		collectionLoader.loadFirstPage()
 		
 		tableView.reloadData()
+	}
+	
+	private func collectionLoaderIsLoadingFirstPageChangedHandler() {
+		guard !blockSetRefreshControlIsRefreshing, let refreshControl = refreshControl else {return}
+		
+		let isLoading = collectionLoader.isLoadingFirstPage
+		guard isLoading != refreshControl.isRefreshing else {return}
+		if !isLoading {refreshControl.endRefreshing()}
+		else          {refreshControl.beginRefreshing()}
+	}
+	
+	@objc
+	@IBAction func refreshTableView(_ sender: AnyObject) {
+		collectionLoader.loadFirstPage()
 	}
 	
 }
