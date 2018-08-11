@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7B01D6EE20F95D1500F0E967 /* ProjectsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B01D6ED20F95D1500F0E967 /* ProjectsListViewController.swift */; };
 		7B01D6F420FA393300F0E967 /* GitHubListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B01D6F320FA393300F0E967 /* GitHubListViewController.swift */; };
+		7B04D0B8211F2712003BAD34 /* GitHubBridge.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA7C12A20C9479E00C210B5 /* GitHubBridge.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7B10024420F1625800603105 /* GitHubPageInfoRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10024320F1625800603105 /* GitHubPageInfoRetriever.swift */; };
 		7B10024520F1625800603105 /* GitHubPageInfoRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10024320F1625800603105 /* GitHubPageInfoRetriever.swift */; };
 		7B559AA821166113002C5E30 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696C620EAE3BB00E26990 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -90,6 +91,7 @@
 				7B559AAE21166113002C5E30 /* CollectionAndTableViewUpdateConveniences.framework in Embed Frameworks */,
 				7B559AAF21166113002C5E30 /* CollectionLoader.framework in Embed Frameworks */,
 				7B559AB021166113002C5E30 /* CollectionLoader_RESTCoreData.framework in Embed Frameworks */,
+				7B04D0B8211F2712003BAD34 /* GitHubBridge.framework in Embed Frameworks */,
 				7B559AB121166113002C5E30 /* KVObserver.framework in Embed Frameworks */,
 				7B559AB221166113002C5E30 /* RESTUtils.framework in Embed Frameworks */,
 				7B559AB321166113002C5E30 /* RetryingOperation.framework in Embed Frameworks */,

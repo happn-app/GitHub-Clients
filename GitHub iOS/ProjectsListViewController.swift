@@ -33,6 +33,7 @@ class ProjectsListViewController : GitHubListViewController<Repository> {
 	override func collectionLoaderHelper(for searchText: String?, context: NSManagedObjectContext) -> CoreDataSearchCLH<Repository, GitHubBMOBridge, GitHubPageInfoRetriever> {
 		let fetchRequest: NSFetchRequest<Repository> = Repository.fetchRequest()
 		
+		let apiOrderProperty: NSAttributeDescription?
 		let deletionDateProperty: NSAttributeDescription
 		if let t = searchText?.trimmingCharacters(in: .whitespaces), !t.isEmpty {
 			let fr: NSFetchRequest<Repository> = Repository.fetchRequest()
@@ -42,15 +43,17 @@ class ProjectsListViewController : GitHubListViewController<Repository> {
 				try? AppDelegate.shared.context.save()
 			}
 			
+			apiOrderProperty = Repository.entity().attributesByName[#keyPath(Repository.zPosInSearchResults)]!
 			deletionDateProperty = Repository.entity().attributesByName[#keyPath(Repository.zDeletionDateInRepositoriesListSearch)]!
-			fetchRequest.predicate = NSPredicate(format: "%K LIKE[cd] %@", #keyPath(Repository.name), t + "*")
-			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Repository.name), ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
+			fetchRequest.predicate = NSPredicate(format: "%K LIKE[cd] %@", #keyPath(Repository.fullName), "*" + t + "*")
+			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Repository.zPosInSearchResults), ascending: false)]
 		} else {
+			apiOrderProperty = nil
 			deletionDateProperty = Repository.entity().attributesByName[#keyPath(Repository.zDeletionDateInRepositoriesList)]!
 			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Repository.remoteId), ascending: true)]
 		}
 		
-		return CoreDataSearchCLH(fetchRequest: fetchRequest, additionalFetchInfo: nil, deletionDateProperty: deletionDateProperty, context: AppDelegate.shared.context, pageInfoRetriever: AppDelegate.shared.pageInfoRetriever, requestManager: AppDelegate.shared.requestManager)
+		return CoreDataSearchCLH(fetchRequest: fetchRequest, additionalFetchInfo: nil, apiOrderProperty: apiOrderProperty, deletionDateProperty: deletionDateProperty, context: AppDelegate.shared.context, pageInfoRetriever: AppDelegate.shared.pageInfoRetriever, requestManager: AppDelegate.shared.requestManager)
 	}
 	
 }

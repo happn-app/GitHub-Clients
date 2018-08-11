@@ -102,7 +102,21 @@ public class GitHubBMOBridge : Bridge {
 //				.restPath("/repos/|owner.username|/|name|"),
 				if (fetchRequest.predicate?.firstLevelConstants(forKeyPath: "owner") ?? []).count == 0 {
 					/* We do not specify an owner for the searched repositories, we assume all repositories are searched */
-					restPath = RESTPath("/repositories")
+					if let namePredicates = fetchRequest.predicate?.firstLevelComparisonSubpredicates
+							.filter({ $0.keyPathExpression?.keyPath == "fullName" && $0.predicateOperatorType == .like && $0.comparisonPredicateModifier == .direct }),
+						let namePredicate = namePredicates.first, namePredicates.count == 1,
+						let searchedNameWithStars = namePredicate.constantValueExpression?.constantValue as? String,
+						searchedNameWithStars.hasPrefix("*"), searchedNameWithStars.hasSuffix("*"), searchedNameWithStars != "**"
+					{
+						/* Search for repositories */
+						let searchedName = searchedNameWithStars.dropFirst().dropLast()
+						restPath = RESTPath("/search/repositories")
+						additionalInfo.additionalRequestParameters["q"] = searchedName + " in:name"
+						additionalInfo.additionalRequestParameters["sort"] = "stars"
+						additionalInfo.additionalRequestParameters["order"] = "desc"
+					} else {
+						restPath = RESTPath("/repositories")
+					}
 				} else {
 					/* Un-specific predicate, we use the generic REST path */
 					restPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
@@ -368,7 +382,9 @@ public class GitHubBMOBridge : Bridge {
 				#keyPath(Repository.subscribersCount): [.restName("subscribers_count"), .restToLocalTransformer(intTransformer)],
 				#keyPath(Repository.topics):           [.restName("topics"),            .restToLocalTransformer(TopicsTransformer())],
 				#keyPath(Repository.updateDate):       [.restName("updated_at"),        .restToLocalTransformer(dateTransformer)],
-				#keyPath(Repository.watchersCount):    [.restName("watchers_count"),    .restToLocalTransformer(intTransformer)]
+				#keyPath(Repository.watchersCount):    [.restName("watchers_count"),    .restToLocalTransformer(intTransformer)],
+				#keyPath(Repository.zDeletionDateInRepositoriesList):       [.localConstant(nil)],
+				#keyPath(Repository.zDeletionDateInRepositoriesListSearch): [.localConstant(nil)]
 			])
 		]
 		
