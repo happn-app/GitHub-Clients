@@ -26,6 +26,10 @@ class GistsListViewController: GitHubListViewController<Gist> {
 		title = nil; title = t
 	}
 	
+	override var shouldShowSearchBar: Bool {
+		return false /* Gists searching is apparently not supported by the GitHub API */
+	}
+	
 	override var numberOfElementsPerPage: Int {
 		return 75
 	}
@@ -35,25 +39,11 @@ class GistsListViewController: GitHubListViewController<Gist> {
 	}
 	
 	override func collectionLoaderHelper(for searchText: String?, context: NSManagedObjectContext) -> CoreDataSearchCLH<Gist, GitHubBMOBridge, GitHubPageInfoRetriever> {
+		assert(searchText == nil)
+		
 		let fetchRequest: NSFetchRequest<Gist> = Gist.fetchRequest()
-		
-		let deletionDateProperty: NSAttributeDescription
-		if let t = searchText?.trimmingCharacters(in: .whitespaces), !t.isEmpty {
-			let fr: NSFetchRequest<Gist> = Gist.fetchRequest()
-			fr.predicate = NSPredicate(format: "%K != NULL", #keyPath(Gist.zDeletionDateInGistListSearch))
-			if let r = try? AppDelegate.shared.context.fetch(fr) {
-				for u in r {u.zDeletionDateInGistListSearch = nil}
-				try? AppDelegate.shared.context.save()
-			}
-			
-			deletionDateProperty = Gist.entity().attributesByName[#keyPath(Gist.zDeletionDateInGistListSearch)]!
-			fetchRequest.predicate = NSPredicate(format: "%K LIKE[cd] %@", #keyPath(Gist.firstFileName), t + "*")
-			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Gist.firstFileName), ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
-		} else {
-			deletionDateProperty = Gist.entity().attributesByName[#keyPath(Gist.zDeletionDateInGistList)]!
-			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Gist.creationDate), ascending: false)]
-		}
-		
+		let deletionDateProperty = Gist.entity().attributesByName[#keyPath(Gist.zDeletionDateInGistList)]!
+		fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Gist.creationDate), ascending: false)]
 		return CoreDataSearchCLH(fetchRequest: fetchRequest, additionalFetchInfo: nil, deletionDateProperty: deletionDateProperty, context: AppDelegate.shared.context, pageInfoRetriever: AppDelegate.shared.pageInfoRetriever, requestManager: AppDelegate.shared.requestManager)
 	}
 	

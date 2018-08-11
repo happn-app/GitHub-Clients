@@ -41,14 +41,16 @@ class GitHubListViewController<ListElement : NSManagedObject> : UITableViewContr
 		tableView.refreshControl = rc
 		
 		/* ***** Configuring the Search Controller ***** */
-		searchController = UISearchController(searchResultsController: nil)
-		searchController.delegate = self
-		searchController.searchResultsUpdater = self
-		searchController.hidesNavigationBarDuringPresentation = true
-		searchController.obscuresBackgroundDuringPresentation = false
-		
-		navigationItem.searchController = searchController
-		definesPresentationContext = true /* Needed so that navigation works when searching */
+		if shouldShowSearchBar {
+			searchController = UISearchController(searchResultsController: nil)
+			searchController.delegate = self
+			searchController.searchResultsUpdater = self
+			searchController.hidesNavigationBarDuringPresentation = true
+			searchController.obscuresBackgroundDuringPresentation = false
+			
+			navigationItem.searchController = searchController
+			definesPresentationContext = true /* Needed so that navigation works when searching */
+		}
 		
 		/* ***** Setup the Collection Loader ***** */
 		setupCollectionLoader(searchText: nil)
@@ -67,6 +69,10 @@ class GitHubListViewController<ListElement : NSManagedObject> : UITableViewContr
 	/* ***********************
       MARK: - Override Points
 	   *********************** */
+	
+	var shouldShowSearchBar: Bool {
+		return true
+	}
 	
 	var numberOfElementsPerPage: Int {
 		return 21
