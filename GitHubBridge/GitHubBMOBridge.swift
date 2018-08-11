@@ -112,8 +112,8 @@ public class GitHubBMOBridge : Bridge {
 						let searchedName = searchedNameWithStars.dropFirst().dropLast()
 						restPath = RESTPath("/search/repositories")
 						additionalInfo.additionalRequestParameters["q"] = searchedName + " in:name"
-						additionalInfo.additionalRequestParameters["sort"] = "stars"
-						additionalInfo.additionalRequestParameters["order"] = "desc"
+//						additionalInfo.additionalRequestParameters["sort"] = "stars"
+//						additionalInfo.additionalRequestParameters["order"] = "desc"
 					} else {
 						restPath = RESTPath("/repositories")
 					}
