@@ -13,8 +13,9 @@ import UIKit
 import AsyncOperationResult
 import BMO
 import BMO_RESTCoreData
-import GitHubBridge
 import RESTUtils
+
+import GitHubBridge
 
 
 
@@ -40,8 +41,8 @@ class UserViewController : UIViewController, NSFetchedResultsControllerDelegate 
 		fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(User.username), ascending: true)]
 		fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: user.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
 		
-		self.fetchedResultsController?.delegate = self
-		try! self.fetchedResultsController?.performFetch()
+		fetchedResultsController?.delegate = self
+		try! fetchedResultsController?.performFetch()
 		
 		if shouldRefreshUserOnLoad {
 			let _: BackRequestOperation<RESTCoreDataFetchRequest, GitHubBMOBridge> = AppDelegate.shared.requestManager.fetchObject(fromFetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>, additionalRequestInfo: nil, onContext: AppDelegate.shared.context)

@@ -10,10 +10,11 @@ import CoreData
 import Foundation
 import UIKit
 
-import GitHubBridge
 import CollectionAndTableViewUpdateConveniences
 import CollectionLoader
 import CollectionLoader_RESTCoreData
+
+import GitHubBridge
 
 
 

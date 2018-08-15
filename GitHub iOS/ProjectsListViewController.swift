@@ -10,8 +10,9 @@ import CoreData
 import Foundation
 import UIKit
 
-import GitHubBridge
 import CollectionLoader_RESTCoreData
+
+import GitHubBridge
 
 
 
@@ -54,6 +55,14 @@ class ProjectsListViewController : GitHubListViewController<Repository> {
 		}
 		
 		return CoreDataSearchCLH(fetchRequest: fetchRequest, additionalFetchInfo: nil, apiOrderProperty: apiOrderProperty, deletionDateProperty: deletionDateProperty, context: AppDelegate.shared.context, pageInfoRetriever: AppDelegate.shared.pageInfoRetriever, requestManager: AppDelegate.shared.requestManager)
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		guard segue.identifier == "ShowProject" else {return}
+		guard let selectedRow = tableView.indexPathForSelectedRow else {return}
+		
+		let destinationVC = segue.destination as! ProjectViewController
+		destinationVC.repository = resultsController.object(at: selectedRow)
 	}
 	
 }

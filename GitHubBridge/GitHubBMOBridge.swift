@@ -100,8 +100,14 @@ public class GitHubBMOBridge : Bridge {
 				/* /orgs/:org/repos       <-- Lists repositories for the specified org */
 				/* /repositories          <-- Lists all public repositories */
 //				.restPath("/repos/|owner.username|/|name|"),
-				if (fetchRequest.predicate?.firstLevelConstants(forKeyPath: "owner") ?? []).count == 0 {
-					/* We do not specify an owner for the searched repositories, we assume all repositories are searched */
+				let selfRepositories = fetchRequest.predicate?.firstLevelComparisonSubpredicates
+					.filter({ $0.leftExpression.expressionType == .evaluatedObject || $0.rightExpression.expressionType == .evaluatedObject })
+					.compactMap({ ($0.constantValueExpression?.constantValue as? Repository) })
+				let selfRepository = selfRepositories.flatMap{ $0.count == 1 ? $0.first : nil }
+				if fetchRequest.predicate?.firstLevelConstants(forKeyPath: "owner").isEmpty ?? true && selfRepository == nil {
+					/* We do not specify an owner for the searched repositories, we
+					 * assume all repositories are searched or we're fetching a
+					 * specific repository. */
 					if let namePredicates = fetchRequest.predicate?.firstLevelComparisonSubpredicates
 							.filter({ $0.keyPathExpression?.keyPath == "fullName" && $0.predicateOperatorType == .like && $0.comparisonPredicateModifier == .direct }),
 						let namePredicate = namePredicates.first, namePredicates.count == 1,
@@ -120,13 +126,18 @@ public class GitHubBMOBridge : Bridge {
 				} else {
 					/* Un-specific predicate, we use the generic REST path */
 					restPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
+					if let selfRepository = selfRepository {
+						/* But we have a “SELF == user” predicate, so we set that in the REST path resolving info (not supported by the REST mapper)  */
+						restPathResolvingInfo["name"] = selfRepository.name
+						restPathResolvingInfo["owner"] = selfRepository.owner?.committedValues(forKeys: nil)
+					}
 				}
 				
 			case User.entity().name!:
 				/* /users/:username <-- Get one user */
 				/* /users           <-- Lists all the users */
 				/* /user            <-- Get the authenticated user */
-//				.restPath("/users(/|id|)"),
+//				.restPath("/users(/|username|)"),
 				if let usernamePredicates = fetchRequest.predicate?.firstLevelComparisonSubpredicates
 						.filter({ $0.keyPathExpression?.keyPath == "username" && $0.predicateOperatorType == .like && $0.comparisonPredicateModifier == .direct }),
 					let usernamePredicate = usernamePredicates.first, usernamePredicates.count == 1,

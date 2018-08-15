@@ -10,6 +10,7 @@
 		7B01D6EE20F95D1500F0E967 /* ProjectsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B01D6ED20F95D1500F0E967 /* ProjectsListViewController.swift */; };
 		7B01D6F420FA393300F0E967 /* GitHubListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B01D6F320FA393300F0E967 /* GitHubListViewController.swift */; };
 		7B04D0B8211F2712003BAD34 /* GitHubBridge.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA7C12A20C9479E00C210B5 /* GitHubBridge.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B04D0BA211F4FC5003BAD34 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B04D0B9211F4FC5003BAD34 /* ProjectViewController.swift */; };
 		7B10024420F1625800603105 /* GitHubPageInfoRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10024320F1625800603105 /* GitHubPageInfoRetriever.swift */; };
 		7B10024520F1625800603105 /* GitHubPageInfoRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10024320F1625800603105 /* GitHubPageInfoRetriever.swift */; };
 		7B559AA821166113002C5E30 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4696C620EAE3BB00E26990 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -104,6 +105,7 @@
 /* Begin PBXFileReference section */
 		7B01D6ED20F95D1500F0E967 /* ProjectsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListViewController.swift; sourceTree = "<group>"; };
 		7B01D6F320FA393300F0E967 /* GitHubListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubListViewController.swift; sourceTree = "<group>"; };
+		7B04D0B9211F4FC5003BAD34 /* ProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		7B10024320F1625800603105 /* GitHubPageInfoRetriever.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubPageInfoRetriever.swift; sourceTree = "<group>"; };
 		7B4696B720EAE3BB00E26990 /* CollectionLoader_RESTCoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CollectionLoader_RESTCoreData.framework; sourceTree = "<group>"; };
 		7B4696C420EAE3BB00E26990 /* CollectionAndTableViewUpdateConveniences.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CollectionAndTableViewUpdateConveniences.framework; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 			children = (
 				7B59183420CB179800D4D9F5 /* AppDelegate.swift */,
 				7B59189320CDCF3900D4D9F5 /* UserViewController.swift */,
+				7B04D0B9211F4FC5003BAD34 /* ProjectViewController.swift */,
 				7B01D6F320FA393300F0E967 /* GitHubListViewController.swift */,
 				7B59188120CC6EEE00D4D9F5 /* UsersListViewController.swift */,
 				7B01D6ED20F95D1500F0E967 /* ProjectsListViewController.swift */,
@@ -504,7 +507,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = happn;
 				TargetAttributes = {
 					7B59183120CB179800D4D9F5 = {
@@ -598,6 +601,7 @@
 				7B01D6EE20F95D1500F0E967 /* ProjectsListViewController.swift in Sources */,
 				7B559AB52116EF34002C5E30 /* GistsListViewController.swift in Sources */,
 				7B59183520CB179800D4D9F5 /* AppDelegate.swift in Sources */,
+				7B04D0BA211F4FC5003BAD34 /* ProjectViewController.swift in Sources */,
 				7B59189420CDCF3900D4D9F5 /* UserViewController.swift in Sources */,
 				7B01D6F420FA393300F0E967 /* GitHubListViewController.swift in Sources */,
 				7B59188220CC6EEE00D4D9F5 /* UsersListViewController.swift in Sources */,
@@ -858,7 +862,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -889,7 +893,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;

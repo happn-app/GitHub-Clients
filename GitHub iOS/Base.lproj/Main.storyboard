@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -77,7 +77,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="DCL-MX-Nkh" kind="show" id="6Fg-z6-53m"/>
+                                    <segue destination="DCL-MX-Nkh" kind="show" identifier="ShowProject" id="6Fg-z6-53m"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -92,16 +92,75 @@
             </objects>
             <point key="canvasLocation" x="1538" y="1108"/>
         </scene>
-        <!--View Controller-->
+        <!--Project View Controller-->
         <scene sceneID="o1v-NH-jam">
             <objects>
-                <viewController id="DCL-MX-Nkh" sceneMemberID="viewController">
+                <viewController id="DCL-MX-Nkh" customClass="ProjectViewController" customModule="GitHub_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i64-gT-uHg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading…" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRn-oZ-rkH">
+                                <rect key="frame" x="16" y="45" width="288" height="32"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Project Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ff-sA-yHW">
+                                <rect key="frame" x="16" y="85" width="288" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hrh-C6-Oea">
+                                <rect key="frame" x="16" y="125.5" width="115" height="30"/>
+                                <state key="normal" title="See Open Issues"/>
+                                <connections>
+                                    <segue destination="n3J-e2-hhn" kind="show" id="tDD-jp-dka"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gwa-hR-8P1">
+                                <rect key="frame" x="16" y="163.5" width="104" height="30"/>
+                                <state key="normal" title="See Stargazers"/>
+                                <connections>
+                                    <segue destination="dPa-Qm-xM4" kind="show" identifier="ShowStargazers" id="3ON-Jy-Iwf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UWn-AB-59E">
+                                <rect key="frame" x="16" y="201.5" width="95" height="30"/>
+                                <state key="normal" title="See Watchers"/>
+                                <connections>
+                                    <segue destination="dPa-Qm-xM4" kind="show" identifier="ShowWatchers" id="gsx-La-c3z"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Hrh-C6-Oea" secondAttribute="trailing" id="1yX-mW-UZE"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Gwa-hR-8P1" secondAttribute="trailing" id="39T-lT-toR"/>
+                            <constraint firstItem="Hrh-C6-Oea" firstAttribute="top" secondItem="7ff-sA-yHW" secondAttribute="bottom" constant="20" id="7ee-xF-tGc"/>
+                            <constraint firstItem="PRn-oZ-rkH" firstAttribute="top" secondItem="qLQ-Mb-cWx" secondAttribute="top" constant="25" id="DNB-Ru-gRW"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="UWn-AB-59E" secondAttribute="trailing" id="LUk-iS-eXq"/>
+                            <constraint firstItem="Gwa-hR-8P1" firstAttribute="leading" secondItem="i64-gT-uHg" secondAttribute="leadingMargin" id="QH9-SF-V5c"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7ff-sA-yHW" secondAttribute="trailing" id="RGr-dO-U3f"/>
+                            <constraint firstItem="UWn-AB-59E" firstAttribute="leading" secondItem="i64-gT-uHg" secondAttribute="leadingMargin" id="UMY-6j-4JT"/>
+                            <constraint firstItem="Hrh-C6-Oea" firstAttribute="leading" secondItem="i64-gT-uHg" secondAttribute="leadingMargin" id="WTV-Rm-5h8"/>
+                            <constraint firstItem="PRn-oZ-rkH" firstAttribute="leading" secondItem="i64-gT-uHg" secondAttribute="leadingMargin" id="WXF-xS-OCL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PRn-oZ-rkH" secondAttribute="trailing" id="cZV-ep-bCc"/>
+                            <constraint firstItem="7ff-sA-yHW" firstAttribute="leading" secondItem="i64-gT-uHg" secondAttribute="leadingMargin" id="hwi-7F-3bq"/>
+                            <constraint firstItem="7ff-sA-yHW" firstAttribute="top" secondItem="PRn-oZ-rkH" secondAttribute="bottom" constant="8" id="sZz-z5-QRT"/>
+                            <constraint firstItem="UWn-AB-59E" firstAttribute="top" secondItem="Gwa-hR-8P1" secondAttribute="bottom" constant="8" id="w9m-Lz-Uy0"/>
+                            <constraint firstItem="Gwa-hR-8P1" firstAttribute="top" secondItem="Hrh-C6-Oea" secondAttribute="bottom" constant="8" id="zIt-xz-GxY"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="qLQ-Mb-cWx"/>
                     </view>
+                    <connections>
+                        <outlet property="buttonSeeIssues" destination="Hrh-C6-Oea" id="GsP-CF-H78"/>
+                        <outlet property="buttonSeeStargazers" destination="Gwa-hR-8P1" id="dVw-k2-pg1"/>
+                        <outlet property="buttonSeeWatchers" destination="UWn-AB-59E" id="9ua-fU-S7d"/>
+                        <outlet property="labelProjectDescription" destination="7ff-sA-yHW" id="FjP-om-xhM"/>
+                        <outlet property="labelProjectName" destination="PRn-oZ-rkH" id="ZfC-k7-LlA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gOP-4b-2lL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -206,27 +265,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading…" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tal-ZN-SWh">
-                                <rect key="frame" x="16" y="89" width="288" height="32"/>
+                                <rect key="frame" x="16" y="45" width="288" height="32"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q7s-Mg-c3A">
-                                <rect key="frame" x="16" y="141" width="161" height="30"/>
+                                <rect key="frame" x="16" y="97" width="161" height="30"/>
                                 <state key="normal" title="See Public Repositories"/>
                                 <connections>
                                     <segue destination="tpG-qC-ZZO" kind="show" id="PAU-bi-nBp"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uc0-Er-jJf">
-                                <rect key="frame" x="16" y="179" width="111" height="30"/>
+                                <rect key="frame" x="16" y="135" width="111" height="30"/>
                                 <state key="normal" title="See Public Gists"/>
                                 <connections>
                                     <segue destination="K24-eK-oic" kind="show" id="rPM-c9-FAf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFC-QC-I9J">
-                                <rect key="frame" x="16" y="217" width="141" height="30"/>
+                                <rect key="frame" x="16" y="173" width="141" height="30"/>
                                 <state key="normal" title="See Assigned Issues"/>
                                 <connections>
                                     <segue destination="n3J-e2-hhn" kind="show" id="cGU-Jg-xaJ"/>
@@ -371,8 +430,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="tDD-jp-dka"/>
         <segue reference="A7I-xT-UGv"/>
         <segue reference="rPM-c9-FAf"/>
         <segue reference="PAU-bi-nBp"/>
+        <segue reference="gsx-La-c3z"/>
     </inferredMetricsTieBreakers>
 </document>

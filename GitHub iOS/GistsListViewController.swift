@@ -10,8 +10,9 @@ import CoreData
 import Foundation
 import UIKit
 
-import GitHubBridge
 import CollectionLoader_RESTCoreData
+
+import GitHubBridge
 
 
 
