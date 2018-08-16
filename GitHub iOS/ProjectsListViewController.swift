@@ -28,7 +28,7 @@ class ProjectsListViewController : GitHubListViewController<Repository> {
 	}
 	
 	override func configureCell(_ cell: UITableViewCell, element: Repository) {
-		cell.textLabel?.text = element.name
+		cell.textLabel?.text = element.fullName
 	}
 	
 	override func collectionLoaderHelper(for searchText: String?, context: NSManagedObjectContext) -> CoreDataSearchCLH<Repository, GitHubBMOBridge, GitHubPageInfoRetriever> {
