@@ -149,9 +149,13 @@ class GitHubListViewController<ListElement : NSManagedObject> : UITableViewContr
 	
 	private var blockSetRefreshControlIsRefreshing = true
 	
+	private var currentSearch: String?
 	private var timerRefreshCollectionLoader: Timer?
 	
 	private func setupCollectionLoader(searchText: String?) {
+		guard searchText != currentSearch || collectionLoader == nil else {return}
+		currentSearch = searchText
+		
 		collectionLoader?.cancelAllLoadings()
 		collectionLoader?.helper.resultsController.delegate = nil
 		
