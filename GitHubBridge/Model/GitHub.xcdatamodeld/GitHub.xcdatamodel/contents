@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.2.4" systemVersion="18A353d" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.12.1" systemVersion="18A365a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="File" representedClassName="File" syncable="YES" codeGenerationType="class">
         <attribute name="bmoId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="filename" optional="YES" attributeType="String" syncable="YES"/>
@@ -111,7 +111,9 @@
         <relationship name="issues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Issue" inverseName="repository" inverseEntity="Issue" syncable="YES"/>
         <relationship name="license" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="License" inverseName="repositories" inverseEntity="License" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="repositories" inverseEntity="User" syncable="YES"/>
+        <relationship name="stargazers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="starredRepositories" inverseEntity="User" syncable="YES"/>
         <relationship name="topics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Topic" inverseName="repositories" inverseEntity="Topic" syncable="YES"/>
+        <relationship name="watchers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="watchedRepositories" inverseEntity="User" syncable="YES"/>
         <fetchIndex name="bmoIndex">
             <fetchIndexElement property="bmoId" type="Binary" order="ascending"/>
         </fetchIndex>
@@ -152,6 +154,8 @@
         <relationship name="assignedIssues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Issue" inverseName="assignees" inverseEntity="Issue" syncable="YES"/>
         <relationship name="gists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Gist" inverseName="owner" inverseEntity="Gist" syncable="YES"/>
         <relationship name="repositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Repository" inverseName="owner" inverseEntity="Repository" syncable="YES"/>
+        <relationship name="starredRepositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Repository" inverseName="stargazers" inverseEntity="Repository" syncable="YES"/>
+        <relationship name="watchedRepositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Repository" inverseName="watchers" inverseEntity="Repository" syncable="YES"/>
         <fetchIndex name="byUsername">
             <fetchIndexElement property="username" type="Binary" order="ascending"/>
         </fetchIndex>
@@ -172,8 +176,8 @@
         <element name="Issue" positionX="745" positionY="198" width="128" height="240"/>
         <element name="Label" positionX="963" positionY="423" width="128" height="165"/>
         <element name="License" positionX="853" positionY="684" width="128" height="120"/>
-        <element name="Repository" positionX="558" positionY="441" width="128" height="480"/>
+        <element name="Repository" positionX="558" positionY="441" width="128" height="510"/>
         <element name="Topic" positionX="817" positionY="846" width="128" height="90"/>
-        <element name="User" positionX="369" positionY="81" width="128" height="315"/>
+        <element name="User" positionX="369" positionY="81" width="128" height="345"/>
     </elements>
 </model>

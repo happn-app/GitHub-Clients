@@ -47,6 +47,23 @@ class ProjectViewController : UIViewController, NSFetchedResultsControllerDelega
 		updateUI()
 	}
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		switch segue.identifier {
+		case "ShowStargazers"?:
+			let usersListViewController = segue.destination as! UsersListViewController
+			usersListViewController.usersSource = .stargazers(of: repository)
+			
+		case "ShowWatchers"?:
+			let usersListViewController = segue.destination as! UsersListViewController
+			usersListViewController.usersSource = .watchers(of: repository)
+			
+		case "ShowOpenIssues"?:
+			()
+			
+		default: (/*nop*/)
+		}
+	}
+	
 	/* *******************************************
       MARK: - Fetched Results Controller Delegate
 	   ******************************************* */

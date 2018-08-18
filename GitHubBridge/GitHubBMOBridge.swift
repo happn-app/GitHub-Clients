@@ -16,6 +16,16 @@ import RESTUtils
 
 
 
+public struct GitHubBMOBridgeUserInfo {
+	
+	public var addedToMixedRepresentations: [String: Any]?
+	
+	init() {
+		addedToMixedRepresentations = nil
+	}
+	
+}
+
 public struct GitHubBMOBridgeMetadata {
 	
 	public var responseHeaders: [AnyHashable: Any]?
@@ -29,7 +39,7 @@ public class GitHubBMOBridge : Bridge {
 	public typealias DbType = NSManagedObjectContext
 	public typealias AdditionalRequestInfoType = AdditionalRESTRequestInfo<NSPropertyDescription>
 	
-	public typealias UserInfoType = Void
+	public typealias UserInfoType = GitHubBMOBridgeUserInfo
 	public typealias MetadataType = GitHubBMOBridgeMetadata
 	
 	public typealias RemoteObjectRepresentationType = [String: Any?]
@@ -48,18 +58,16 @@ public class GitHubBMOBridge : Bridge {
 	}
 	
 	public func createUserInfoObject() -> UserInfoType {
-		return ()
+		return GitHubBMOBridgeUserInfo()
 	}
 	
 	public func backOperation(forFetchRequest fetchRequest: DbType.FetchRequestType, additionalInfo: AdditionalRequestInfoType?, userInfo: inout UserInfoType) throws -> BackOperationType? {
-		let restPath: RESTPath?
+		let normalRESTPath: RESTPath?
 		var restPathResolvingInfo: [String: Any] = [:]
+		var additionalRESTPathResolvingInfo: [Any] = []
 		var additionalInfo = additionalInfo ?? AdditionalRequestInfoType()
 		
-		let paginatorRESTPath = additionalInfo.paginatorInfo.flatMap{ paginator.forcedRestPath(withPaginatorInfo: $0) }
-		if let forcedRESTPath = (additionalInfo.forcedRESTPath ?? paginatorRESTPath) {
-			restPath = forcedRESTPath
-		} else {
+		do {
 			let entity = fetchRequest.entity!
 			switch entity.name! {
 			case Gist.entity().name!:
@@ -71,10 +79,10 @@ public class GitHubBMOBridge : Bridge {
 //				.restPath("(/users/|owner.username|)/gists(/|remoteId|)"),
 				if (fetchRequest.predicate?.firstLevelConstants(forKeyPath: "owner") ?? []).count == 0 {
 					/* We do not specify an owner for the searched gists, we assume all gists are searched */
-					restPath = RESTPath("/gists/public")
+					normalRESTPath = RESTPath("/gists/public")
 				} else {
 					/* Un-specific predicate, we use the generic REST path */
-					restPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
+					normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
 				}
 				
 			case Issue.entity().name!:
@@ -84,14 +92,14 @@ public class GitHubBMOBridge : Bridge {
 				/* /user/issues                       <-- Lists issues assigned to authenticated user in owned and member repositories */
 				/* /orgs/:org/issues                  <-- Lists issues assigned to authenticated user in the given org repositories */
 //				.restPath("(/repos/|repository.owner.username|/|repository.name|)/issues(/|issueNumber|)"),
-				restPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
+				normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
 				
 			case Label.entity().name!:
 				/* /repos/:owner/:repo/labels                <-- Lists all labels in given repository */
 				/* /repos/:owner/:repo/labels/:name          <-- Get one label */
 				/* /repos/:owner/:repo/issues/:number/labels <-- Lists labels of a given issue */
 //				.restPath("/repos/|repository.owner.username|/|repository.name|(/issues/|issue.issueNumber|)/labels(/|name|)"),
-				restPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
+				normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
 				
 			case Repository.entity().name!:
 				/* /repos/:owner/:repo    <-- Get one repository */
@@ -116,20 +124,18 @@ public class GitHubBMOBridge : Bridge {
 					{
 						/* Search for repositories */
 						let searchedName = searchedNameWithStars.dropFirst().dropLast()
-						restPath = RESTPath("/search/repositories")
+						normalRESTPath = RESTPath("/search/repositories")
 						additionalInfo.additionalRequestParameters["q"] = searchedName + " in:name"
 //						additionalInfo.additionalRequestParameters["sort"] = "stars"
 //						additionalInfo.additionalRequestParameters["order"] = "desc"
 					} else {
-						restPath = RESTPath("/repositories")
+						normalRESTPath = RESTPath("/repositories")
 					}
 				} else {
 					/* Un-specific predicate, we use the generic REST path */
-					restPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
+					normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
 					if let selfRepository = selfRepository {
-						/* But we have a “SELF == user” predicate, so we set that in the REST path resolving info (not supported by the REST mapper)  */
-						restPathResolvingInfo["name"] = selfRepository.name
-						restPathResolvingInfo["owner"] = selfRepository.owner?.committedValues(forKeys: nil)
+						additionalRESTPathResolvingInfo.append(selfRepository)
 					}
 				}
 				
@@ -146,11 +152,20 @@ public class GitHubBMOBridge : Bridge {
 				{
 					/* Search for users */
 					let searchedUsername = searchedUsernameWithStar.dropLast()
-					restPath = RESTPath("/search/users")
+					normalRESTPath = RESTPath("/search/users")
 					additionalInfo.additionalRequestParameters["q"] = searchedUsername + " in:login"
+				} else if let starredRepositoriesPredicates = fetchRequest.predicate?.firstLevelComparisonSubpredicates
+						.filter({ $0.keyPathExpression?.keyPath == "starredRepositories" && $0.predicateOperatorType == .contains }),
+					let starredRepositoriesPredicate = starredRepositoriesPredicates.first, starredRepositoriesPredicates.count == 1,
+					let starredRepository = starredRepositoriesPredicate.constantValueExpression?.constantValue as? Repository
+				{
+					normalRESTPath = RESTPath("/repos/|repo.owner.username|/|repo.name|/stargazers")
+					restPathResolvingInfo["repo"] = starredRepository
+					userInfo.addedToMixedRepresentations = userInfo.addedToMixedRepresentations ?? [:]
+					userInfo.addedToMixedRepresentations!["starredRepositories"] = ["id": starredRepository.remoteId]
 				} else {
 					/* Un-specific predicate, we use the generic REST path */
-					restPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
+					normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
 					if let selfUsernames = fetchRequest.predicate?.firstLevelComparisonSubpredicates
 							.filter({ $0.leftExpression.expressionType == .evaluatedObject || $0.rightExpression.expressionType == .evaluatedObject })
 							.compactMap({ ($0.constantValueExpression?.constantValue as? User)?.username }),
@@ -162,9 +177,12 @@ public class GitHubBMOBridge : Bridge {
 				}
 				
 			default:
-				restPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
+				normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
 			}
 		}
+		
+		let paginatorRESTPath = additionalInfo.paginatorInfo.flatMap{ paginator.forcedRestPath(withPaginatorInfo: $0) }
+		let restPath = additionalInfo.forcedRESTPath ?? paginatorRESTPath ?? normalRESTPath
 		
 		/* Computing REST path values from request's predicate: We're enumerating
 		 * all key/val pairs from comparison predicates in request predicate. Only
@@ -177,7 +195,7 @@ public class GitHubBMOBridge : Bridge {
 		}
 		for p in blacklistedKeys {restPathResolvingInfo.removeValue(forKey: p)}
 		
-		guard let path = restPath?.resolvedPath(source: restPathResolvingInfo) else {
+		guard let path = restPath?.resolvedPath(sources: [restPathResolvingInfo] + additionalRESTPathResolvingInfo) else {
 			throw Err.cannotGetRESTPathForRequest
 		}
 		
@@ -209,7 +227,7 @@ public class GitHubBMOBridge : Bridge {
 	}
 	
 	public func userInfo(fromFinishedOperation operation: BackOperationType, currentUserInfo: UserInfoType) -> UserInfoType {
-		return ()
+		return currentUserInfo
 	}
 	
 	public func bridgeMetadata(fromFinishedOperation operation: BackOperationType, userInfo: UserInfoType) -> MetadataType? {
@@ -228,12 +246,13 @@ public class GitHubBMOBridge : Bridge {
 	public func mixedRepresentation(fromRemoteObjectRepresentation remoteRepresentation: RemoteObjectRepresentationType, expectedEntity: DbType.EntityDescriptionType, userInfo: UserInfoType) -> MixedRepresentation<DbType.EntityDescriptionType, RemoteRelationshipAndMetadataRepresentationType, UserInfoType>? {
 		guard let entity = restMapper.actualLocalEntity(forRESTRepresentation: remoteRepresentation, expectedEntity: expectedEntity) else {return nil}
 		let mixedRepresentationDictionary = restMapper.mixedRepresentation(ofEntity: entity, fromRESTRepresentation: remoteRepresentation, userInfo: userInfo)
+			.merging(userInfo.addedToMixedRepresentations ?? [:], uniquingKeysWith: { current, _ in current })
 		let uniquingId = restMapper.uniquingId(forLocalRepresentation: mixedRepresentationDictionary, ofEntity: entity)
 		return MixedRepresentation(entity: entity, uniquingId: uniquingId, mixedRepresentationDictionary: mixedRepresentationDictionary, userInfo: userInfo)
 	}
 	
 	public func subUserInfo(forRelationshipNamed relationshipName: String, inEntity entity: DbType.EntityDescriptionType, currentMixedRepresentation: MixedRepresentation<DbType.EntityDescriptionType, RemoteRelationshipAndMetadataRepresentationType, UserInfoType>) -> UserInfoType {
-		return ()
+		return GitHubBMOBridgeUserInfo()
 	}
 	
 	public func metadata(fromRemoteRelationshipAndMetadataRepresentation remoteRelationshipAndMetadataRepresentation: RemoteRelationshipAndMetadataRepresentationType, userInfo: UserInfoType) -> MetadataType? {
@@ -245,6 +264,7 @@ public class GitHubBMOBridge : Bridge {
 	}
 	
 	public func relationshipMergeType(forRelationshipNamed relationshipName: String, inEntity entity: DbType.EntityDescriptionType, currentMixedRepresentation: MixedRepresentation<DbType.EntityDescriptionType, RemoteRelationshipAndMetadataRepresentationType, UserInfoType>) -> DbRepresentationRelationshipMergeType<DbType.EntityDescriptionType, DbType.ObjectType> {
+		guard relationshipName != "starredRepositories" else {return .append}
 		return .replace
 	}
 	

@@ -116,7 +116,7 @@
                                 <rect key="frame" x="16" y="125.5" width="115" height="30"/>
                                 <state key="normal" title="See Open Issues"/>
                                 <connections>
-                                    <segue destination="n3J-e2-hhn" kind="show" id="tDD-jp-dka"/>
+                                    <segue destination="n3J-e2-hhn" kind="show" identifier="ShowOpenIssues" id="tDD-jp-dka"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gwa-hR-8P1">
