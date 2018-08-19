@@ -413,7 +413,7 @@ public class GitHubBMOBridge : Bridge {
 				#keyPath(Repository.subscribersCount): [.restName("subscribers_count"), .restToLocalTransformer(intTransformer)],
 				#keyPath(Repository.topics):           [.restName("topics"),            .restToLocalTransformer(TopicsTransformer())],
 				#keyPath(Repository.updateDate):       [.restName("updated_at"),        .restToLocalTransformer(dateTransformer)],
-				#keyPath(Repository.watchersCount):    [.restName("watchers_count"),    .restToLocalTransformer(intTransformer)],
+				#keyPath(Repository.watchersCount):    [.restName("subscribers_count"), .restToLocalTransformer(intTransformer)],
 				#keyPath(Repository.zDeletionDateInRepositoriesList):       [.localConstant(nil)],
 				#keyPath(Repository.zDeletionDateInRepositoriesListSearch): [.localConstant(nil)]
 			])
