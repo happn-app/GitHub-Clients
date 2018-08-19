@@ -419,7 +419,6 @@ public class GitHubBMOBridge : Bridge {
 				#keyPath(Repository.owner):            [.restName("owner")],
 				#keyPath(Repository.remoteId):         [.restName("id"),                .restToLocalTransformer(intTransformer)],
 				#keyPath(Repository.stargazersCount):  [.restName("stargazers_count"),  .restToLocalTransformer(intTransformer)],
-				#keyPath(Repository.subscribersCount): [.restName("subscribers_count"), .restToLocalTransformer(intTransformer)],
 				#keyPath(Repository.topics):           [.restName("topics"),            .restToLocalTransformer(TopicsTransformer())],
 				#keyPath(Repository.updateDate):       [.restName("updated_at"),        .restToLocalTransformer(dateTransformer)],
 				#keyPath(Repository.watchersCount):    [.restName("subscribers_count"), .restToLocalTransformer(intTransformer)],

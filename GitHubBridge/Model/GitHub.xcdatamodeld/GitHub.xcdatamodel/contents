@@ -102,7 +102,6 @@
         <attribute name="openIssuesCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="remoteId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="stargazersCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="subscribersCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="watchersCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="zDeletionDateInRepositoriesList" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -176,7 +175,7 @@
         <element name="Issue" positionX="745" positionY="198" width="128" height="240"/>
         <element name="Label" positionX="963" positionY="423" width="128" height="165"/>
         <element name="License" positionX="853" positionY="684" width="128" height="120"/>
-        <element name="Repository" positionX="558" positionY="441" width="128" height="510"/>
+        <element name="Repository" positionX="558" positionY="441" width="128" height="495"/>
         <element name="Topic" positionX="817" positionY="846" width="128" height="90"/>
         <element name="User" positionX="369" positionY="81" width="128" height="345"/>
     </elements>
