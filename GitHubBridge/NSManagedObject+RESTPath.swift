@@ -23,3 +23,11 @@ extension NSManagedObject : RESTPathKeyResovable {
 	}
 	
 }
+
+extension NSNumber : RESTPathStringConvertible {
+	
+	public var stringValueForRESTPath: String {
+		return self.stringValue
+	}
+	
+}

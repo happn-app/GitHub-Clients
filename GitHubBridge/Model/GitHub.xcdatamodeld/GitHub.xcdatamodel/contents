@@ -47,6 +47,7 @@
         <attribute name="closeDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="commentsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="descr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isLocked" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="issueNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="nodeId" optional="YES" attributeType="String" syncable="YES"/>
@@ -63,7 +64,11 @@
     </entity>
     <entity name="Label" representedClassName="Label" syncable="YES" codeGenerationType="class">
         <attribute name="bmoId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="color" optional="YES" attributeType="Transformable" customClassName=".Color" syncable="YES"/>
+        <attribute name="color" optional="YES" attributeType="Transformable" customClassName=".Color" syncable="YES">
+            <userInfo>
+                <entry key="BMO_ObjCAttributeValueClassName" value="UIColor"/>
+            </userInfo>
+        </attribute>
         <attribute name="descr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isDefault" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -174,7 +179,7 @@
         <element name="File" positionX="-27" positionY="458" width="128" height="165"/>
         <element name="FileLanguage" positionX="151" positionY="603" width="128" height="90"/>
         <element name="Gist" positionX="151" positionY="306" width="128" height="270"/>
-        <element name="Issue" positionX="745" positionY="198" width="128" height="270"/>
+        <element name="Issue" positionX="745" positionY="198" width="128" height="285"/>
         <element name="Label" positionX="963" positionY="423" width="128" height="165"/>
         <element name="License" positionX="853" positionY="684" width="128" height="120"/>
         <element name="Repository" positionX="558" positionY="441" width="128" height="495"/>

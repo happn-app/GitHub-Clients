@@ -92,7 +92,16 @@ public class GitHubBMOBridge : Bridge {
 				/* /user/issues                       <-- Lists issues assigned to authenticated user in owned and member repositories */
 				/* /orgs/:org/issues                  <-- Lists issues assigned to authenticated user in the given org repositories */
 //				.restPath("(/repos/|repository.owner.username|/|repository.name|)/issues(/|issueNumber|)"),
+				let selfIssue = (fetchRequest.predicate?.firstLevelComparisonSubpredicates
+					.filter{ $0.leftExpression.expressionType == .evaluatedObject || $0.rightExpression.expressionType == .evaluatedObject }
+					.compactMap{ ($0.constantValueExpression?.constantValue as? Issue) })
+					.flatMap{ $0.count == 1 ? $0.first : nil }
+				
 				normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
+				
+				if let selfIssue = selfIssue {
+					additionalRESTPathResolvingInfo.append(selfIssue)
+				}
 				if let repositories = fetchRequest.predicate?.firstLevelConstants(forKeyPath: "repository", withOrCompound: true, withAndCompound: true) as? [Repository],
 					let repository = repositories.first, repositories.count == 1
 				{
@@ -114,10 +123,10 @@ public class GitHubBMOBridge : Bridge {
 				/* /orgs/:org/repos       <-- Lists repositories for the specified org */
 				/* /repositories          <-- Lists all public repositories */
 //				.restPath("/repos/|owner.username|/|name|"),
-				let selfRepositories = fetchRequest.predicate?.firstLevelComparisonSubpredicates
-					.filter({ $0.leftExpression.expressionType == .evaluatedObject || $0.rightExpression.expressionType == .evaluatedObject })
-					.compactMap({ ($0.constantValueExpression?.constantValue as? Repository) })
-				let selfRepository = selfRepositories.flatMap{ $0.count == 1 ? $0.first : nil }
+				let selfRepository = (fetchRequest.predicate?.firstLevelComparisonSubpredicates
+					.filter{ $0.leftExpression.expressionType == .evaluatedObject || $0.rightExpression.expressionType == .evaluatedObject }
+					.compactMap{ ($0.constantValueExpression?.constantValue as? Repository) })
+					.flatMap{ $0.count == 1 ? $0.first : nil }
 				let owners = fetchRequest.predicate?.firstLevelConstants(forKeyPath: "owner", withOrCompound: true, withAndCompound: true)
 				if owners?.isEmpty ?? true && selfRepository == nil {
 					/* We do not specify an owner for the searched repositories, we
@@ -363,6 +372,7 @@ public class GitHubBMOBridge : Bridge {
 				#keyPath(Issue.closeDate):        [.restName("closed_at"),          .restToLocalTransformer(dateTransformer)],
 				#keyPath(Issue.commentsCount):    [.restName("comments"),           .restToLocalTransformer(intTransformer)],
 				#keyPath(Issue.creationDate):     [.restName("created_at"),         .restToLocalTransformer(dateTransformer)],
+				#keyPath(Issue.descr):            [.restName("body")],
 				#keyPath(Issue.isLocked):         [.restName("locked"),             .restToLocalTransformer(boolTransformer)],
 				#keyPath(Issue.labels):           [.restName("labels")],
 				#keyPath(Issue.nodeId):           [.restName("node_id")],

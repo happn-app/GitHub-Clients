@@ -362,7 +362,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="mJn-1e-0wg" kind="show" id="lhR-Nm-MIG"/>
+                                    <segue destination="mJn-1e-0wg" kind="show" identifier="ShowIssue" id="lhR-Nm-MIG"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -376,16 +376,54 @@
             </objects>
             <point key="canvasLocation" x="3613" y="1107"/>
         </scene>
-        <!--View Controller-->
+        <!--Issue View Controller-->
         <scene sceneID="fBZ-4I-9Y6">
             <objects>
-                <viewController id="mJn-1e-0wg" sceneMemberID="viewController">
+                <viewController id="mJn-1e-0wg" customClass="IssueViewController" customModule="GitHub_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SUA-g3-Po6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AM7-M2-vsv">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;Issue Body&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVY-zy-yRn">
+                                        <rect key="frame" x="16" y="53.5" width="105" height="20.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading…" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4P8-ch-Osg">
+                                        <rect key="frame" x="16" y="25" width="105" height="20.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="eVY-zy-yRn" firstAttribute="top" secondItem="4P8-ch-Osg" secondAttribute="bottom" constant="8" id="5mb-uf-N0T"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="eVY-zy-yRn" secondAttribute="trailing" id="PcG-b9-bad"/>
+                                    <constraint firstItem="4P8-ch-Osg" firstAttribute="leading" secondItem="AM7-M2-vsv" secondAttribute="leadingMargin" id="b9y-OI-ePF"/>
+                                    <constraint firstItem="4P8-ch-Osg" firstAttribute="top" secondItem="AM7-M2-vsv" secondAttribute="top" constant="25" id="cVx-t8-ebh"/>
+                                    <constraint firstItem="eVY-zy-yRn" firstAttribute="leading" secondItem="AM7-M2-vsv" secondAttribute="leadingMargin" id="gqK-Jm-Wuj"/>
+                                    <constraint firstAttribute="bottom" secondItem="eVY-zy-yRn" secondAttribute="bottom" id="n4b-ES-Uxy"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="4P8-ch-Osg" secondAttribute="trailing" id="tVq-hx-dE0"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="AM7-M2-vsv" firstAttribute="leading" secondItem="SUA-g3-Po6" secondAttribute="leading" id="NSv-Ng-aek"/>
+                            <constraint firstAttribute="trailing" secondItem="AM7-M2-vsv" secondAttribute="trailing" id="bc5-d4-A0p"/>
+                            <constraint firstItem="U5E-Zy-98F" firstAttribute="bottom" secondItem="AM7-M2-vsv" secondAttribute="bottom" id="c2S-mR-5eE"/>
+                            <constraint firstItem="AM7-M2-vsv" firstAttribute="top" secondItem="U5E-Zy-98F" secondAttribute="top" id="ikd-oV-0Wo"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="U5E-Zy-98F"/>
                     </view>
+                    <connections>
+                        <outlet property="labelIssueDescription" destination="eVY-zy-yRn" id="c6A-hc-cJ3"/>
+                        <outlet property="labelIssueName" destination="4P8-ch-Osg" id="dIg-qg-w15"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NbS-gn-ChN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -445,7 +483,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="tDD-jp-dka"/>
+        <segue reference="cGU-Jg-xaJ"/>
         <segue reference="A7I-xT-UGv"/>
         <segue reference="TAA-Ot-2eM"/>
         <segue reference="rPM-c9-FAf"/>
