@@ -41,6 +41,11 @@ class GistViewController : UITableViewController, NSFetchedResultsControllerDele
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
+		case "ShowFile"?:
+			guard let senderIndexPath = (sender as? UITableViewCell).flatMap({ tableView.indexPath(for: $0) }) else {return}
+			let fileViewController = segue.destination as! GistFileViewController
+			fileViewController.file = (gist.files?.object(at: senderIndexPath.row) as! File)
+			
 		default: (/*nop*/)
 		}
 	}

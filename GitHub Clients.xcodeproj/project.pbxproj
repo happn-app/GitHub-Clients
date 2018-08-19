@@ -51,6 +51,7 @@
 		7BA81C312129D29200F8B2E9 /* IssuesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA81C302129D29200F8B2E9 /* IssuesListViewController.swift */; };
 		7BA81C332129DAFD00F8B2E9 /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA81C322129DAFD00F8B2E9 /* IssueViewController.swift */; };
 		7BA81C352129F05000F8B2E9 /* GistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA81C342129F05000F8B2E9 /* GistViewController.swift */; };
+		7BA81C372129F48600F8B2E9 /* GistFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA81C362129F48600F8B2E9 /* GistFileViewController.swift */; };
 		7BE7F21820C9A7C8006DED14 /* GitHubBMOOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE7F1E420C9A7C8006DED14 /* GitHubBMOOperation.swift */; };
 		7BE7F21920C9A7C8006DED14 /* GitHubBMOOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE7F1E420C9A7C8006DED14 /* GitHubBMOOperation.swift */; };
 		7BEFD1C220C9483B00FDA05F /* GitHubBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BEFD1B920C9483B00FDA05F /* GitHubBridge.framework */; };
@@ -182,6 +183,7 @@
 		7BA81C302129D29200F8B2E9 /* IssuesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesListViewController.swift; sourceTree = "<group>"; };
 		7BA81C322129DAFD00F8B2E9 /* IssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
 		7BA81C342129F05000F8B2E9 /* GistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GistViewController.swift; sourceTree = "<group>"; };
+		7BA81C362129F48600F8B2E9 /* GistFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GistFileViewController.swift; sourceTree = "<group>"; };
 		7BE7F1E420C9A7C8006DED14 /* GitHubBMOOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubBMOOperation.swift; sourceTree = "<group>"; };
 		7BEFD1B920C9483B00FDA05F /* GitHubBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GitHubBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BEFD1C120C9483B00FDA05F /* GitHubBridge macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GitHubBridge macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -312,6 +314,7 @@
 				7B04D0B9211F4FC5003BAD34 /* ProjectViewController.swift */,
 				7BA81C322129DAFD00F8B2E9 /* IssueViewController.swift */,
 				7BA81C342129F05000F8B2E9 /* GistViewController.swift */,
+				7BA81C362129F48600F8B2E9 /* GistFileViewController.swift */,
 				7B01D6F320FA393300F0E967 /* GitHubListViewController.swift */,
 				7B59188120CC6EEE00D4D9F5 /* UsersListViewController.swift */,
 				7B01D6ED20F95D1500F0E967 /* ProjectsListViewController.swift */,
@@ -615,6 +618,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BA81C332129DAFD00F8B2E9 /* IssueViewController.swift in Sources */,
+				7BA81C372129F48600F8B2E9 /* GistFileViewController.swift in Sources */,
 				7BA81C352129F05000F8B2E9 /* GistViewController.swift in Sources */,
 				7B01D6EE20F95D1500F0E967 /* ProjectsListViewController.swift in Sources */,
 				7B559AB52116EF34002C5E30 /* GistsListViewController.swift in Sources */,

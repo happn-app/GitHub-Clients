@@ -508,6 +508,12 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="BQ4-8T-WA7" kind="show" identifier="ShowFile" id="qpy-xp-HgP">
+                                        <segue key="commit" inheritsFrom="parent" id="3JK-Sd-JlO"/>
+                                        <segue key="preview" inheritsFrom="commit" id="nxv-5a-yVf"/>
+                                    </segue>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -520,8 +526,41 @@
             </objects>
             <point key="canvasLocation" x="2646" y="2025"/>
         </scene>
+        <!--Gist File View Controller-->
+        <scene sceneID="yWo-JM-0qH">
+            <objects>
+                <viewController id="BQ4-8T-WA7" customClass="GistFileViewController" customModule="GitHub_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6yD-uQ-y12">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Loading…" translatesAutoresizingMaskIntoConstraints="NO" id="DFz-lV-JCw">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="DFz-lV-JCw" firstAttribute="top" secondItem="s5Q-ev-Ic0" secondAttribute="top" id="0ao-He-Afr"/>
+                            <constraint firstItem="s5Q-ev-Ic0" firstAttribute="trailing" secondItem="DFz-lV-JCw" secondAttribute="trailing" id="1iR-I7-uKW"/>
+                            <constraint firstItem="s5Q-ev-Ic0" firstAttribute="bottom" secondItem="DFz-lV-JCw" secondAttribute="bottom" id="gRu-gu-6Op"/>
+                            <constraint firstItem="DFz-lV-JCw" firstAttribute="leading" secondItem="s5Q-ev-Ic0" secondAttribute="leading" id="m62-Dm-XmJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="s5Q-ev-Ic0"/>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="DFz-lV-JCw" id="yBX-k2-meI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l7r-Bj-ZOc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3463" y="2025"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="qpy-xp-HgP"/>
         <segue reference="UA0-xw-ANq"/>
         <segue reference="cGU-Jg-xaJ"/>
         <segue reference="A7I-xT-UGv"/>
