@@ -57,12 +57,12 @@ class GitHubListViewController<ListElement : NSManagedObject> : UITableViewContr
 		setupCollectionLoader(searchText: nil)
 	}
 	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
 		
 		/* If the refresh control is updated too soon, the collection view inset
 		 * will not be updated and we won't be able to show the refresh control.
-		 * So we have to block the update until the view _will_ appear. */
+		 * So we have to block the update until the view _did_ appear. */
 		blockSetRefreshControlIsRefreshing = false
 		collectionLoaderIsLoadingFirstPageChangedHandler()
 	}
