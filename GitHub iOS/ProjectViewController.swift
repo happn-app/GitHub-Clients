@@ -31,7 +31,7 @@ class ProjectViewController : UIViewController, NSFetchedResultsControllerDelega
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let t = title
+		let t = repository.name
 		title = nil; title = t
 		
 		let fetchRequest: NSFetchRequest<Repository> = Repository.fetchRequest()
