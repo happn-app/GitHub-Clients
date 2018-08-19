@@ -332,8 +332,8 @@ public class GitHubBMOBridge : Bridge {
 				#keyPath(Gist.owner):        [.restName("owner")],
 				#keyPath(Gist.remoteId):     [.restName("id")],
 				#keyPath(Gist.updateDate):   [.restName("updated_at"),   .restToLocalTransformer(dateTransformer)],
-				#keyPath(Gist.zDeletionDateInGistList):       [.localConstant(nil)],
-				#keyPath(Gist.zDeletionDateInGistListSearch): [.localConstant(nil)]
+				#keyPath(Gist.zDeletionDateInGistList): [.localConstant(nil)],
+				#keyPath(Gist.zEphemeralDeletionDate):  [.localConstant(nil)]
 			])
 		]
 		
@@ -422,8 +422,8 @@ public class GitHubBMOBridge : Bridge {
 				#keyPath(Repository.topics):           [.restName("topics"),            .restToLocalTransformer(TopicsTransformer())],
 				#keyPath(Repository.updateDate):       [.restName("updated_at"),        .restToLocalTransformer(dateTransformer)],
 				#keyPath(Repository.watchersCount):    [.restName("subscribers_count"), .restToLocalTransformer(intTransformer)],
-				#keyPath(Repository.zDeletionDateInRepositoriesList):       [.localConstant(nil)],
-				#keyPath(Repository.zDeletionDateInRepositoriesListSearch): [.localConstant(nil)]
+				#keyPath(Repository.zDeletionDateInRepositoriesList): [.localConstant(nil)],
+				#keyPath(Repository.zEphemeralDeletionDate):          [.localConstant(nil)]
 			])
 		]
 		
@@ -455,8 +455,8 @@ public class GitHubBMOBridge : Bridge {
 				#keyPath(User.remoteId):         [.restName("id"),           .restToLocalTransformer(intTransformer)],
 				#keyPath(User.updateDate):       [.restName("updated_at"),   .restToLocalTransformer(dateTransformer)],
 				#keyPath(User.username):         [.restName("login")],
-				#keyPath(User.zDeletionDateInUsersList):       [.localConstant(nil)],
-				#keyPath(User.zDeletionDateInUsersListSearch): [.localConstant(nil)]
+				#keyPath(User.zDeletionDateInUsersList): [.localConstant(nil)],
+				#keyPath(User.zEphemeralDeletionDate):   [.localConstant(nil)]
 			])
 		]
 		

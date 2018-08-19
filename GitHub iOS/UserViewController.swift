@@ -51,6 +51,16 @@ class UserViewController : UIViewController, NSFetchedResultsControllerDelegate 
 		updateUI()
 	}
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		switch segue.identifier {
+		case "ShowGists"?:
+			let gistsListViewController = segue.destination as! GistsListViewController
+			gistsListViewController.gistsSource = .gists(of: user)
+			
+		default: (/*nop*/)
+		}
+	}
+	
 	/* *******************************************
       MARK: - Fetched Results Controller Delegate
 	   ******************************************* */

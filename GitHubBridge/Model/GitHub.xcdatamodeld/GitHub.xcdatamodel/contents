@@ -34,7 +34,7 @@
         <attribute name="remoteId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="zDeletionDateInGistList" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="zDeletionDateInGistListSearch" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="zEphemeralDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="files" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="File" inverseName="gistOwner" inverseEntity="File" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="gists" inverseEntity="User" syncable="YES"/>
         <fetchIndex name="bmoIndex">
@@ -105,7 +105,7 @@
         <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="watchersCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="zDeletionDateInRepositoriesList" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="zDeletionDateInRepositoriesListSearch" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="zEphemeralDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="zPosInSearchResults" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="issues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Issue" inverseName="repository" inverseEntity="Issue" syncable="YES"/>
         <relationship name="license" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="License" inverseName="repositories" inverseEntity="License" syncable="YES"/>
@@ -120,7 +120,7 @@
             <fetchIndexElement property="zDeletionDateInRepositoriesList" type="Binary" order="ascending"/>
         </fetchIndex>
         <fetchIndex name="byZDeletionDateInRepositoriesListSearch">
-            <fetchIndexElement property="zDeletionDateInRepositoriesListSearch" type="Binary" order="ascending"/>
+            <fetchIndexElement property="zEphemeralDeletionDate" type="Binary" order="ascending"/>
         </fetchIndex>
         <fetchIndex name="byZPosInSearchResults">
             <fetchIndexElement property="zPosInSearchResults" type="Binary" order="ascending"/>
@@ -149,7 +149,7 @@
         <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zDeletionDateInUsersList" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="zDeletionDateInUsersListSearch" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="zEphemeralDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="assignedIssues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Issue" inverseName="assignees" inverseEntity="Issue" syncable="YES"/>
         <relationship name="gists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Gist" inverseName="owner" inverseEntity="Gist" syncable="YES"/>
         <relationship name="repositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Repository" inverseName="owner" inverseEntity="Repository" syncable="YES"/>
@@ -165,7 +165,7 @@
             <fetchIndexElement property="zDeletionDateInUsersList" type="Binary" order="ascending"/>
         </fetchIndex>
         <fetchIndex name="byZDeletionDateInUsersListSearch">
-            <fetchIndexElement property="zDeletionDateInUsersListSearch" type="Binary" order="ascending"/>
+            <fetchIndexElement property="zEphemeralDeletionDate" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
     <elements>

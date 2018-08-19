@@ -47,6 +47,7 @@
 		7BA6F63520C96B7500C21A36 /* GitHubTransformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA6F63320C96B7500C21A36 /* GitHubTransformers.swift */; };
 		7BA7C13420C9479E00C210B5 /* GitHubBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA7C12A20C9479E00C210B5 /* GitHubBridge.framework */; };
 		7BA7C13920C9479E00C210B5 /* GitHubBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7C13820C9479E00C210B5 /* GitHubBridgeTests.swift */; };
+		7BA81C2F2129B52000F8B2E9 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA81C2E2129B52000F8B2E9 /* Utilities.swift */; };
 		7BE7F21820C9A7C8006DED14 /* GitHubBMOOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE7F1E420C9A7C8006DED14 /* GitHubBMOOperation.swift */; };
 		7BE7F21920C9A7C8006DED14 /* GitHubBMOOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE7F1E420C9A7C8006DED14 /* GitHubBMOOperation.swift */; };
 		7BEFD1C220C9483B00FDA05F /* GitHubBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BEFD1B920C9483B00FDA05F /* GitHubBridge.framework */; };
@@ -174,6 +175,7 @@
 		7BA7C13320C9479E00C210B5 /* GitHubBridge iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GitHubBridge iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BA7C13820C9479E00C210B5 /* GitHubBridgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubBridgeTests.swift; sourceTree = "<group>"; };
 		7BA7C13A20C9479E00C210B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BA81C2E2129B52000F8B2E9 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		7BE7F1E420C9A7C8006DED14 /* GitHubBMOOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubBMOOperation.swift; sourceTree = "<group>"; };
 		7BEFD1B920C9483B00FDA05F /* GitHubBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GitHubBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BEFD1C120C9483B00FDA05F /* GitHubBridge macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GitHubBridge macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -298,6 +300,7 @@
 		7B59183320CB179800D4D9F5 /* GitHub iOS */ = {
 			isa = PBXGroup;
 			children = (
+				7BA81C2E2129B52000F8B2E9 /* Utilities.swift */,
 				7B59183420CB179800D4D9F5 /* AppDelegate.swift */,
 				7B59189320CDCF3900D4D9F5 /* UserViewController.swift */,
 				7B04D0B9211F4FC5003BAD34 /* ProjectViewController.swift */,
@@ -608,6 +611,7 @@
 				7B04D0BA211F4FC5003BAD34 /* ProjectViewController.swift in Sources */,
 				7B59189420CDCF3900D4D9F5 /* UserViewController.swift in Sources */,
 				7B01D6F420FA393300F0E967 /* GitHubListViewController.swift in Sources */,
+				7BA81C2F2129B52000F8B2E9 /* Utilities.swift in Sources */,
 				7B59188220CC6EEE00D4D9F5 /* UsersListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

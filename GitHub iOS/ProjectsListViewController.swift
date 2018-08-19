@@ -34,23 +34,21 @@ class ProjectsListViewController : GitHubListViewController<Repository> {
 	override func collectionLoaderHelper(for searchText: String?, context: NSManagedObjectContext) -> CoreDataSearchCLH<Repository, GitHubBMOBridge, GitHubPageInfoRetriever> {
 		let fetchRequest: NSFetchRequest<Repository> = Repository.fetchRequest()
 		
+		let repositoryEntity = Repository.entity()
+		let ephemeralDeletionDateProperty = repositoryEntity.attributesByName[#keyPath(Repository.zEphemeralDeletionDate)]!
+		
 		let apiOrderProperty: NSAttributeDescription?
 		let deletionDateProperty: NSAttributeDescription
 		if let t = searchText?.trimmingCharacters(in: .whitespaces), !t.isEmpty {
-			let fr: NSFetchRequest<Repository> = Repository.fetchRequest()
-			fr.predicate = NSPredicate(format: "%K != NULL", #keyPath(Repository.zDeletionDateInRepositoriesListSearch))
-			if let r = try? AppDelegate.shared.context.fetch(fr) {
-				for u in r {u.zDeletionDateInRepositoriesListSearch = nil}
-				try? AppDelegate.shared.context.save()
-			}
+			nullify(property: ephemeralDeletionDateProperty, inInstancesOf: repositoryEntity, context: AppDelegate.shared.context)
 			
-			apiOrderProperty = Repository.entity().attributesByName[#keyPath(Repository.zPosInSearchResults)]!
-			deletionDateProperty = Repository.entity().attributesByName[#keyPath(Repository.zDeletionDateInRepositoriesListSearch)]!
+			deletionDateProperty = ephemeralDeletionDateProperty
+			apiOrderProperty = repositoryEntity.attributesByName[#keyPath(Repository.zPosInSearchResults)]!
 			fetchRequest.predicate = NSPredicate(format: "%K LIKE[cd] %@", #keyPath(Repository.fullName), "*" + t + "*")
 			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Repository.zPosInSearchResults), ascending: false)]
 		} else {
 			apiOrderProperty = nil
-			deletionDateProperty = Repository.entity().attributesByName[#keyPath(Repository.zDeletionDateInRepositoriesList)]!
+			deletionDateProperty = repositoryEntity.attributesByName[#keyPath(Repository.zDeletionDateInRepositoriesList)]!
 			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Repository.remoteId), ascending: true)]
 		}
 		

@@ -296,7 +296,7 @@
                                 <rect key="frame" x="16" y="135" width="111" height="30"/>
                                 <state key="normal" title="See Public Gists"/>
                                 <connections>
-                                    <segue destination="K24-eK-oic" kind="show" id="rPM-c9-FAf"/>
+                                    <segue destination="K24-eK-oic" kind="show" identifier="ShowGists" id="rPM-c9-FAf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFC-QC-I9J">
@@ -445,7 +445,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="tDD-jp-dka"/>
+        <segue reference="cGU-Jg-xaJ"/>
         <segue reference="A7I-xT-UGv"/>
         <segue reference="TAA-Ot-2eM"/>
         <segue reference="rPM-c9-FAf"/>
