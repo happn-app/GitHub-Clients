@@ -62,6 +62,7 @@ class GistsListViewController: GitHubListViewController<Gist> {
 			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Gist.creationDate), ascending: false)]
 			
 		case .gists(of: let user):
+			nullify(property: ephemeralDeletionDateProperty, inInstancesOf: gistEntity, context: AppDelegate.shared.context)
 			deletionDateProperty = ephemeralDeletionDateProperty
 			fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Gist.owner), user)
 			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Gist.creationDate), ascending: false)]

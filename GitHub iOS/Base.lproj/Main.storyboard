@@ -289,7 +289,7 @@
                                 <rect key="frame" x="16" y="97" width="161" height="30"/>
                                 <state key="normal" title="See Public Repositories"/>
                                 <connections>
-                                    <segue destination="tpG-qC-ZZO" kind="show" id="PAU-bi-nBp"/>
+                                    <segue destination="tpG-qC-ZZO" kind="show" identifier="ShowRepositories" id="PAU-bi-nBp"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uc0-Er-jJf">
@@ -303,7 +303,7 @@
                                 <rect key="frame" x="16" y="173" width="141" height="30"/>
                                 <state key="normal" title="See Assigned Issues"/>
                                 <connections>
-                                    <segue destination="n3J-e2-hhn" kind="show" id="cGU-Jg-xaJ"/>
+                                    <segue destination="n3J-e2-hhn" kind="show" identifier="ShowIssues" id="cGU-Jg-xaJ"/>
                                 </connections>
                             </button>
                         </subviews>

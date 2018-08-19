@@ -57,6 +57,13 @@ class UserViewController : UIViewController, NSFetchedResultsControllerDelegate 
 			let gistsListViewController = segue.destination as! GistsListViewController
 			gistsListViewController.gistsSource = .gists(of: user)
 			
+		case "ShowRepositories"?:
+			let repositoriesListViewController = segue.destination as! ProjectsListViewController
+			repositoriesListViewController.projectsSource = .projects(of: user)
+			
+		case "ShowIssues"?:
+			()
+			
 		default: (/*nop*/)
 		}
 	}

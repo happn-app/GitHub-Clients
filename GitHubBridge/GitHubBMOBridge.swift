@@ -112,7 +112,8 @@ public class GitHubBMOBridge : Bridge {
 					.filter({ $0.leftExpression.expressionType == .evaluatedObject || $0.rightExpression.expressionType == .evaluatedObject })
 					.compactMap({ ($0.constantValueExpression?.constantValue as? Repository) })
 				let selfRepository = selfRepositories.flatMap{ $0.count == 1 ? $0.first : nil }
-				if fetchRequest.predicate?.firstLevelConstants(forKeyPath: "owner").isEmpty ?? true && selfRepository == nil {
+				let owners = fetchRequest.predicate?.firstLevelConstants(forKeyPath: "owner", withOrCompound: true, withAndCompound: true)
+				if owners?.isEmpty ?? true && selfRepository == nil {
 					/* We do not specify an owner for the searched repositories, we
 					 * assume all repositories are searched or we're fetching a
 					 * specific repository. */
@@ -131,6 +132,10 @@ public class GitHubBMOBridge : Bridge {
 					} else {
 						normalRESTPath = RESTPath("/repositories")
 					}
+				} else if let owners = owners as? [User], owners.count == 1 {
+					normalRESTPath = RESTPath("/users/|owner.username|/repos")
+					additionalInfo.additionalRequestParameters["sort"] = "updated"
+					additionalInfo.additionalRequestParameters["direction"] = "desc"
 				} else {
 					/* Un-specific predicate, we use the generic REST path */
 					normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
@@ -190,7 +195,7 @@ public class GitHubBMOBridge : Bridge {
 			}
 		}
 		
-		let paginatorRESTPath = additionalInfo.paginatorInfo.flatMap{ paginator.forcedRestPath(withPaginatorInfo: $0) }
+		let paginatorRESTPath = additionalInfo.paginatorInfo.flatMap{ paginator.forcedRESTPath(withPaginatorInfo: $0) }
 		let restPath = additionalInfo.forcedRESTPath ?? paginatorRESTPath ?? normalRESTPath
 		
 		/* Computing REST path values from request's predicate: We're enumerating
@@ -198,7 +203,7 @@ public class GitHubBMOBridge : Bridge {
 		 * one value per key is allowed for the key to stay in the final
 		 * restPathValues dictionary. */
 		var blacklistedKeys = Set<String>()
-		fetchRequest.predicate?.enumerateFirstLevelConstants(forKeyPath: nil){ (keyPath, constant) in
+		fetchRequest.predicate?.enumerateFirstLevelConstants(forKeyPath: nil, withOrCompound: true, withAndCompound: true){ (keyPath, constant) in
 			if restPathResolvingInfo[keyPath] == nil {restPathResolvingInfo[keyPath] = constant}
 			else                                     {blacklistedKeys.insert(keyPath)}
 		}

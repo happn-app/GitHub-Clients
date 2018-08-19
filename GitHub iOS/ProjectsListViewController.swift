@@ -18,6 +18,15 @@ import GitHubBridge
 
 class ProjectsListViewController : GitHubListViewController<Repository> {
 	
+	enum ProjectsSource {
+		
+		case searchAll
+		case projects(of: User)
+		
+	}
+	
+	var projectsSource = ProjectsSource.searchAll
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -39,17 +48,33 @@ class ProjectsListViewController : GitHubListViewController<Repository> {
 		
 		let apiOrderProperty: NSAttributeDescription?
 		let deletionDateProperty: NSAttributeDescription
-		if let t = searchText?.trimmingCharacters(in: .whitespaces), !t.isEmpty {
-			nullify(property: ephemeralDeletionDateProperty, inInstancesOf: repositoryEntity, context: AppDelegate.shared.context)
+		switch projectsSource {
+		case .searchAll:
+			if let t = searchText?.trimmingCharacters(in: .whitespaces), !t.isEmpty {
+				nullify(property: ephemeralDeletionDateProperty, inInstancesOf: repositoryEntity, context: AppDelegate.shared.context)
+				
+				deletionDateProperty = ephemeralDeletionDateProperty
+				apiOrderProperty = repositoryEntity.attributesByName[#keyPath(Repository.zPosInSearchResults)]!
+				fetchRequest.predicate = NSPredicate(format: "%K LIKE[cd] %@", #keyPath(Repository.fullName), "*" + t + "*")
+				fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Repository.zPosInSearchResults), ascending: false)]
+			} else {
+				apiOrderProperty = nil
+				deletionDateProperty = repositoryEntity.attributesByName[#keyPath(Repository.zDeletionDateInRepositoriesList)]!
+				fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Repository.remoteId), ascending: true)]
+			}
 			
-			deletionDateProperty = ephemeralDeletionDateProperty
-			apiOrderProperty = repositoryEntity.attributesByName[#keyPath(Repository.zPosInSearchResults)]!
-			fetchRequest.predicate = NSPredicate(format: "%K LIKE[cd] %@", #keyPath(Repository.fullName), "*" + t + "*")
-			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Repository.zPosInSearchResults), ascending: false)]
-		} else {
+		case .projects(of: let user):
+			nullify(property: ephemeralDeletionDateProperty, inInstancesOf: repositoryEntity, context: AppDelegate.shared.context)
 			apiOrderProperty = nil
-			deletionDateProperty = repositoryEntity.attributesByName[#keyPath(Repository.zDeletionDateInRepositoriesList)]!
-			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Repository.remoteId), ascending: true)]
+			deletionDateProperty = ephemeralDeletionDateProperty
+			fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Repository.owner), user)
+			if let t = searchText?.trimmingCharacters(in: .whitespaces), !t.isEmpty {
+				fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
+					fetchRequest.predicate!,
+					NSPredicate(format: "%K LIKE[cd] %@", #keyPath(Repository.fullName), "*" + t + "*")
+				])
+			}
+			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Repository.updateDate), ascending: false)]
 		}
 		
 		return CoreDataSearchCLH(fetchRequest: fetchRequest, additionalFetchInfo: nil, apiOrderProperty: apiOrderProperty, deletionDateProperty: deletionDateProperty, context: AppDelegate.shared.context, pageInfoRetriever: AppDelegate.shared.pageInfoRetriever, requestManager: AppDelegate.shared.requestManager)
