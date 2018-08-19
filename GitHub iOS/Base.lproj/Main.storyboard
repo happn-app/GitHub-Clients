@@ -204,9 +204,9 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="A4K-LQ-N8I" kind="show" id="TAA-Ot-2eM">
-                                        <segue key="commit" inheritsFrom="parent" id="Rb9-Oy-Xp5"/>
-                                        <segue key="preview" inheritsFrom="commit" id="UDf-Qu-Tt8"/>
+                                    <segue destination="kQ5-ep-Qgy" kind="show" identifier="ShowGist" id="UA0-xw-ANq">
+                                        <segue key="commit" inheritsFrom="parent" id="dnm-9n-tPp"/>
+                                        <segue key="preview" inheritsFrom="commit" id="GxT-Wg-sRH"/>
                                     </segue>
                                 </connections>
                             </tableViewCell>
@@ -221,21 +221,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cwi-Zf-ku9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1538" y="1893"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="URZ-Z9-gfh">
-            <objects>
-                <viewController id="A4K-LQ-N8I" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="qi2-NI-vbM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="i1K-8D-pUO"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Lxy-ke-IvK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2646" y="2026"/>
         </scene>
         <!--Gists-->
         <scene sceneID="yTl-uo-2TD">
@@ -481,11 +466,65 @@
             </objects>
             <point key="canvasLocation" x="-289" y="1293"/>
         </scene>
+        <!--Gist View Controller-->
+        <scene sceneID="9hE-zh-hhA">
+            <objects>
+                <tableViewController id="kQ5-ep-Qgy" customClass="GistViewController" customModule="GitHub_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fO5-KC-DUQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="DescriptionCell" textLabel="aHi-bv-dax" style="IBUITableViewCellStyleDefault" id="o4y-LT-iU1">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="o4y-LT-iU1" id="qiU-XO-mnX">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Gist Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aHi-bv-dax">
+                                            <rect key="frame" x="16" y="0.0" width="288" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FileCell" textLabel="Cbo-rf-v7j" style="IBUITableViewCellStyleDefault" id="Jhf-jR-a8g">
+                                <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jhf-jR-a8g" id="Ks1-Ll-rMt">
+                                    <rect key="frame" x="0.0" y="0.0" width="286" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Filename" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Cbo-rf-v7j">
+                                            <rect key="frame" x="16" y="0.0" width="269" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="kQ5-ep-Qgy" id="Yey-l0-zQq"/>
+                            <outlet property="delegate" destination="kQ5-ep-Qgy" id="mG3-lJ-OKp"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hys-DB-tUc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2646" y="2025"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="UA0-xw-ANq"/>
         <segue reference="cGU-Jg-xaJ"/>
         <segue reference="A7I-xT-UGv"/>
-        <segue reference="TAA-Ot-2eM"/>
         <segue reference="rPM-c9-FAf"/>
         <segue reference="6Fg-z6-53m"/>
         <segue reference="PAU-bi-nBp"/>

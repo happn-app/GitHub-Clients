@@ -70,4 +70,12 @@ class GistsListViewController: GitHubListViewController<Gist> {
 		return CoreDataSearchCLH(fetchRequest: fetchRequest, additionalFetchInfo: nil, deletionDateProperty: deletionDateProperty, context: AppDelegate.shared.context, pageInfoRetriever: AppDelegate.shared.pageInfoRetriever, requestManager: AppDelegate.shared.requestManager)
 	}
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		guard segue.identifier == "ShowGist" else {return}
+		guard let selectedRow = (sender as? UITableViewCell).flatMap({ tableView.indexPath(for: $0) }) else {return}
+		
+		let destinationVC = segue.destination as! GistViewController
+		destinationVC.gist = resultsController.object(at: selectedRow)
+	}
+	
 }
