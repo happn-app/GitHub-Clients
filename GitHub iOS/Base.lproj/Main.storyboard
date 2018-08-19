@@ -336,10 +336,10 @@
             </objects>
             <point key="canvasLocation" x="2646" y="239"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Issues List View Controller-->
         <scene sceneID="ozA-Az-aDw">
             <objects>
-                <tableViewController id="n3J-e2-hhn" sceneMemberID="viewController">
+                <tableViewController id="n3J-e2-hhn" customClass="IssuesListViewController" customModule="GitHub_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="xRS-5D-GWs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -445,7 +445,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="cGU-Jg-xaJ"/>
+        <segue reference="tDD-jp-dka"/>
         <segue reference="A7I-xT-UGv"/>
         <segue reference="TAA-Ot-2eM"/>
         <segue reference="rPM-c9-FAf"/>

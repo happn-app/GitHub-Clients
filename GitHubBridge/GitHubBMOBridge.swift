@@ -93,6 +93,12 @@ public class GitHubBMOBridge : Bridge {
 				/* /orgs/:org/issues                  <-- Lists issues assigned to authenticated user in the given org repositories */
 //				.restPath("(/repos/|repository.owner.username|/|repository.name|)/issues(/|issueNumber|)"),
 				normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
+				if let repositories = fetchRequest.predicate?.firstLevelConstants(forKeyPath: "repository", withOrCompound: true, withAndCompound: true) as? [Repository],
+					let repository = repositories.first, repositories.count == 1
+				{
+					userInfo.addedToMixedRepresentations = userInfo.addedToMixedRepresentations ?? [:]
+					userInfo.addedToMixedRepresentations!["repository"] = ["id": repository.remoteId]
+				}
 				
 			case Label.entity().name!:
 				/* /repos/:owner/:repo/labels                <-- Lists all labels in given repository */
@@ -363,7 +369,9 @@ public class GitHubBMOBridge : Bridge {
 				#keyPath(Issue.issueNumber):      [.restName("number"),             .restToLocalTransformer(intTransformer)],
 				#keyPath(Issue.remoteId):         [.restName("id"),                 .restToLocalTransformer(intTransformer)],
 				#keyPath(Issue.repository):       [.restName("repository")],
-				#keyPath(Issue.updateDate):       [.restName("updated_at"),         .restToLocalTransformer(dateTransformer)]
+				#keyPath(Issue.title):            [.restName("title")],
+				#keyPath(Issue.updateDate):       [.restName("updated_at"),         .restToLocalTransformer(dateTransformer)],
+				#keyPath(Issue.zEphemeralDeletionDate): [.localConstant(nil)]
 			])
 		]
 		

@@ -51,7 +51,9 @@
         <attribute name="issueNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="nodeId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="remoteId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="zEphemeralDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="assignees" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="User" inverseName="assignedIssues" inverseEntity="User" syncable="YES"/>
         <relationship name="labels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Label" inverseName="issues" inverseEntity="Label" syncable="YES"/>
         <relationship name="repository" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Repository" inverseName="issues" inverseEntity="Repository" syncable="YES"/>
@@ -172,7 +174,7 @@
         <element name="File" positionX="-27" positionY="458" width="128" height="165"/>
         <element name="FileLanguage" positionX="151" positionY="603" width="128" height="90"/>
         <element name="Gist" positionX="151" positionY="306" width="128" height="270"/>
-        <element name="Issue" positionX="745" positionY="198" width="128" height="240"/>
+        <element name="Issue" positionX="745" positionY="198" width="128" height="270"/>
         <element name="Label" positionX="963" positionY="423" width="128" height="165"/>
         <element name="License" positionX="853" positionY="684" width="128" height="120"/>
         <element name="Repository" positionX="558" positionY="441" width="128" height="495"/>

@@ -58,7 +58,8 @@ class ProjectViewController : UIViewController, NSFetchedResultsControllerDelega
 			usersListViewController.usersSource = .watchers(of: repository)
 			
 		case "ShowOpenIssues"?:
-			()
+			let issuesListViewController = segue.destination as! IssuesListViewController
+			issuesListViewController.issuesSource = .from(project: repository)
 			
 		default: (/*nop*/)
 		}
