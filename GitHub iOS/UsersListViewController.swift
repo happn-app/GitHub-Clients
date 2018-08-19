@@ -40,8 +40,10 @@ class UsersListViewController : GitHubListViewController<User> {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
 		case "ShowUser"?:
+			guard let selectedRow = (sender as? UITableViewCell).flatMap({ tableView.indexPath(for: $0) }) else {return}
+			
 			let userViewController = segue.destination as! UserViewController
-			userViewController.user = resultsController.object(at: tableView.indexPathForSelectedRow!)
+			userViewController.user = resultsController.object(at: selectedRow)
 			
 		default: (/*nop*/)
 		}

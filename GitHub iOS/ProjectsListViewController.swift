@@ -59,7 +59,7 @@ class ProjectsListViewController : GitHubListViewController<Repository> {
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		guard segue.identifier == "ShowProject" else {return}
-		guard let selectedRow = tableView.indexPathForSelectedRow else {return}
+		guard let selectedRow = (sender as? UITableViewCell).flatMap({ tableView.indexPath(for: $0) }) else {return}
 		
 		let destinationVC = segue.destination as! ProjectViewController
 		destinationVC.repository = resultsController.object(at: selectedRow)

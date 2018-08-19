@@ -36,7 +36,10 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="yuO-rZ-jW1" kind="show" identifier="ShowUser" id="A7I-xT-UGv"/>
+                                    <segue destination="yuO-rZ-jW1" kind="show" identifier="ShowUser" id="A7I-xT-UGv">
+                                        <segue key="commit" inheritsFrom="parent" id="vyK-dg-2fJ"/>
+                                        <segue key="preview" inheritsFrom="commit" id="Qt3-9h-gin"/>
+                                    </segue>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -77,7 +80,10 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="DCL-MX-Nkh" kind="show" identifier="ShowProject" id="6Fg-z6-53m"/>
+                                    <segue destination="DCL-MX-Nkh" kind="show" identifier="ShowProject" id="6Fg-z6-53m">
+                                        <segue key="commit" inheritsFrom="parent" id="vgV-UX-Bj3"/>
+                                        <segue key="preview" inheritsFrom="commit" id="y9j-vK-Po1"/>
+                                    </segue>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -123,14 +129,20 @@
                                 <rect key="frame" x="16" y="163.5" width="104" height="30"/>
                                 <state key="normal" title="See Stargazers"/>
                                 <connections>
-                                    <segue destination="dPa-Qm-xM4" kind="show" identifier="ShowStargazers" id="3ON-Jy-Iwf"/>
+                                    <segue destination="dPa-Qm-xM4" kind="show" identifier="ShowStargazers" id="3ON-Jy-Iwf">
+                                        <segue key="commit" inheritsFrom="parent" id="Iwr-2d-3Ql"/>
+                                        <segue key="preview" inheritsFrom="commit" id="9Ed-hp-Jda"/>
+                                    </segue>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UWn-AB-59E">
                                 <rect key="frame" x="16" y="201.5" width="95" height="30"/>
                                 <state key="normal" title="See Watchers"/>
                                 <connections>
-                                    <segue destination="dPa-Qm-xM4" kind="show" identifier="ShowWatchers" id="gsx-La-c3z"/>
+                                    <segue destination="dPa-Qm-xM4" kind="show" identifier="ShowWatchers" id="gsx-La-c3z">
+                                        <segue key="commit" inheritsFrom="parent" id="AU8-ZI-NI7"/>
+                                        <segue key="preview" inheritsFrom="commit" id="UU4-zQ-Ibj"/>
+                                    </segue>
                                 </connections>
                             </button>
                         </subviews>
@@ -192,7 +204,10 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="A4K-LQ-N8I" kind="show" id="TAA-Ot-2eM"/>
+                                    <segue destination="A4K-LQ-N8I" kind="show" id="TAA-Ot-2eM">
+                                        <segue key="commit" inheritsFrom="parent" id="Rb9-Oy-Xp5"/>
+                                        <segue key="preview" inheritsFrom="commit" id="UDf-Qu-Tt8"/>
+                                    </segue>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -432,8 +447,10 @@
     <inferredMetricsTieBreakers>
         <segue reference="tDD-jp-dka"/>
         <segue reference="A7I-xT-UGv"/>
+        <segue reference="TAA-Ot-2eM"/>
         <segue reference="rPM-c9-FAf"/>
+        <segue reference="6Fg-z6-53m"/>
         <segue reference="PAU-bi-nBp"/>
-        <segue reference="gsx-La-c3z"/>
+        <segue reference="3ON-Jy-Iwf"/>
     </inferredMetricsTieBreakers>
 </document>
