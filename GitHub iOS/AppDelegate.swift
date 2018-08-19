@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	private(set) var requestManager: RequestManager!
 	private(set) var pageInfoRetriever: GitHubPageInfoRetriever!
 	
+	private(set) var myUsername: String?
+	
 	private(set) var tabBarController: UITabBarController!
 	
 	var window: UIWindow?
@@ -51,7 +53,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		/* Let's fetch the connected username (if any) and add the “you” tab if we
 		 * get a result. */
 		GitHubBMOOperation.retrieveUsernameFromToken{ username in
+			self.myUsername = username
 			guard let username = username else {return}
+			
 			DispatchQueue.main.async{
 				var hasAddedController = false
 				let addUserController = { (user: User?) -> Void in

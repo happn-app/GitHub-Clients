@@ -20,6 +20,7 @@ class IssuesListViewController : GitHubListViewController<Issue> {
 	enum IssuesSource {
 		
 		case from(project: Repository)
+		case assigned(to: User)
 		
 	}
 	
@@ -59,6 +60,12 @@ class IssuesListViewController : GitHubListViewController<Issue> {
 			nullify(property: ephemeralDeletionDateProperty, inInstancesOf: issueEntity, context: AppDelegate.shared.context)
 			deletionDateProperty = ephemeralDeletionDateProperty
 			fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Issue.repository), repository)
+			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Gist.creationDate), ascending: false)]
+			
+		case .assigned(to: let user):
+			nullify(property: ephemeralDeletionDateProperty, inInstancesOf: issueEntity, context: AppDelegate.shared.context)
+			deletionDateProperty = ephemeralDeletionDateProperty
+			fetchRequest.predicate = NSPredicate(format: "%K CONTAINS %@", #keyPath(Issue.assignees), user)
 			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Gist.creationDate), ascending: false)]
 		}
 		return CoreDataSearchCLH(fetchRequest: fetchRequest, additionalFetchInfo: nil, deletionDateProperty: deletionDateProperty, context: AppDelegate.shared.context, pageInfoRetriever: AppDelegate.shared.pageInfoRetriever, requestManager: AppDelegate.shared.requestManager)

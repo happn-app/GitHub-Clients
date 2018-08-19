@@ -62,7 +62,8 @@ class UserViewController : UIViewController, NSFetchedResultsControllerDelegate 
 			repositoriesListViewController.projectsSource = .projects(of: user)
 			
 		case "ShowIssues"?:
-			()
+			let issuesListViewController = segue.destination as! IssuesListViewController
+			issuesListViewController.issuesSource = .assigned(to: user)
 			
 		default: (/*nop*/)
 		}
@@ -84,11 +85,13 @@ class UserViewController : UIViewController, NSFetchedResultsControllerDelegate 
 	
 	private func updateUI() {
 		guard let user = fetchedResultsController?.fetchedObjects?.first else {
+			buttonAssignedIssues.isHidden = true
 			labelUsername.text = "Error"
 			return
 		}
 		
 		labelUsername.text = user.username
+		buttonAssignedIssues.isHidden = (user.username != AppDelegate.shared.myUsername)
 		
 		/* Both performWithoutAnimation and layoutIfNeeded are needed to avoid the
 		 * animations on the buttons when changing the title... */
