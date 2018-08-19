@@ -163,6 +163,15 @@ public class GitHubBMOBridge : Bridge {
 					restPathResolvingInfo["repo"] = starredRepository
 					userInfo.addedToMixedRepresentations = userInfo.addedToMixedRepresentations ?? [:]
 					userInfo.addedToMixedRepresentations!["starredRepositories"] = ["id": starredRepository.remoteId]
+				} else if let watchedRepositoriesPredicates = fetchRequest.predicate?.firstLevelComparisonSubpredicates
+						.filter({ $0.keyPathExpression?.keyPath == "watchedRepositories" && $0.predicateOperatorType == .contains }),
+					let watchedRepositoriesPredicate = watchedRepositoriesPredicates.first, watchedRepositoriesPredicates.count == 1,
+					let watchedRepository = watchedRepositoriesPredicate.constantValueExpression?.constantValue as? Repository
+				{
+					normalRESTPath = RESTPath("/repos/|repo.owner.username|/|repo.name|/subscribers")
+					restPathResolvingInfo["repo"] = watchedRepository
+					userInfo.addedToMixedRepresentations = userInfo.addedToMixedRepresentations ?? [:]
+					userInfo.addedToMixedRepresentations!["watchedRepositories"] = ["id": watchedRepository.remoteId]
 				} else {
 					/* Un-specific predicate, we use the generic REST path */
 					normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
@@ -264,7 +273,7 @@ public class GitHubBMOBridge : Bridge {
 	}
 	
 	public func relationshipMergeType(forRelationshipNamed relationshipName: String, inEntity entity: DbType.EntityDescriptionType, currentMixedRepresentation: MixedRepresentation<DbType.EntityDescriptionType, RemoteRelationshipAndMetadataRepresentationType, UserInfoType>) -> DbRepresentationRelationshipMergeType<DbType.EntityDescriptionType, DbType.ObjectType> {
-		guard relationshipName != "starredRepositories" else {return .append}
+		guard relationshipName != "starredRepositories" && relationshipName != "watchedRepositories" else {return .append}
 		return .replace
 	}
 	
