@@ -171,6 +171,7 @@
 		7B59189320CDCF3900D4D9F5 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		7B63397521175D0E005966F4 /* Gist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gist.swift; sourceTree = "<group>"; };
 		7B9E39B82128B46500826388 /* NSManagedObject+RESTPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+RESTPath.swift"; sourceTree = "<group>"; };
+		7BA2A33021318074001DD10F /* License.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
 		7BA6F62020C94F2000C21A36 /* GitHub.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitHub.xcdatamodel; sourceTree = "<group>"; };
 		7BA6F62320C95CC700C21A36 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		7BA6F63320C96B7500C21A36 /* GitHubTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubTransformers.swift; sourceTree = "<group>"; };
@@ -348,6 +349,7 @@
 		7BA7C12020C9479E00C210B5 = {
 			isa = PBXGroup;
 			children = (
+				7BA2A33021318074001DD10F /* License.txt */,
 				7B59183320CB179800D4D9F5 /* GitHub iOS */,
 				7BA7C12C20C9479E00C210B5 /* GitHubBridge */,
 				7BA7C13720C9479E00C210B5 /* GitHubBridgeTests */,
