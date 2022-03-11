@@ -44,7 +44,7 @@ public struct GitHubBMOBridgeMetadata {
 public class GitHubBMOBridge : Bridge {
 	
 	public typealias DbType = NSManagedObjectContext
-	public typealias AdditionalRequestInfoType = AdditionalRESTRequestInfo<NSPropertyDescription>
+	public typealias AdditionalRequestInfoType = AdditionalRESTRequestInfo<NSPropertyDescriptionHashableWrapper>
 	
 	public typealias UserInfoType = GitHubBMOBridgeUserInfo
 	public typealias MetadataType = GitHubBMOBridgeMetadata
@@ -53,6 +53,10 @@ public class GitHubBMOBridge : Bridge {
 	public typealias RemoteRelationshipAndMetadataRepresentationType = [[String: Any?]]
 	
 	public typealias BackOperationType = GitHubBMOOperation
+	
+	public static var model: NSManagedObjectModel {
+		NSManagedObjectModel(contentsOf: Bundle.module.url(forResource: "GitHub", withExtension: "momd")!)!
+	}
 	
 	enum Err : Error {
 		case cannotGetRESTPathForRequest
@@ -308,7 +312,7 @@ public class GitHubBMOBridge : Bridge {
 	
 	private var paginator = RESTURLAndCountPaginator(countKey: "per_page")
 	
-	private lazy var restMapper: RESTMapper<NSEntityDescription, NSPropertyDescription> = {
+	private lazy var restMapper: RESTMapper<NSEntityDescription, NSPropertyDescriptionHashableWrapper> = {
 		let urlTransformer = RESTURLTransformer()
 		let boolTransformer = RESTBoolTransformer()
 		let colorTransformer = RESTColorTransformer()

@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-		let container = NSPersistentContainer(name: "GitHub", managedObjectModel: NSManagedObjectModel(contentsOf: Bundle(for: GitHubBMOBridge.self).url(forResource: "GitHub", withExtension: "momd")!)!)
+		let container = NSPersistentContainer(name: "GitHub", managedObjectModel: GitHubBMOBridge.model)
 		container.loadPersistentStores(completionHandler: { _, _ in })
 		context = container.viewContext
 		

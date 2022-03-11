@@ -1,8 +1,0 @@
-github "happn-app/KVObserver" ~> 0.9.3
-github "happn-app/BMO" "dev.paginator_enhancements"
-github "happn-app/CollectionLoader" "master"
-github "happn-app/RetryingOperation" ~> 1.0
-
-github "happn-tech/CollectionAndTableViewUpdateConveniences" ~> 1.0
-
-github "Alamofire/Alamofire" ~> 4.7
