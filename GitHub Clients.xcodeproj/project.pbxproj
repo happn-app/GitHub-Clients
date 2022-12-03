@@ -490,7 +490,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/happn-app/BMO.git";
 			requirement = {
-				branch = dev.paginator_enhancements;
+				branch = dev.tests;
 				kind = branch;
 			};
 		};

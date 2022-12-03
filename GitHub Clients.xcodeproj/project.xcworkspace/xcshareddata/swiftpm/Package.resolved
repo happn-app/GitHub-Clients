@@ -23,8 +23,8 @@
         "package": "BMO",
         "repositoryURL": "https://github.com/happn-app/BMO.git",
         "state": {
-          "branch": "dev.paginator_enhancements",
-          "revision": "412faef7c8ccc985f313c7ede38d05ed1251af7a",
+          "branch": "dev.tests",
+          "revision": "68879167e7a0b5fb2e0394084fe54ab0d3990036",
           "version": null
         }
       },
