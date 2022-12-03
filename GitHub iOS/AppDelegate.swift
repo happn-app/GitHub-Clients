@@ -17,7 +17,6 @@ import CoreData
 import os.log
 import UIKit
 
-import AsyncOperationResult
 import BMO
 import BMO_CoreData
 
@@ -76,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					self.tabBarController.viewControllers?.append(youNavigationController)
 					hasAddedController = true
 				}
-				let (u, _) = self.requestManager.unsafeFetchObject(withRemoteId: username, remoteIdAttributeName: "username", onContext: self.context, handler: { (u: User?, _: AsyncOperationResult<BridgeBackRequestResult<GitHubBMOBridge>>) in
+				let (u, _) = self.requestManager.unsafeFetchObject(withRemoteId: username, remoteIdAttributeName: "username", onContext: self.context, handler: { (u: User?, _: Result<BridgeBackRequestResult<GitHubBMOBridge>, Error>) in
 					addUserController(u)
 				})
 				addUserController(u)

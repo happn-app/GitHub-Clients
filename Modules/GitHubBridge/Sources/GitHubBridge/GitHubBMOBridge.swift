@@ -260,7 +260,7 @@ public class GitHubBMOBridge : Bridge {
 	}
 	
 	public func error(fromFinishedOperation operation: BackOperationType) -> Error? {
-		return operation.results.error
+		return operation.results.failure
 	}
 	
 	public func userInfo(fromFinishedOperation operation: BackOperationType, currentUserInfo: UserInfoType) -> UserInfoType {
@@ -275,8 +275,8 @@ public class GitHubBMOBridge : Bridge {
 		switch operation.results {
 			case .success(let success as [[String: Any?]]): return success
 			case .success(let success as  [String: Any?]):  return success["items"] as? [[String: Any?]] ?? [success]
-			case .error(let e): throw Err.operationError(e)
-			default:            throw Err.invalidAPIResponse
+			case .failure(let e): throw Err.operationError(e)
+			default:              throw Err.invalidAPIResponse
 		}
 	}
 	

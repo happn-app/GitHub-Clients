@@ -16,7 +16,6 @@ limitations under the License. */
 import Foundation
 
 import Alamofire
-import AsyncOperationResult
 import RetryingOperation
 
 
@@ -54,7 +53,7 @@ public class GitHubBMOOperation : RetryingOperation {
 	
 	let request: URLRequest
 	var responseHeaders: [AnyHashable: Any]?
-	var results: AsyncOperationResult<Any> = .error(Err.operationNotFinished)
+	var results: Swift.Result<Any, Error> = .failure(Err.operationNotFinished)
 	
 	init(request r: URLRequest) {
 		request = r
@@ -75,7 +74,7 @@ public class GitHubBMOOperation : RetryingOperation {
 			if let parsedJSON = response.result.value {
 				self.results = .success(parsedJSON)
 			} else {
-				self.results = .error(response.error ?? Err.unknownError)
+				self.results = .failure(response.error ?? Err.unknownError)
 			}
 			self.baseOperationEnded()
 		}

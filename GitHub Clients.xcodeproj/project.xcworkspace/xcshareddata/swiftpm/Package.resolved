@@ -11,20 +11,11 @@
         }
       },
       {
-        "package": "AsyncOperationResult",
-        "repositoryURL": "https://github.com/happn-app/AsyncOperationResult.git",
-        "state": {
-          "branch": null,
-          "revision": "fe81cdaa25a577a9ea688d71aa81387bfed213c7",
-          "version": "1.0.7"
-        }
-      },
-      {
         "package": "BMO",
         "repositoryURL": "https://github.com/happn-app/BMO.git",
         "state": {
           "branch": "dev.tests",
-          "revision": "68879167e7a0b5fb2e0394084fe54ab0d3990036",
+          "revision": "a0173f3b2219ae6079064118c0885b93e900312e",
           "version": null
         }
       },
@@ -42,7 +33,7 @@
         "repositoryURL": "https://github.com/happn-app/CollectionLoader.git",
         "state": {
           "branch": "dev.tests",
-          "revision": "9fa122b9d07a626006d4b2d7aa1afd37cc32b703",
+          "revision": "300477436701d7a650ad2b8530baa9885a4c80c1",
           "version": null
         }
       },
