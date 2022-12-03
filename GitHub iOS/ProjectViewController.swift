@@ -56,33 +56,33 @@ class ProjectViewController : UIViewController, NSFetchedResultsControllerDelega
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
-		case "ShowStargazers"?:
-			let usersListViewController = segue.destination as! UsersListViewController
-			usersListViewController.usersSource = .stargazers(of: repository)
-			
-		case "ShowWatchers"?:
-			let usersListViewController = segue.destination as! UsersListViewController
-			usersListViewController.usersSource = .watchers(of: repository)
-			
-		case "ShowOpenIssues"?:
-			let issuesListViewController = segue.destination as! IssuesListViewController
-			issuesListViewController.issuesSource = .from(project: repository)
-			
-		default: (/*nop*/)
+			case "ShowStargazers"?:
+				let usersListViewController = segue.destination as! UsersListViewController
+				usersListViewController.usersSource = .stargazers(of: repository)
+				
+			case "ShowWatchers"?:
+				let usersListViewController = segue.destination as! UsersListViewController
+				usersListViewController.usersSource = .watchers(of: repository)
+				
+			case "ShowOpenIssues"?:
+				let issuesListViewController = segue.destination as! IssuesListViewController
+				issuesListViewController.issuesSource = .from(project: repository)
+				
+			default: (/*nop*/)
 		}
 	}
 	
 	/* *******************************************
-      MARK: - Fetched Results Controller Delegate
-	   ******************************************* */
+	   MARK: - Fetched Results Controller Delegate
+	   ******************************************* */
 	
 	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		updateUI()
 	}
 	
 	/* ***************
-      MARK: - Private
-	   *************** */
+	   MARK: - Private
+	   *************** */
 	
 	private var fetchedResultsController: NSFetchedResultsController<Repository>!
 	
@@ -97,8 +97,7 @@ class ProjectViewController : UIViewController, NSFetchedResultsControllerDelega
 		labelProjectDescription.isHidden = false
 		labelProjectDescription.text = (repository.descr?.isEmpty ?? true ? "<No Description>" : repository.descr)
 		
-		/* Both performWithoutAnimation and layoutIfNeeded are needed to avoid the
-		 * animations on the buttons when changing the title... */
+		/* Both performWithoutAnimation and layoutIfNeeded are needed to avoid the animations on the buttons when changing the title… */
 		UIView.performWithoutAnimation{
 			buttonSeeIssues.setTitle("See Open Issues (\(repository.openIssuesCount))", for: .normal)
 			buttonSeeWatchers.setTitle("See Watchers (\(repository.watchersCount))", for: .normal)

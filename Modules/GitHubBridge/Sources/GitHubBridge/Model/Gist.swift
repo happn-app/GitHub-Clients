@@ -24,17 +24,15 @@ import KVObserver
 public class Gist : NSManagedObject {
 	
 	/* ***************************
-	   MARK: - Core Data Overrides
-	   *************************** */
+	   MARK: - Core Data Overrides
+	   *************************** */
 	
 	public override func awakeFromFetch() {
-		/* This is also called when a fault is fulfilled (fulfilling a fault is a
-		 * fetch).
-		 * Always DO call super's implementation *first*.
-		 *
-		 * Context's changes processing is disabled in this method. This also
-		 * means inverse relationship are not set automatically when relationships
-		 * are modified in this method. */
+		/* This is also called when a fault is fulfilled (fulfilling a fault is a fetch).
+		 * Always DO call super's implementation *first*.
+		 *
+		 * Context's changes processing is disabled in this method.
+		 * This also means inverse relationship are not set automatically when relationships are modified in this method. */
 		super.awakeFromFetch()
 		
 		if observingIdForFiles == nil {
@@ -44,7 +42,7 @@ public class Gist : NSManagedObject {
 	
 	public override func awakeFromInsert() {
 		/* Use primitive accessors to change properties values in this method.
-		 * Always DO call super's implementation first. */
+		 * Always DO call super's implementation first. */
 		super.awakeFromInsert()
 		
 		if observingIdForFiles == nil {
@@ -62,9 +60,9 @@ public class Gist : NSManagedObject {
 		super.willTurnIntoFault()
 	}
 	
-	/* *******************
-	   MARK - KVO-Handling
-	   ******************* */
+	/* ********************
+	   MARK: - KVO-Handling
+	   ******************** */
 	
 	private func processFilesKVOChange(_ changes: [NSKeyValueChangeKey: Any]?) {
 		let firstFile = files?.firstObject as! File?
@@ -81,8 +79,8 @@ public class Gist : NSManagedObject {
 	}
 	
 	/* ***************
-	   MARK: - Private
-	   *************** */
+	   MARK: - Private
+	   *************** */
 	
 	let kvObserver = KVObserver()
 	

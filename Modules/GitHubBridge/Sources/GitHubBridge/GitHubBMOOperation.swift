@@ -24,7 +24,7 @@ import RetryingOperation
 public class GitHubBMOOperation : RetryingOperation {
 	
 	public static var gitHubToken: String? {
-		/* Let's read the token from a hard-coded file */
+		/* Let's read the token from a hard-coded file. */
 		let desktopPath = NSSearchPathForDirectoriesInDomains(.desktopDirectory, .userDomainMask, true).first!
 		let re = try! NSRegularExpression(pattern: "/Users/([^/]*)/.*", options: [])
 		let username = re.stringByReplacingMatches(in: desktopPath, options: [], range: NSRange(location: 0, length: (desktopPath as NSString).length), withTemplate: "$1")

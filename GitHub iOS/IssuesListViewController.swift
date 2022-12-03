@@ -63,17 +63,17 @@ class IssuesListViewController : GitHubListViewController<Issue> {
 		
 		let deletionDateProperty: NSAttributeDescription
 		switch issuesSource! {
-		case .from(project: let repository):
-			nullify(property: ephemeralDeletionDateProperty, inInstancesOf: issueEntity, context: AppDelegate.shared.context)
-			deletionDateProperty = ephemeralDeletionDateProperty
-			fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Issue.repository), repository)
-			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Gist.creationDate), ascending: false)]
-			
-		case .assigned(to: let user):
-			nullify(property: ephemeralDeletionDateProperty, inInstancesOf: issueEntity, context: AppDelegate.shared.context)
-			deletionDateProperty = ephemeralDeletionDateProperty
-			fetchRequest.predicate = NSPredicate(format: "%K CONTAINS %@", #keyPath(Issue.assignees), user)
-			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Gist.creationDate), ascending: false)]
+			case .from(project: let repository):
+				nullify(property: ephemeralDeletionDateProperty, inInstancesOf: issueEntity, context: AppDelegate.shared.context)
+				deletionDateProperty = ephemeralDeletionDateProperty
+				fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Issue.repository), repository)
+				fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Gist.creationDate), ascending: false)]
+				
+			case .assigned(to: let user):
+				nullify(property: ephemeralDeletionDateProperty, inInstancesOf: issueEntity, context: AppDelegate.shared.context)
+				deletionDateProperty = ephemeralDeletionDateProperty
+				fetchRequest.predicate = NSPredicate(format: "%K CONTAINS %@", #keyPath(Issue.assignees), user)
+				fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Gist.creationDate), ascending: false)]
 		}
 		return CoreDataSearchCLH(fetchRequest: fetchRequest, additionalFetchInfo: nil, deletionDateProperty: deletionDateProperty, context: AppDelegate.shared.context, pageInfoRetriever: AppDelegate.shared.pageInfoRetriever, requestManager: AppDelegate.shared.requestManager)
 	}

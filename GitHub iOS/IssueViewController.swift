@@ -60,21 +60,21 @@ class IssueViewController : UIViewController, NSFetchedResultsControllerDelegate
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
-		default: (/*nop*/)
+			default: (/*nop*/)
 		}
 	}
 	
 	/* *******************************************
-	   MARK: - Fetched Results Controller Delegate
-	   ******************************************* */
+	   MARK: - Fetched Results Controller Delegate
+	   ******************************************* */
 	
 	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		updateUI()
 	}
 	
 	/* ***************
-	   MARK: - Private
-	   *************** */
+	   MARK: - Private
+	   *************** */
 	
 	private var fetchedResultsController: NSFetchedResultsController<Issue>!
 	

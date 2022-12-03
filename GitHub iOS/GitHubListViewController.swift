@@ -68,15 +68,15 @@ class GitHubListViewController<ListElement : NSManagedObject> : UITableViewContr
 		super.viewDidAppear(animated)
 		
 		/* If the refresh control is updated too soon, the collection view inset
-		 * will not be updated and we won't be able to show the refresh control.
-		 * So we have to block the update until the view _did_ appear. */
+		 * will not be updated and we won't be able to show the refresh control.
+		 * So we have to block the update until the view _did_ appear. */
 		blockSetRefreshControlIsRefreshing = false
 		collectionLoaderIsLoadingFirstPageChangedHandler()
 	}
 	
 	/* ***********************
-      MARK: - Override Points
-	   *********************** */
+	   MARK: - Override Points
+	   *********************** */
 	
 	var shouldShowSearchBar: Bool {
 		return true
@@ -95,8 +95,8 @@ class GitHubListViewController<ListElement : NSManagedObject> : UITableViewContr
 	}
 	
 	/* ******************************************
-      MARK: - Table View DataSource and Delegate
-	   ****************************************** */
+	   MARK: - Table View DataSource and Delegate
+	   ****************************************** */
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
 		return resultsController.sections!.count
@@ -119,8 +119,8 @@ class GitHubListViewController<ListElement : NSManagedObject> : UITableViewContr
 	}
 	
 	/* *******************************
-      MARK: - Search Results Updating
-	   ******************************* */
+	   MARK: - Search Results Updating
+	   ******************************* */
 	
 	func updateSearchResults(for searchController: UISearchController) {
 		timerRefreshCollectionLoader?.invalidate()
@@ -131,8 +131,8 @@ class GitHubListViewController<ListElement : NSManagedObject> : UITableViewContr
 	}
 	
 	/* ******************************************
-      MARK: - NSFetchedResultsControllerDelegate
-      ****************************************** */
+	   MARK: - NSFetchedResultsControllerDelegate
+	   ****************************************** */
 	
 	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		tableView.fetchedResultsControllerWillChangeContent()
@@ -151,8 +151,8 @@ class GitHubListViewController<ListElement : NSManagedObject> : UITableViewContr
 	}
 	
 	/* ***************
-      MARK: - Private
-	   *************** */
+	   MARK: - Private
+	   *************** */
 	
 	private var blockSetRefreshControlIsRefreshing = true
 	

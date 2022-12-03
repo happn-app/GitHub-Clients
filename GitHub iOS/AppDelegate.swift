@@ -57,8 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		tabBarController = (window!.rootViewController! as! UITabBarController)
 		
-		/* Let's fetch the connected username (if any) and add the “you” tab if we
-		 * get a result. */
+		/* Let's fetch the connected username (if any) and add the “you” tab if we get a result. */
 		GitHubBMOOperation.retrieveUsernameFromToken{ username in
 			self.myUsername = username
 			guard let username = username else {return}

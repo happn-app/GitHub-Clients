@@ -81,153 +81,150 @@ public class GitHubBMOBridge : Bridge {
 		do {
 			let entity = fetchRequest.entity!
 			switch entity.name! {
-			case Gist.entity().name!:
-				/* /gists                 <-- Lists gists of the connected user, or all public gists if nobody is connected */
-				/* /gists/:gist_id        <-- Get one gist */
-				/* /users/:username/gists <-- Lists gists of the specified user */
-				/* /gists/public          <-- Lists all public gists */
-				/* /gists/starred         <-- Lists authenticated user’s starred gists */
-//				.restPath("(/users/|owner.username|)/gists(/|remoteId|)"),
-				if (fetchRequest.predicate?.firstLevelConstants(forKeyPath: "owner") ?? []).count == 0 {
-					/* We do not specify an owner for the searched gists, we assume all gists are searched */
-					normalRESTPath = RESTPath("/gists/public")
-				} else {
-					/* Un-specific predicate, we use the generic REST path */
-					normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
-				}
-				
-			case Issue.entity().name!:
-				/* /issues                            <-- Lists all issues assigned to authenticated user */
-				/* /repos/:owner/:repo/issues         <-- Lists issues in a given repository */
-				/* /repos/:owner/:repo/issues/:number <-- Get one issue */
-				/* /user/issues                       <-- Lists issues assigned to authenticated user in owned and member repositories */
-				/* /orgs/:org/issues                  <-- Lists issues assigned to authenticated user in the given org repositories */
-//				.restPath("(/repos/|repository.owner.username|/|repository.name|)/issues(/|issueNumber|)"),
-				let selfIssue = (fetchRequest.predicate?.firstLevelComparisonSubpredicates
-					.filter{ $0.leftExpression.expressionType == .evaluatedObject || $0.rightExpression.expressionType == .evaluatedObject }
-					.compactMap{ ($0.constantValueExpression?.constantValue as? Issue) })
-					.flatMap{ $0.count == 1 ? $0.first : nil }
-				
-				normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
-				
-				if let selfIssue = selfIssue {
-					additionalRESTPathResolvingInfo.append(selfIssue)
-				}
-				if let repositories = fetchRequest.predicate?.firstLevelConstants(forKeyPath: "repository", withOrCompound: true, withAndCompound: true) as? [Repository],
-					let repository = repositories.first, repositories.count == 1
-				{
-					userInfo.addedToMixedRepresentations = userInfo.addedToMixedRepresentations ?? [:]
-					userInfo.addedToMixedRepresentations!["repository"] = ["id": repository.remoteId]
-				}
-				
-			case Label.entity().name!:
-				/* /repos/:owner/:repo/labels                <-- Lists all labels in given repository */
-				/* /repos/:owner/:repo/labels/:name          <-- Get one label */
-				/* /repos/:owner/:repo/issues/:number/labels <-- Lists labels of a given issue */
-//				.restPath("/repos/|repository.owner.username|/|repository.name|(/issues/|issue.issueNumber|)/labels(/|name|)"),
-				normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
-				
-			case Repository.entity().name!:
-				/* /repos/:owner/:repo    <-- Get one repository */
-				/* /user/repos            <-- Lists all repositories on which the authenticated user has explicit permission to access */
-				/* /users/:username/repos <-- Lists public repositories for the specified user */
-				/* /orgs/:org/repos       <-- Lists repositories for the specified org */
-				/* /repositories          <-- Lists all public repositories */
-//				.restPath("/repos/|owner.username|/|name|"),
-				let selfRepository = (fetchRequest.predicate?.firstLevelComparisonSubpredicates
-					.filter{ $0.leftExpression.expressionType == .evaluatedObject || $0.rightExpression.expressionType == .evaluatedObject }
-					.compactMap{ ($0.constantValueExpression?.constantValue as? Repository) })
-					.flatMap{ $0.count == 1 ? $0.first : nil }
-				let owners = fetchRequest.predicate?.firstLevelConstants(forKeyPath: "owner", withOrCompound: true, withAndCompound: true)
-				if owners?.isEmpty ?? true && selfRepository == nil {
-					/* We do not specify an owner for the searched repositories, we
-					 * assume all repositories are searched or we're fetching a
-					 * specific repository. */
-					if let namePredicates = fetchRequest.predicate?.firstLevelComparisonSubpredicates
-							.filter({ $0.keyPathExpression?.keyPath == "fullName" && $0.predicateOperatorType == .like && $0.comparisonPredicateModifier == .direct }),
-						let namePredicate = namePredicates.first, namePredicates.count == 1,
-						let searchedNameWithStars = namePredicate.constantValueExpression?.constantValue as? String,
-						searchedNameWithStars.hasPrefix("*"), searchedNameWithStars.hasSuffix("*"), searchedNameWithStars != "**"
-					{
-						/* Search for repositories */
-						let searchedName = searchedNameWithStars.dropFirst().dropLast()
-						normalRESTPath = RESTPath("/search/repositories")
-						additionalInfo.additionalRequestParameters["q"] = searchedName + " in:name"
-//						additionalInfo.additionalRequestParameters["sort"] = "stars"
-//						additionalInfo.additionalRequestParameters["order"] = "desc"
+				case Gist.entity().name!:
+					/* /gists                 <-- Lists gists of the connected user, or all public gists if nobody is connected */
+					/* /gists/:gist_id        <-- Get one gist */
+					/* /users/:username/gists <-- Lists gists of the specified user */
+					/* /gists/public          <-- Lists all public gists */
+					/* /gists/starred         <-- Lists authenticated user’s starred gists */
+//					.restPath("(/users/|owner.username|)/gists(/|remoteId|)"),
+					if (fetchRequest.predicate?.firstLevelConstants(forKeyPath: "owner") ?? []).count == 0 {
+						/* We do not specify an owner for the searched gists, we assume all gists are searched */
+						normalRESTPath = RESTPath("/gists/public")
 					} else {
-						normalRESTPath = RESTPath("/repositories")
+						/* Un-specific predicate, we use the generic REST path */
+						normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
 					}
-				} else if let owners = owners as? [User], owners.count == 1 {
-					normalRESTPath = RESTPath("/users/|owner.username|/repos")
-					additionalInfo.additionalRequestParameters["sort"] = "updated"
-					additionalInfo.additionalRequestParameters["direction"] = "desc"
-				} else {
-					/* Un-specific predicate, we use the generic REST path */
+					
+				case Issue.entity().name!:
+					/* /issues                            <-- Lists all issues assigned to authenticated user */
+					/* /repos/:owner/:repo/issues         <-- Lists issues in a given repository */
+					/* /repos/:owner/:repo/issues/:number <-- Get one issue */
+					/* /user/issues                       <-- Lists issues assigned to authenticated user in owned and member repositories */
+					/* /orgs/:org/issues                  <-- Lists issues assigned to authenticated user in the given org repositories */
+//					.restPath("(/repos/|repository.owner.username|/|repository.name|)/issues(/|issueNumber|)"),
+					let selfIssue = (fetchRequest.predicate?.firstLevelComparisonSubpredicates
+						.filter{ $0.leftExpression.expressionType == .evaluatedObject || $0.rightExpression.expressionType == .evaluatedObject }
+						.compactMap{ ($0.constantValueExpression?.constantValue as? Issue) })
+						.flatMap{ $0.count == 1 ? $0.first : nil }
+					
 					normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
-					if let selfRepository = selfRepository {
-						additionalRESTPathResolvingInfo.append(selfRepository)
+					
+					if let selfIssue = selfIssue {
+						additionalRESTPathResolvingInfo.append(selfIssue)
 					}
-				}
-				
-			case User.entity().name!:
-				/* /users/:username <-- Get one user */
-				/* /users           <-- Lists all the users */
-				/* /user            <-- Get the authenticated user */
-//				.restPath("/users(/|username|)"),
-				if let usernamePredicates = fetchRequest.predicate?.firstLevelComparisonSubpredicates
+					if let repositories = fetchRequest.predicate?.firstLevelConstants(forKeyPath: "repository", withOrCompound: true, withAndCompound: true) as? [Repository],
+						let repository = repositories.first, repositories.count == 1
+					{
+						userInfo.addedToMixedRepresentations = userInfo.addedToMixedRepresentations ?? [:]
+						userInfo.addedToMixedRepresentations!["repository"] = ["id": repository.remoteId]
+					}
+					
+				case Label.entity().name!:
+					/* /repos/:owner/:repo/labels                <-- Lists all labels in given repository */
+					/* /repos/:owner/:repo/labels/:name          <-- Get one label */
+					/* /repos/:owner/:repo/issues/:number/labels <-- Lists labels of a given issue */
+//					.restPath("/repos/|repository.owner.username|/|repository.name|(/issues/|issue.issueNumber|)/labels(/|name|)"),
+					normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
+					
+				case Repository.entity().name!:
+					/* /repos/:owner/:repo    <-- Get one repository */
+					/* /user/repos            <-- Lists all repositories on which the authenticated user has explicit permission to access */
+					/* /users/:username/repos <-- Lists public repositories for the specified user */
+					/* /orgs/:org/repos       <-- Lists repositories for the specified org */
+					/* /repositories          <-- Lists all public repositories */
+//					.restPath("/repos/|owner.username|/|name|"),
+					let selfRepository = (fetchRequest.predicate?.firstLevelComparisonSubpredicates
+						.filter{ $0.leftExpression.expressionType == .evaluatedObject || $0.rightExpression.expressionType == .evaluatedObject }
+						.compactMap{ ($0.constantValueExpression?.constantValue as? Repository) })
+						.flatMap{ $0.count == 1 ? $0.first : nil }
+					let owners = fetchRequest.predicate?.firstLevelConstants(forKeyPath: "owner", withOrCompound: true, withAndCompound: true)
+					if owners?.isEmpty ?? true && selfRepository == nil {
+						/* We do not specify an owner for the searched repositories, we assume all repositories are searched or we're fetching a specific repository. */
+						if let namePredicates = fetchRequest.predicate?.firstLevelComparisonSubpredicates
+							.filter({ $0.keyPathExpression?.keyPath == "fullName" && $0.predicateOperatorType == .like && $0.comparisonPredicateModifier == .direct }),
+							let namePredicate = namePredicates.first, namePredicates.count == 1,
+							let searchedNameWithStars = namePredicate.constantValueExpression?.constantValue as? String,
+							searchedNameWithStars.hasPrefix("*"), searchedNameWithStars.hasSuffix("*"), searchedNameWithStars != "**"
+						{
+							/* Search for repositories */
+							let searchedName = searchedNameWithStars.dropFirst().dropLast()
+							normalRESTPath = RESTPath("/search/repositories")
+							additionalInfo.additionalRequestParameters["q"] = searchedName + " in:name"
+//							additionalInfo.additionalRequestParameters["sort"] = "stars"
+//							additionalInfo.additionalRequestParameters["order"] = "desc"
+						} else {
+							normalRESTPath = RESTPath("/repositories")
+						}
+					} else if let owners = owners as? [User], owners.count == 1 {
+						normalRESTPath = RESTPath("/users/|owner.username|/repos")
+						additionalInfo.additionalRequestParameters["sort"] = "updated"
+						additionalInfo.additionalRequestParameters["direction"] = "desc"
+					} else {
+						/* Un-specific predicate, we use the generic REST path. */
+						normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
+						if let selfRepository = selfRepository {
+							additionalRESTPathResolvingInfo.append(selfRepository)
+						}
+					}
+					
+				case User.entity().name!:
+					/* /users/:username <-- Get one user */
+					/* /users           <-- Lists all the users */
+					/* /user            <-- Get the authenticated user */
+//					.restPath("/users(/|username|)"),
+					if let usernamePredicates = fetchRequest.predicate?.firstLevelComparisonSubpredicates
 						.filter({ $0.keyPathExpression?.keyPath == "username" && $0.predicateOperatorType == .like && $0.comparisonPredicateModifier == .direct }),
-					let usernamePredicate = usernamePredicates.first, usernamePredicates.count == 1,
-					let searchedUsernameWithStar = usernamePredicate.constantValueExpression?.constantValue as? String,
-					searchedUsernameWithStar.hasSuffix("*"), searchedUsernameWithStar != "*"
-				{
-					/* Search for users */
-					let searchedUsername = searchedUsernameWithStar.dropLast()
-					normalRESTPath = RESTPath("/search/users")
-					additionalInfo.additionalRequestParameters["q"] = searchedUsername + " in:login"
-				} else if let starredRepositoriesPredicates = fetchRequest.predicate?.firstLevelComparisonSubpredicates
+						let usernamePredicate = usernamePredicates.first, usernamePredicates.count == 1,
+						let searchedUsernameWithStar = usernamePredicate.constantValueExpression?.constantValue as? String,
+						searchedUsernameWithStar.hasSuffix("*"), searchedUsernameWithStar != "*"
+					{
+						/* Search for users. */
+						let searchedUsername = searchedUsernameWithStar.dropLast()
+						normalRESTPath = RESTPath("/search/users")
+						additionalInfo.additionalRequestParameters["q"] = searchedUsername + " in:login"
+					} else if let starredRepositoriesPredicates = fetchRequest.predicate?.firstLevelComparisonSubpredicates
 						.filter({ $0.keyPathExpression?.keyPath == "starredRepositories" && $0.predicateOperatorType == .contains }),
-					let starredRepositoriesPredicate = starredRepositoriesPredicates.first, starredRepositoriesPredicates.count == 1,
-					let starredRepository = starredRepositoriesPredicate.constantValueExpression?.constantValue as? Repository
-				{
-					normalRESTPath = RESTPath("/repos/|repo.owner.username|/|repo.name|/stargazers")
-					restPathResolvingInfo["repo"] = starredRepository
-					userInfo.addedToMixedRepresentations = userInfo.addedToMixedRepresentations ?? [:]
-					userInfo.addedToMixedRepresentations!["starredRepositories"] = ["id": starredRepository.remoteId]
-				} else if let watchedRepositoriesPredicates = fetchRequest.predicate?.firstLevelComparisonSubpredicates
+								 let starredRepositoriesPredicate = starredRepositoriesPredicates.first, starredRepositoriesPredicates.count == 1,
+								 let starredRepository = starredRepositoriesPredicate.constantValueExpression?.constantValue as? Repository
+					{
+						normalRESTPath = RESTPath("/repos/|repo.owner.username|/|repo.name|/stargazers")
+						restPathResolvingInfo["repo"] = starredRepository
+						userInfo.addedToMixedRepresentations = userInfo.addedToMixedRepresentations ?? [:]
+						userInfo.addedToMixedRepresentations!["starredRepositories"] = ["id": starredRepository.remoteId]
+					} else if let watchedRepositoriesPredicates = fetchRequest.predicate?.firstLevelComparisonSubpredicates
 						.filter({ $0.keyPathExpression?.keyPath == "watchedRepositories" && $0.predicateOperatorType == .contains }),
-					let watchedRepositoriesPredicate = watchedRepositoriesPredicates.first, watchedRepositoriesPredicates.count == 1,
-					let watchedRepository = watchedRepositoriesPredicate.constantValueExpression?.constantValue as? Repository
-				{
-					normalRESTPath = RESTPath("/repos/|repo.owner.username|/|repo.name|/subscribers")
-					restPathResolvingInfo["repo"] = watchedRepository
-					userInfo.addedToMixedRepresentations = userInfo.addedToMixedRepresentations ?? [:]
-					userInfo.addedToMixedRepresentations!["watchedRepositories"] = ["id": watchedRepository.remoteId]
-				} else {
-					/* Un-specific predicate, we use the generic REST path */
-					normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
-					if let selfUsernames = fetchRequest.predicate?.firstLevelComparisonSubpredicates
+								 let watchedRepositoriesPredicate = watchedRepositoriesPredicates.first, watchedRepositoriesPredicates.count == 1,
+								 let watchedRepository = watchedRepositoriesPredicate.constantValueExpression?.constantValue as? Repository
+					{
+						normalRESTPath = RESTPath("/repos/|repo.owner.username|/|repo.name|/subscribers")
+						restPathResolvingInfo["repo"] = watchedRepository
+						userInfo.addedToMixedRepresentations = userInfo.addedToMixedRepresentations ?? [:]
+						userInfo.addedToMixedRepresentations!["watchedRepositories"] = ["id": watchedRepository.remoteId]
+					} else {
+						/* Un-specific predicate, we use the generic REST path. */
+						normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
+						if let selfUsernames = fetchRequest.predicate?.firstLevelComparisonSubpredicates
 							.filter({ $0.leftExpression.expressionType == .evaluatedObject || $0.rightExpression.expressionType == .evaluatedObject })
 							.compactMap({ ($0.constantValueExpression?.constantValue as? User)?.username }),
-						let selfUsername = selfUsernames.first, selfUsernames.count == 1
-					{
-						/* But we have a “SELF == user” predicate, so we set that in the REST path resolving info (not supported by the REST mapper)  */
-						restPathResolvingInfo["username"] = selfUsername
+							let selfUsername = selfUsernames.first, selfUsernames.count == 1
+						{
+							/* But we have a “SELF == user” predicate, so we set that in the REST path resolving info (not supported by the REST mapper). */
+							restPathResolvingInfo["username"] = selfUsername
+						}
 					}
-				}
-				
-			default:
-				normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
+					
+				default:
+					normalRESTPath = restMapper.restPath(forEntity: entity, additionalRESTInfo: additionalInfo)
 			}
 		}
 		
 		let paginatorRESTPath = additionalInfo.paginatorInfo.flatMap{ paginator.forcedRESTPath(withPaginatorInfo: $0) }
 		let restPath = additionalInfo.forcedRESTPath ?? paginatorRESTPath ?? normalRESTPath
 		
-		/* Computing REST path values from request's predicate: We're enumerating
-		 * all key/val pairs from comparison predicates in request predicate. Only
-		 * one value per key is allowed for the key to stay in the final
-		 * restPathValues dictionary. */
+		/* Computing REST path values from request's predicate:
+		 *  we're enumerating all key/val pairs from comparison predicates in request predicate.
+		 * Only one value per key is allowed for the key to stay in the final restPathValues dictionary. */
 		var blacklistedKeys = Set<String>()
 		fetchRequest.predicate?.enumerateFirstLevelConstants(forKeyPath: nil, withOrCompound: true, withAndCompound: true){ (keyPath, constant) in
 			if restPathResolvingInfo[keyPath] == nil {restPathResolvingInfo[keyPath] = constant}
@@ -276,10 +273,10 @@ public class GitHubBMOBridge : Bridge {
 	
 	public func remoteObjectRepresentations(fromFinishedOperation operation: BackOperationType, userInfo: UserInfoType) throws -> [RemoteObjectRepresentationType]? {
 		switch operation.results {
-		case .success(let success as [[String: Any?]]): return success
-		case .success(let success as  [String: Any?]):  return success["items"] as? [[String: Any?]] ?? [success]
-		case .error(let e): throw Err.operationError(e)
-		default:            throw Err.invalidAPIResponse
+			case .success(let success as [[String: Any?]]): return success
+			case .success(let success as  [String: Any?]):  return success["items"] as? [[String: Any?]] ?? [success]
+			case .error(let e): throw Err.operationError(e)
+			default:            throw Err.invalidAPIResponse
 		}
 	}
 	
@@ -318,7 +315,7 @@ public class GitHubBMOBridge : Bridge {
 		let colorTransformer = RESTColorTransformer()
 		let dateTransformer = RESTDateAndTimeTransformer()
 		let intTransformer = RESTNumericTransformer(numericFormat: .int)
-
+		
 		let intToStrTransformer = IntToStringTransformer()
 		
 		let FileMapping: [_RESTConvenienceMappingForEntity] = [

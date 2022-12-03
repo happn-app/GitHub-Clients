@@ -46,13 +46,13 @@ class UsersListViewController : GitHubListViewController<User> {
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
-		case "ShowUser"?:
-			guard let selectedRow = (sender as? UITableViewCell).flatMap({ tableView.indexPath(for: $0) }) else {return}
-			
-			let userViewController = segue.destination as! UserViewController
-			userViewController.user = resultsController.object(at: selectedRow)
-			
-		default: (/*nop*/)
+			case "ShowUser"?:
+				guard let selectedRow = (sender as? UITableViewCell).flatMap({ tableView.indexPath(for: $0) }) else {return}
+				
+				let userViewController = segue.destination as! UserViewController
+				userViewController.user = resultsController.object(at: selectedRow)
+				
+			default: (/*nop*/)
 		}
 	}
 	
@@ -68,31 +68,31 @@ class UsersListViewController : GitHubListViewController<User> {
 		
 		let deletionDateProperty: NSAttributeDescription
 		switch usersSource {
-		case .searchAll:
-			if let t = searchText?.trimmingCharacters(in: .whitespaces), !t.isEmpty {
-				nullify(property: ephemeralDeletionDateProperty, inInstancesOf: userEntity, context: AppDelegate.shared.context)
+			case .searchAll:
+				if let t = searchText?.trimmingCharacters(in: .whitespaces), !t.isEmpty {
+					nullify(property: ephemeralDeletionDateProperty, inInstancesOf: userEntity, context: AppDelegate.shared.context)
+					
+					deletionDateProperty = ephemeralDeletionDateProperty
+					fetchRequest.predicate = NSPredicate(format: "%K LIKE[cd] %@", #keyPath(User.username), t + "*")
+					fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(User.username), ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
+				} else {
+					deletionDateProperty = userEntity.attributesByName[#keyPath(User.zDeletionDateInUsersList)]!
+					fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(User.remoteId), ascending: true)]
+				}
 				
+			case .stargazers(of: let repo):
+				nullify(property: ephemeralDeletionDateProperty, inInstancesOf: userEntity, context: AppDelegate.shared.context)
 				deletionDateProperty = ephemeralDeletionDateProperty
-				fetchRequest.predicate = NSPredicate(format: "%K LIKE[cd] %@", #keyPath(User.username), t + "*")
-				fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(User.username), ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
-			} else {
-				deletionDateProperty = userEntity.attributesByName[#keyPath(User.zDeletionDateInUsersList)]!
+				
+				fetchRequest.predicate = NSPredicate(format: "%K CONTAINS %@", #keyPath(User.starredRepositories), repo)
 				fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(User.remoteId), ascending: true)]
-			}
-			
-		case .stargazers(of: let repo):
-			nullify(property: ephemeralDeletionDateProperty, inInstancesOf: userEntity, context: AppDelegate.shared.context)
-			deletionDateProperty = ephemeralDeletionDateProperty
-			
-			fetchRequest.predicate = NSPredicate(format: "%K CONTAINS %@", #keyPath(User.starredRepositories), repo)
-			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(User.remoteId), ascending: true)]
-			
-		case .watchers(of: let repo):
-			nullify(property: ephemeralDeletionDateProperty, inInstancesOf: userEntity, context: AppDelegate.shared.context)
-			deletionDateProperty = ephemeralDeletionDateProperty
-			
-			fetchRequest.predicate = NSPredicate(format: "%K CONTAINS %@", #keyPath(User.watchedRepositories), repo)
-			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(User.remoteId), ascending: true)]
+				
+			case .watchers(of: let repo):
+				nullify(property: ephemeralDeletionDateProperty, inInstancesOf: userEntity, context: AppDelegate.shared.context)
+				deletionDateProperty = ephemeralDeletionDateProperty
+				
+				fetchRequest.predicate = NSPredicate(format: "%K CONTAINS %@", #keyPath(User.watchedRepositories), repo)
+				fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(User.remoteId), ascending: true)]
 		}
 		
 		return CoreDataSearchCLH(fetchRequest: fetchRequest, additionalFetchInfo: nil, deletionDateProperty: deletionDateProperty, context: AppDelegate.shared.context, pageInfoRetriever: AppDelegate.shared.pageInfoRetriever, requestManager: AppDelegate.shared.requestManager)

@@ -60,33 +60,33 @@ class UserViewController : UIViewController, NSFetchedResultsControllerDelegate 
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
-		case "ShowGists"?:
-			let gistsListViewController = segue.destination as! GistsListViewController
-			gistsListViewController.gistsSource = .gists(of: user)
-			
-		case "ShowRepositories"?:
-			let repositoriesListViewController = segue.destination as! ProjectsListViewController
-			repositoriesListViewController.projectsSource = .projects(of: user)
-			
-		case "ShowIssues"?:
-			let issuesListViewController = segue.destination as! IssuesListViewController
-			issuesListViewController.issuesSource = .assigned(to: user)
-			
-		default: (/*nop*/)
+			case "ShowGists"?:
+				let gistsListViewController = segue.destination as! GistsListViewController
+				gistsListViewController.gistsSource = .gists(of: user)
+				
+			case "ShowRepositories"?:
+				let repositoriesListViewController = segue.destination as! ProjectsListViewController
+				repositoriesListViewController.projectsSource = .projects(of: user)
+				
+			case "ShowIssues"?:
+				let issuesListViewController = segue.destination as! IssuesListViewController
+				issuesListViewController.issuesSource = .assigned(to: user)
+				
+			default: (/*nop*/)
 		}
 	}
 	
 	/* *******************************************
-      MARK: - Fetched Results Controller Delegate
-	   ******************************************* */
+	   MARK: - Fetched Results Controller Delegate
+	   ******************************************* */
 	
 	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		updateUI()
 	}
 	
 	/* ***************
-      MARK: - Private
-	   *************** */
+	   MARK: - Private
+	   *************** */
 	
 	private var fetchedResultsController: NSFetchedResultsController<User>!
 	
@@ -100,8 +100,7 @@ class UserViewController : UIViewController, NSFetchedResultsControllerDelegate 
 		labelUsername.text = user.username
 		buttonAssignedIssues.isHidden = (user.username != AppDelegate.shared.myUsername)
 		
-		/* Both performWithoutAnimation and layoutIfNeeded are needed to avoid the
-		 * animations on the buttons when changing the title... */
+		/* Both performWithoutAnimation and layoutIfNeeded are needed to avoid the animations on the buttons when changing the title… */
 		UIView.performWithoutAnimation{
 			buttonPublicRepos.setTitle("See Public Repositories (\(user.publicReposCount))", for: .normal)
 			buttonPublicGists.setTitle("See Public Gists (\(user.publicGistsCount))", for: .normal)

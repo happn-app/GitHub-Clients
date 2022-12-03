@@ -44,7 +44,7 @@ class GistsListViewController: GitHubListViewController<Gist> {
 	}
 	
 	override var shouldShowSearchBar: Bool {
-		return false /* Gists searching is apparently not supported by the GitHub API */
+		return false /* Gists searching is apparently not supported by the GitHub API. */
 	}
 	
 	override var numberOfElementsPerPage: Int {
@@ -64,15 +64,15 @@ class GistsListViewController: GitHubListViewController<Gist> {
 		
 		let deletionDateProperty: NSAttributeDescription
 		switch gistsSource {
-		case .all:
-			deletionDateProperty = gistEntity.attributesByName[#keyPath(Gist.zDeletionDateInGistList)]!
-			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Gist.creationDate), ascending: false)]
-			
-		case .gists(of: let user):
-			nullify(property: ephemeralDeletionDateProperty, inInstancesOf: gistEntity, context: AppDelegate.shared.context)
-			deletionDateProperty = ephemeralDeletionDateProperty
-			fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Gist.owner), user)
-			fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Gist.creationDate), ascending: false)]
+			case .all:
+				deletionDateProperty = gistEntity.attributesByName[#keyPath(Gist.zDeletionDateInGistList)]!
+				fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Gist.creationDate), ascending: false)]
+				
+			case .gists(of: let user):
+				nullify(property: ephemeralDeletionDateProperty, inInstancesOf: gistEntity, context: AppDelegate.shared.context)
+				deletionDateProperty = ephemeralDeletionDateProperty
+				fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Gist.owner), user)
+				fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Gist.creationDate), ascending: false)]
 		}
 		return CoreDataSearchCLH(fetchRequest: fetchRequest, additionalFetchInfo: nil, deletionDateProperty: deletionDateProperty, context: AppDelegate.shared.context, pageInfoRetriever: AppDelegate.shared.pageInfoRetriever, requestManager: AppDelegate.shared.requestManager)
 	}

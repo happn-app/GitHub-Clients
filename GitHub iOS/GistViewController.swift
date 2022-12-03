@@ -48,18 +48,18 @@ class GistViewController : UITableViewController, NSFetchedResultsControllerDele
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
-		case "ShowFile"?:
-			guard let senderIndexPath = (sender as? UITableViewCell).flatMap({ tableView.indexPath(for: $0) }) else {return}
-			let fileViewController = segue.destination as! GistFileViewController
-			fileViewController.file = (gist.files?.object(at: senderIndexPath.row) as! File)
-			
-		default: (/*nop*/)
+			case "ShowFile"?:
+				guard let senderIndexPath = (sender as? UITableViewCell).flatMap({ tableView.indexPath(for: $0) }) else {return}
+				let fileViewController = segue.destination as! GistFileViewController
+				fileViewController.file = (gist.files?.object(at: senderIndexPath.row) as! File)
+				
+			default: (/*nop*/)
 		}
 	}
 	
 	/* *****************************************
-      MARK: - Table View Data Source & Delegate
-	   ***************************************** */
+	   MARK: - Table View Data Source & Delegate
+	   ***************************************** */
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
 		return 2
@@ -67,48 +67,48 @@ class GistViewController : UITableViewController, NSFetchedResultsControllerDele
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		switch section {
-		case 0: return 1
-		case 1: return gist.files?.count ?? 0
-		default: fatalError()
+			case 0: return 1
+			case 1: return gist.files?.count ?? 0
+			default: fatalError()
 		}
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		switch indexPath.section {
-		case 0:
-			let cell = tableView.dequeueReusableCell(withIdentifier: "DescriptionCell", for: indexPath)
-			cell.textLabel?.text = (gist.descr?.isEmpty ?? true ? "<No description>" : gist.descr)
-			return cell
-			
-		case 1:
-			let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell", for: indexPath)
-			cell.textLabel?.text = (gist.files!.object(at: indexPath.row) as! File).filename
-			return cell
-			
-		default:
-			fatalError()
+			case 0:
+				let cell = tableView.dequeueReusableCell(withIdentifier: "DescriptionCell", for: indexPath)
+				cell.textLabel?.text = (gist.descr?.isEmpty ?? true ? "<No description>" : gist.descr)
+				return cell
+				
+			case 1:
+				let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell", for: indexPath)
+				cell.textLabel?.text = (gist.files!.object(at: indexPath.row) as! File).filename
+				return cell
+				
+			default:
+				fatalError()
 		}
 	}
 	
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		switch section {
-		case 0: return "Description"
-		case 1: return "Files"
-		default: fatalError()
+			case 0: return "Description"
+			case 1: return "Files"
+			default: fatalError()
 		}
 	}
 	
 	/* *******************************************
-	   MARK: - Fetched Results Controller Delegate
-	   ******************************************* */
+	   MARK: - Fetched Results Controller Delegate
+	   ******************************************* */
 	
 	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		tableView.reloadData()
 	}
 	
 	/* ***************
-	   MARK: - Private
-	   *************** */
+	   MARK: - Private
+	   *************** */
 	
 	private var fetchedResultsController: NSFetchedResultsController<Gist>!
 	
