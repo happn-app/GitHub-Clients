@@ -1,125 +1,125 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.12.1" systemVersion="18A365a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="22A400" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="File" representedClassName="File" syncable="YES" codeGenerationType="class">
-        <attribute name="bmoId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="filename" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="isTruncated" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="mimeType" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="rawURL" optional="YES" attributeType="URI" syncable="YES"/>
-        <attribute name="size" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="gistOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Gist" inverseName="files" inverseEntity="Gist" syncable="YES"/>
-        <relationship name="language" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FileLanguage" inverseName="files" inverseEntity="FileLanguage" syncable="YES"/>
+        <attribute name="bmoId" optional="YES" attributeType="String"/>
+        <attribute name="filename" optional="YES" attributeType="String"/>
+        <attribute name="isTruncated" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="mimeType" optional="YES" attributeType="String"/>
+        <attribute name="rawURL" optional="YES" attributeType="URI"/>
+        <attribute name="size" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="gistOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Gist" inverseName="files" inverseEntity="Gist"/>
+        <relationship name="language" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FileLanguage" inverseName="files" inverseEntity="FileLanguage"/>
         <fetchIndex name="bmoIndex">
             <fetchIndexElement property="bmoId" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
     <entity name="FileLanguage" representedClassName="FileLanguage" syncable="YES" codeGenerationType="class">
-        <attribute name="bmoId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="files" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="File" inverseName="language" inverseEntity="File" syncable="YES"/>
+        <attribute name="bmoId" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="files" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="File" inverseName="language" inverseEntity="File"/>
         <fetchIndex name="bmoIndex">
             <fetchIndexElement property="bmoId" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
     <entity name="Gist" representedClassName="Gist" syncable="YES" codeGenerationType="category">
-        <attribute name="bmoId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="descr" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="firstFileName" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
-        <attribute name="gitPullURL" optional="YES" attributeType="URI" syncable="YES"/>
-        <attribute name="gitPushURL" optional="YES" attributeType="URI" syncable="YES"/>
-        <attribute name="isPublic" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="isTruncated" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="nodeId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="remoteId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="zDeletionDateInGistList" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="zEphemeralDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="files" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="File" inverseName="gistOwner" inverseEntity="File" syncable="YES"/>
-        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="gists" inverseEntity="User" syncable="YES"/>
+        <attribute name="bmoId" optional="YES" attributeType="String"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="descr" optional="YES" attributeType="String"/>
+        <attribute name="firstFileName" optional="YES" transient="YES" attributeType="String"/>
+        <attribute name="gitPullURL" optional="YES" attributeType="URI"/>
+        <attribute name="gitPushURL" optional="YES" attributeType="URI"/>
+        <attribute name="isPublic" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isTruncated" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="nodeId" optional="YES" attributeType="String"/>
+        <attribute name="remoteId" optional="YES" attributeType="String"/>
+        <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="zDeletionDateInGistList" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="zEphemeralDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="files" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="File" inverseName="gistOwner" inverseEntity="File"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="gists" inverseEntity="User"/>
         <fetchIndex name="bmoIndex">
             <fetchIndexElement property="bmoId" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
     <entity name="Issue" representedClassName="Issue" syncable="YES" codeGenerationType="class">
-        <attribute name="activeLockReason" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="bmoId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="closeDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="commentsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="descr" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="isLocked" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="issueNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="nodeId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="remoteId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="zEphemeralDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="assignees" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="User" inverseName="assignedIssues" inverseEntity="User" syncable="YES"/>
-        <relationship name="labels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Label" inverseName="issues" inverseEntity="Label" syncable="YES"/>
-        <relationship name="repository" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Repository" inverseName="issues" inverseEntity="Repository" syncable="YES"/>
+        <attribute name="activeLockReason" optional="YES" attributeType="String"/>
+        <attribute name="bmoId" optional="YES" attributeType="String"/>
+        <attribute name="closeDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="commentsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="descr" optional="YES" attributeType="String"/>
+        <attribute name="isLocked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="issueNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="nodeId" optional="YES" attributeType="String"/>
+        <attribute name="remoteId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="zEphemeralDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="assignees" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="User" inverseName="assignedIssues" inverseEntity="User"/>
+        <relationship name="labels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Label" inverseName="issues" inverseEntity="Label"/>
+        <relationship name="repository" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Repository" inverseName="issues" inverseEntity="Repository"/>
         <fetchIndex name="bmoIndex">
             <fetchIndexElement property="bmoId" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
     <entity name="Label" representedClassName="Label" syncable="YES" codeGenerationType="class">
-        <attribute name="bmoId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="color" optional="YES" attributeType="Transformable" customClassName=".Color" syncable="YES">
+        <attribute name="bmoId" optional="YES" attributeType="String"/>
+        <attribute name="color" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName" customClassName=".Color">
             <userInfo>
                 <entry key="BMO_ObjCAttributeValueClassName" value="UIColor"/>
             </userInfo>
         </attribute>
-        <attribute name="descr" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="isDefault" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="nodeId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="remoteId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="issues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Issue" inverseName="labels" inverseEntity="Issue" syncable="YES"/>
+        <attribute name="descr" optional="YES" attributeType="String"/>
+        <attribute name="isDefault" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="nodeId" optional="YES" attributeType="String"/>
+        <attribute name="remoteId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="issues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Issue" inverseName="labels" inverseEntity="Issue"/>
         <fetchIndex name="bmoIndex">
             <fetchIndexElement property="bmoId" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
     <entity name="License" representedClassName="License" syncable="YES" codeGenerationType="class">
-        <attribute name="bmoId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="nodeId" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="repositories" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Repository" inverseName="license" inverseEntity="Repository" syncable="YES"/>
+        <attribute name="bmoId" optional="YES" attributeType="String"/>
+        <attribute name="key" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="nodeId" optional="YES" attributeType="String"/>
+        <relationship name="repositories" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Repository" inverseName="license" inverseEntity="Repository"/>
         <fetchIndex name="bmoIndex">
             <fetchIndexElement property="bmoId" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
     <entity name="Repository" representedClassName="Repository" syncable="YES" codeGenerationType="class">
-        <attribute name="bmoId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="defaultBranch" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="descr" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="forksCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="hasDownloads" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="hasIssues" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="hasPages" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="hasWiki" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="isArchived" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="isFork" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="isPrivate" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="latestPushDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="nodeId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="openIssuesCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="remoteId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="stargazersCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="watchersCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="zDeletionDateInRepositoriesList" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="zEphemeralDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="zPosInSearchResults" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="issues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Issue" inverseName="repository" inverseEntity="Issue" syncable="YES"/>
-        <relationship name="license" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="License" inverseName="repositories" inverseEntity="License" syncable="YES"/>
-        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="repositories" inverseEntity="User" syncable="YES"/>
-        <relationship name="stargazers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="starredRepositories" inverseEntity="User" syncable="YES"/>
-        <relationship name="topics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Topic" inverseName="repositories" inverseEntity="Topic" syncable="YES"/>
-        <relationship name="watchers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="watchedRepositories" inverseEntity="User" syncable="YES"/>
+        <attribute name="bmoId" optional="YES" attributeType="String"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="defaultBranch" optional="YES" attributeType="String"/>
+        <attribute name="descr" optional="YES" attributeType="String"/>
+        <attribute name="forksCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="fullName" optional="YES" attributeType="String"/>
+        <attribute name="hasDownloads" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="hasIssues" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="hasPages" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="hasWiki" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isArchived" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isFork" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isPrivate" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="latestPushDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="nodeId" optional="YES" attributeType="String"/>
+        <attribute name="openIssuesCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="remoteId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="stargazersCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="watchersCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="zDeletionDateInRepositoriesList" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="zEphemeralDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="zPosInSearchResults" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="issues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Issue" inverseName="repository" inverseEntity="Issue"/>
+        <relationship name="license" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="License" inverseName="repositories" inverseEntity="License"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="repositories" inverseEntity="User"/>
+        <relationship name="stargazers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="starredRepositories" inverseEntity="User"/>
+        <relationship name="topics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Topic" inverseName="repositories" inverseEntity="Topic"/>
+        <relationship name="watchers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="watchedRepositories" inverseEntity="User"/>
         <fetchIndex name="bmoIndex">
             <fetchIndexElement property="bmoId" type="Binary" order="ascending"/>
         </fetchIndex>
@@ -134,34 +134,34 @@
         </fetchIndex>
     </entity>
     <entity name="Topic" representedClassName="Topic" syncable="YES" codeGenerationType="class">
-        <attribute name="bmoId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="repositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Repository" inverseName="topics" inverseEntity="Repository" syncable="YES"/>
+        <attribute name="bmoId" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="repositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Repository" inverseName="topics" inverseEntity="Repository"/>
         <fetchIndex name="bmoIndex">
             <fetchIndexElement property="bmoId" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
-        <attribute name="avatarURL" optional="YES" attributeType="URI" syncable="YES"/>
-        <attribute name="bmoId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="followersCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="followingCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="nodeId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="publicGistsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="publicReposCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="remoteId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="zDeletionDateInUsersList" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="zEphemeralDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="assignedIssues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Issue" inverseName="assignees" inverseEntity="Issue" syncable="YES"/>
-        <relationship name="gists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Gist" inverseName="owner" inverseEntity="Gist" syncable="YES"/>
-        <relationship name="repositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Repository" inverseName="owner" inverseEntity="Repository" syncable="YES"/>
-        <relationship name="starredRepositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Repository" inverseName="stargazers" inverseEntity="Repository" syncable="YES"/>
-        <relationship name="watchedRepositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Repository" inverseName="watchers" inverseEntity="Repository" syncable="YES"/>
+        <attribute name="avatarURL" optional="YES" attributeType="URI"/>
+        <attribute name="bmoId" optional="YES" attributeType="String"/>
+        <attribute name="company" optional="YES" attributeType="String"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="followersCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="followingCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="nodeId" optional="YES" attributeType="String"/>
+        <attribute name="publicGistsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="publicReposCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="remoteId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="username" optional="YES" attributeType="String"/>
+        <attribute name="zDeletionDateInUsersList" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="zEphemeralDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="assignedIssues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Issue" inverseName="assignees" inverseEntity="Issue"/>
+        <relationship name="gists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Gist" inverseName="owner" inverseEntity="Gist"/>
+        <relationship name="repositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Repository" inverseName="owner" inverseEntity="Repository"/>
+        <relationship name="starredRepositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Repository" inverseName="stargazers" inverseEntity="Repository"/>
+        <relationship name="watchedRepositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Repository" inverseName="watchers" inverseEntity="Repository"/>
         <fetchIndex name="byUsername">
             <fetchIndexElement property="username" type="Binary" order="ascending"/>
         </fetchIndex>
@@ -175,15 +175,4 @@
             <fetchIndexElement property="zEphemeralDeletionDate" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
-    <elements>
-        <element name="File" positionX="-27" positionY="458" width="128" height="165"/>
-        <element name="FileLanguage" positionX="151" positionY="603" width="128" height="90"/>
-        <element name="Gist" positionX="151" positionY="306" width="128" height="270"/>
-        <element name="Issue" positionX="745" positionY="198" width="128" height="285"/>
-        <element name="Label" positionX="963" positionY="423" width="128" height="165"/>
-        <element name="License" positionX="853" positionY="684" width="128" height="120"/>
-        <element name="Repository" positionX="558" positionY="441" width="128" height="495"/>
-        <element name="Topic" positionX="817" positionY="846" width="128" height="90"/>
-        <element name="User" positionX="369" positionY="81" width="128" height="345"/>
-    </elements>
 </model>
