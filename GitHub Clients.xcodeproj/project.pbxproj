@@ -498,8 +498,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/happn-app/CollectionLoader.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.3;
+				branch = dev.tests;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

@@ -41,9 +41,9 @@
         "package": "CollectionLoader",
         "repositoryURL": "https://github.com/happn-app/CollectionLoader.git",
         "state": {
-          "branch": null,
-          "revision": "420dcee7e04c4bc95273443dcc6dec0ad6630664",
-          "version": "0.9.6"
+          "branch": "dev.tests",
+          "revision": "9fa122b9d07a626006d4b2d7aa1afd37cc32b703",
+          "version": null
         }
       },
       {
